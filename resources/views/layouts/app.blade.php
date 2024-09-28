@@ -176,9 +176,9 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Detalle de pedido</a>
-                                    <ul class="dropdown-menu dropdown-menu-light">
-                                        <li><a class="dropdown-item" href="/Detalle_pedidos/Mostrar">Ver Detalle de pedidos</a></li>
-                                        <li><a class="dropdown-item" href="/Detalle_pedidos/Crear">Crear 2</a></li>
+                                    <ul class="dropdown-submenu dropdown-menu-light">
+                                        <a class="dropdown-item" href="/Detalle_pedidos/Mostrar">Ver Detalle de pedidos</a>
+                                        <a class="dropdown-item" href="/Detalle_pedidos/Crear">Crear 2</a>
                                     </ul>
                                 </li>
                             </ul>
@@ -194,9 +194,9 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Pagos</a>
-                                    <ul class="dropdown-menu dropdown-menu-light">
-                                        <li><a class="dropdown-item" href="/Pagos/Mostrar">Ver Pagos</a></li>
-                                        <li><a class="dropdown-item" href="/Pagos/Crear">Crear</a></li>
+                                    <ul class="dropdown-submenu dropdown-menu-light">
+                                        <a class="dropdown-item" href="/Pagos/Mostrar">Ver Pagos</a>
+                                        <a class="dropdown-item" href="/Pagos/Crear">Crear</a>
                                     </ul>
                                 </li>
                             </ul>
@@ -212,9 +212,9 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Detalle de informe</a>
-                                    <ul class="dropdown-menu dropdown-menu-light">
-                                        <li><a class="dropdown-item" href="/Detalle_informe/Mostrar">Detalle de informes</a></li>
-                                        <li><a class="dropdown-item" href="/Detalle_informe/Crear">Crear</a></li>
+                                    <ul class="dropdown-submenu dropdown-menu-light">
+                                        <a class="dropdown-item" href="/Detalle_informe/Mostrar">Detalle de informes</a>
+                                        <a class="dropdown-item" href="/Detalle_informe/Crear">Crear</a>
                                     </ul>
                                 </li>
                             </ul>
