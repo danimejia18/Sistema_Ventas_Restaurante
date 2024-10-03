@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('ingredientes');
             $table->unsignedBigInteger('id_categoria');
 
-        $table->foreign('id_categoria')->references('codigo')->on('categorias');
+            $table->foreign('id_categoria')->references('codigo')->on('categorias');
            $table->timestamps();
         });
     }

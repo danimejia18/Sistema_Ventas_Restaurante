@@ -13,6 +13,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    {{-- Link de Materialize --}}
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -76,15 +78,15 @@
                                 Accesos
                             </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="/Accesos/Mostrar">Ver accesos</a></li>
-                                <li><a class="dropdown-item" href="/Accesos/Crear">Crear</a></li>
+                                <li><a class="dropdown-item" href="/Accesos/show">Ver accesos</a></li>
+                                <li><a class="dropdown-item" href="/Accesos/create">Crear</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <!-- Dropdown anidado -->
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Empleados</a>
                                     <ul class="dropdown-submenu dropdown-menu-light">
-                                        <a class="dropdown-item" href="/Empleados/Mostrar">Ver Empleados</a>
-                                        <a class="dropdown-item" href="/Empleados/Crear">Crear </a>
+                                        <a class="dropdown-item" href="/Empleados/show">Ver Empleados</a>
+                                        <a class="dropdown-item" href="/Empleados/create">Crear </a>
                                     </ul>
                                 </li>
                             </ul>
@@ -95,16 +97,16 @@
                                 Menu
                             </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="/Clientes/Mostrar">Ver Menú</a></li>
-                                <li><a class="dropdown-item" href="/Clientes/Crear">Crear</a></li>
+                                <li><a class="dropdown-item" href="/Clientes/show">Ver Menú</a></li>
+                                <li><a class="dropdown-item" href="/Clientes/create">Crear</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <!-- Dropdown anidado -->
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Platos</a>
                                     <ul class="dropdown-submenu dropdown-menu-light">
                                     <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="/Platos/Mostrar">Ver Platos</a>
-                                        <a class="dropdown-item" href="/Platos/Crear">Crear </a>
+                                        <a class="dropdown-item" href="/Platos/show">Ver Platos</a>
+                                        <a class="dropdown-item" href="/Platos/create">Crear </a>
                                         <hr class="dropdown-divider">
                                     </ul>
                                 </li>
@@ -112,8 +114,8 @@
                                     <a class="dropdown-item dropdown-toggle" href="#">Categorias</a>
                                     <ul class="dropdown-submenu dropdown-menu-llight">
                                     <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="/Categorias/Mostrar">Ver categorias</a>
-                                        <a class="dropdown-item" href="/Categorias/Crear">Crear </a>
+                                        <a class="dropdown-item" href="/Categorias/show">Ver categorias</a>
+                                        <a class="dropdown-item" href="/Categorias/create">Crear </a>
                                     <hr class="dropdown-divider">
                                     </ul>
                                 </li>
@@ -125,8 +127,8 @@
                                     Clientes
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/Menus/Mostrar">Mostrar</a></li>
-                                    <li><a class="dropdown-item" href="/Menus/Crear">Crear</a></li>
+                                    <li><a class="dropdown-item" href="/Menus/show">Mostrar</a></li>
+                                    <li><a class="dropdown-item" href="/Menus/create">Crear</a></li>
                                 </ul>
                             </li>
                         </div>
@@ -136,8 +138,8 @@
                                     Productos
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/Productos/Mostrar">Crear</a></li>
-                                    <li><a class="dropdown-item" href="/Productos/Crear">Mostrar</a></li>
+                                    <li><a class="dropdown-item" href="/Productos/show">Crear</a></li>
+                                    <li><a class="dropdown-item" href="/Productos/create">Mostrar</a></li>
                                 </ul>
                             </li>
                         </div>
@@ -147,8 +149,8 @@
                                     Mesas
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/Mesas/Mostrar">Mostrar</a></li>
-                                    <li><a class="dropdown-item" href="/Mesas/Crear">Crear</a></li>
+                                    <li><a class="dropdown-item" href="/Mesas/show">Mostrar</a></li>
+                                    <li><a class="dropdown-item" href="/Mesas/create">Crear</a></li>
                                 </ul>
                             </li>
                         </div>
@@ -158,8 +160,8 @@
                                     Promociones
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/Promociones/Mostrar">Mostrar</a></li>
-                                    <li><a class="dropdown-item" href="/Promociones/Crear">Crear</a></li>
+                                    <li><a class="dropdown-item" href="/Promociones/show">Mostrar</a></li>
+                                    <li><a class="dropdown-item" href="/Promociones/create">Crear</a></li>
                                 </ul>
                             </li>
                         </div>
@@ -171,14 +173,14 @@
                                 Pedidos
                             </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="Pedidos/Mostrar">Ver pedidos</a></li>
-                                <li><a class="dropdown-item" href="Pedidos/Crear">Crear</a></li>
+                                <li><a class="dropdown-item" href="Pedidos/show">Ver pedidos</a></li>
+                                <li><a class="dropdown-item" href="Pedidos/create">Crear</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Detalle de pedido</a>
                                     <ul class="dropdown-submenu dropdown-menu-light">
-                                        <a class="dropdown-item" href="/Detalle_pedidos/Mostrar">Ver Detalle de pedidos</a>
-                                        <a class="dropdown-item" href="/Detalle_pedidos/Crear">Crear 2</a>
+                                        <a class="dropdown-item" href="/Detalle_pedidos/show">Ver Detalle de pedidos</a>
+                                        <a class="dropdown-item" href="/Detalle_pedidos/create">Crear 2</a>
                                     </ul>
                                 </li>
                             </ul>
@@ -189,14 +191,14 @@
                                 Reservaciones
                             </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="Reservaciones/Mostrar">Ver reseraciones</a></li>
-                                <li><a class="dropdown-item" href="Reservaciones/Crear">Crear</a></li>
+                                <li><a class="dropdown-item" href="Reservaciones/show">Ver reseraciones</a></li>
+                                <li><a class="dropdown-item" href="Reservaciones/create">Crear</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Pagos</a>
                                     <ul class="dropdown-submenu dropdown-menu-light">
-                                        <a class="dropdown-item" href="/Pagos/Mostrar">Ver Pagos</a>
-                                        <a class="dropdown-item" href="/Pagos/Crear">Crear</a>
+                                        <a class="dropdown-item" href="/Pagos/show">Ver Pagos</a>
+                                        <a class="dropdown-item" href="/Pagos/create">Crear</a>
                                     </ul>
                                 </li>
                             </ul>
@@ -207,14 +209,14 @@
                                 Informes
                             </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="Informes/Mostrar">Ver informes</a></li>
-                                <li><a class="dropdown-item" href="Informes/Crear">Crear</a></li>
+                                <li><a class="dropdown-item" href="Informes/show">Ver informes</a></li>
+                                <li><a class="dropdown-item" href="Informes/create">Crear</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-submenu dropdown-menu-light">
                                     <a class="dropdown-item dropdown-toggle" href="#">Detalle de informe</a>
                                     <ul class="dropdown-submenu dropdown-menu-light">
-                                        <a class="dropdown-item" href="/Detalle_informe/Mostrar">Detalle de informes</a>
-                                        <a class="dropdown-item" href="/Detalle_informe/Crear">Crear</a>
+                                        <a class="dropdown-item" href="/Detalle_informe/show">Detalle de informes</a>
+                                        <a class="dropdown-item" href="/Detalle_informe/create">Crear</a>
                                     </ul>
                                 </li>
                             </ul>
@@ -246,5 +248,7 @@
             @yield('content')
         </main>
     </div>
+    {{-- Link de javaScript de Materialize --}}
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
