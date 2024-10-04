@@ -6,6 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <style>
+        /* Estilos para la navegación vertical */
+        .vertical-nav {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        .vertical-nav .nav-link {
+            color: #333;
+        }
+
+        .vertical-nav .nav-link.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -5px;
+        }
+    </style>
 </head>
 <body>
     {{-- Menú vertical --}}

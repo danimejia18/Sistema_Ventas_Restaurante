@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agregar Categoría</title>
-  
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el titulo --}}
+@section('title', 'Accesos')
+
+{{-- Definimos el contenido --}}
+@section('content')
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   
@@ -25,35 +26,49 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Agregar Categoría</h3>
-    <br>
-    <!-- Formulario para agregar categoría -->
-    <div class="form-container">
-      <form id="agregarAccesoForm">
-        <div class="input-field col s12">
-            <label>Tipo Acceso</label>
-            <br><br>
-                <select class="browser-default">
-                    <option value="" disabled selected>Seleccione el tipo de Acceso</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Empleado</option>
-                </select>
+@section('content')
+<h1>Agregar Acceso</h1>
+<hr>
+<div class="form-container">
+    <form action="/Acceso/store" method="POST">
+        @csrf
+        <div class="row">
+            <!-- Tipo de Acceso -->
+            <div class="col-6">
+              <label for="tipo_acceso">Tipo de Acceso</label>
+              <select class="form-control" name="tipo_acceso" id="tipo_acceso">
+                  <option value="" disabled {{ old('tipo_acceso', $acceso->tipo_acceso ?? '') === '' ? 'selected' : '' }}>Seleccione el tipo de acceso</option>
+                  <option value="1" {{ old('tipo_acceso', $acceso->tipo_acceso ?? '') == 1 ? 'selected' : '' }}>Administrador</option>
+                  <option value="2" {{ old('tipo_acceso', $acceso->tipo_acceso ?? '') == 2 ? 'selected' : '' }}>Empleado</option>
+              </select>
+              @error('tipo_acceso')
+                  <span class="invalid-feedback d-block" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+          </div>          
         </div>
-        <div class="input-field">
-          <label for="descripcion">Descripción</label>
-          <textarea id="descripcion" class="materialize-textarea"></textarea>
-        </div>
-        <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
-    </div>
-  </div>
 
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+        <div class="row mt-2">
+            <!-- Descripción -->
+            <div class="col-12">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" class="form-control" rows="4"></textarea>
+                @error('descripcion')
+                    <span class="invalid-feedback d-block" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Botón Guardar -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
+@endsection
+
