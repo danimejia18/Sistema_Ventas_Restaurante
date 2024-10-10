@@ -1,101 +1,145 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Empleado</title>
-  
-  <!-- Importar Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
-  <!-- Fuentes de Google -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
+{{-- Heredamos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el título --}}
+@section('title', 'Actualizar Empleado')
+
+{{-- Definimos el contenido --}}
+@section('content')
+
+<!-- Importar Materialize CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Fuentes de Google -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
     /* Estilos personalizados */
     .form-container {
-      margin-top: 20px;
+        margin-top: 20px;
     }
     .form-container form {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Modificar Empleado</h3>
+</style>
+
+<div class="container">
+    <h3 class="center-align">Actualizar Empleado</h3>
     <br>
     <div class="form-container">
-      <form class="col s12" id="modificarClienteForm">
-        <div class="row">
-          <div class="input-field col s6">
-            <label for="nombre" class="active">Nombre</label>
-            <input id="nombre" type="text" class="validate" value="John" required>
-          </div>
-          <div class="input-field col s6">
-            <label for="apellido" class="active">Apellido</label>
-            <input id="apellido" type="text" class="validate" value="Doe" required>
-          </div>
-        </div>
-        <div class="input-field col s12">
-            <label for="correo" class="active">Correo Electrónico</label>
-            <input id="correo" type="email" class="validate" value="johndoe@gmail.com" required>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="telefono">Teléfono</label>
-                <input id="telefono" type="tel" class="validate" value="12345690" required>
+        <form action="/Empleados/update/{{ $empleado->codigo }}" method="POST">
+            @csrf
+            @method('PUT') <!-- Método PUT para la actualización -->
+            <div class="row">
+                <div class="input-field col s6">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" value="{{ old('nombre', $empleado->nombre) }}">
+                    @error('nombre')
+                    <span class="invalid-feedback d-block" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
             </div>
-            <div class="input-field col s6">
-                <label>Rol</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Mesero</option>
-                        <option value="1">Mesero</option>
-                        <option value="2">Cocinero</option>
-                        <option value="3">Gerente</option>
-                        <option value="4">Personal de Limpieza</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="password">Contraseña</label>
-                <input id="password" type="password" class="validate" value="*******" required>
-            </div>
-            <div class="input-field col s6">
-                <label>ID Acceso</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>3</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-            </div>
-        </div>
-        <!-- Campo oculto para almacenar el ID del cliente -->
-        <input type="hidden" id="idCliente" name="idCliente">
 
-        <div class="row">
-          <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Guardar Cambios
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-        </div>
-      </form>
+            <div class="input-field col s6">
+                <label for="apellido">Apellido</label>
+                <input type="text" class="form-control" name="apellido" id="apellido" value="{{ old('apellido', $empleado->apellido) }}">
+                @error('apellido')
+                <span class="helper-text red-text" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <label for="correo">Correo Electrónico</label>
+                    <input id="correo" type="email" class="validate" name="correo" value="{{ old('correo', $empleado->correo) }}" required>
+                    @error('correo')
+                    <span class="helper-text red-text" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="row mt22">
+                <div class="col s12">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="validate" name="telefono" id="telefono" value="{{ old('telefono', $empleado->telefono) }}">
+                    @error('telefono')
+                    <span class="helper-text red-text" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="input-field col s6">
+                <label for="rol">Rol</label><br><br>
+                <select class="browser-default" name="rol" id="rol" required>
+                    <option value="" disabled>Seleccione un Rol</option>
+                    <option value="1" {{ $empleado->rol == 1 ? 'selected' : '' }}>Mesero</option>
+                    <option value="2" {{ $empleado->rol == 2 ? 'selected' : '' }}>Cocinero</option>
+                    <option value="3" {{ $empleado->rol == 3 ? 'selected' : '' }}>Gerente</option>
+                    <option value="4" {{ $empleado->rol == 4 ? 'selected' : '' }}>Personal de Limpieza</option>
+                </select>
+                @error('rol')
+                <span class="helper-text red-text" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="row mt22">
+                <div class="col s12">
+                    <label for="password">Contraseña (dejar en blanco si no desea cambiarla)</label>
+                    <input type="password" class="validate" name="password" id="password" placeholder="Dejar en blanco si no desea cambiarla">
+                    @error('password')
+                    <span class="helper-text red-text" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="input-field col s6">
+                <label for="id_acceso">ID Acceso</label><br><br>
+                <select name="id_acceso" id="acceso" class="form-control">
+                    @foreach ($accesos as $item)
+                    <option value="{{ $item->codigo }}" {{ ($item->codigo == $empleado->id_acceso) ? 'selected' : '' }}>
+                        @if($item->tipo_acceso == 1)
+                            Admin
+                        @elseif($item->tipo_acceso == 2)
+                            Empleado
+                        @else
+                            Desconocido
+                        @endif
+                    </option>
+                    @endforeach
+                </select>
+                @error('id_acceso')
+                <span class="helper-text red-text" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="col s12 mt-2">
+                <button class="btn waves-effect waves-light" type="submit">Guardar
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
     </div>
-  </div>
+</div>
 
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-  
-  </script>
-</body>
-</html>
+<!-- Importar Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+@endsection

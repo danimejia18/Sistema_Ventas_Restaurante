@@ -27,6 +27,7 @@
     }
     .card-title {
       color: #333;
+      text-align: center;
     }
     .btn-editar,
     .btn-eliminar {
@@ -37,18 +38,19 @@
       float: right;
       margin-right: 50px
     }
+    
   </style>
 </head>
 <body>
-  <div class="container">
-    <h3 class="center-align">Mostrar Accesos</h3>
+  <div class="container"><br>
+    <h3 class="center-align">Lista de Accesos</h3>
     <br>
     <!-- Mostrar Accesos -->
     <div class="row">
       <div class="col s12">
         <div class="card">
           <div class="card-content">
-            <span class="card-title">Accesos registrados</span>
+            <span class="card-title " >Accesos registrados</span>
             <a href="/Acceso/create" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
             <table class="striped">
               <thead>

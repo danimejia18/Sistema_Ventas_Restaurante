@@ -14,6 +14,12 @@
   
   <style>
     /* Estilos personalizados */
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 20px;
+    }
     .form-container {
       margin-top: 20px;
     }
@@ -27,14 +33,16 @@
     }
   </style>
 @section('content')
-<h1>Agregar Acceso</h1>
-<hr>
+<div class="container"><br>
+<h1 class="center-align">Agregar Acceso</h1>
+<br>
 <div class="form-container">
+<h3 class="center-align">Formulario para crear Accesos</h3>
     <form action="/Acceso/store" method="POST">
         @csrf
         <div class="row">
             <!-- Tipo de Acceso -->
-            <div class="col-6">
+            <div class="col s12">
               <label for="tipo_acceso">Tipo de Acceso</label>
               <select class="form-control" name="tipo_acceso" id="tipo_acceso">
                   <option value="" disabled {{ old('tipo_acceso', $acceso->tipo_acceso ?? '') === '' ? 'selected' : '' }}>Seleccione el tipo de acceso</option>
@@ -49,9 +57,9 @@
           </div>          
         </div>
 
-        <div class="row mt-2">
+        <div class="row">
             <!-- Descripción -->
-            <div class="col-12">
+            <div class="col-6">
                 <label for="descripcion">Descripción</label>
                 <textarea id="descripcion" name="descripcion" class="form-control" rows="4"></textarea>
                 @error('descripcion')
@@ -69,6 +77,7 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 @endsection
 

@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Categoría</title>
-  
+{{-- Heredamos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el título --}}
+@section('title', 'Modificar Categoría')
+
+{{-- Definimos el contenido --}}
+@section('content')
+
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   
@@ -25,30 +27,45 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Editar Categoría</h3>
-    <br>
-    <!-- Formulario para editar categoría -->
-    <div class="form-container">
-        <form id="editarCategoriaForm">
-          <input type="hidden" id="editarIdCategoria" name="idCategoria">
-          <div class="input-field">
-            <label for="editarNombreCategoria">Nombre de la Categoría</label>
-            <input id="editarNombreCategoria" type="text" class="validate" value="Leal" required>
-          </div>
-          <div class="input-field">
-            <label for="editarDescripcionCategoria">Descripción</label>
-            <textarea id="editarDescripcionCategoria" class="materialize-textarea">Es aquel que va a desayunar al restaurante casi todos los días.</textarea>
-          </div>
-          <button class="btn waves-effect waves-light" type="submit">Guardar Cambios
-            <i class="material-icons right">send</i>
-          </button>
-        </form>
-    </div>
-  </div>
+
+  <h1 class="text-center">Modificar Categoría</h1>
+  <h5 class="text-center">Formulario para actualizar la categoría</h5>
+  <hr>
+
+  <div class="container form-container">
+    <form action="/Categorias/update/{{ $categoria->codigo }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="input-field col s12">
+            <label class="form-label" for="nombre">Nombre de la Categoría</label>
+            <input type="text" id="nombre" name="nombre" value="{{ $categoria->nombre }}" required>
+            @error('nombre')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div><br>
+        
+        <div class="input-field col s12">
+            <label class="form-label" for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" class="materialize-textarea {{ $categoria->descripcion }}"></textarea>
+            @error('descripcion')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        <div class="col s12 mt-2">
+            <button class="btn waves-effect waves-light" type="submit">Guardar
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>
+
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+
+@endsection

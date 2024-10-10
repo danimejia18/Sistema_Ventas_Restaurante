@@ -19,8 +19,47 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <style>
+        /* Cambiar el fondo del menú a negro */
+        .navbar {
+            background-color: #000; /* Fondo negro */
+        }
+    
+        /* Cambiar el color del texto del menú a blanco */
+        .navbar a, /* Enlaces del menú */
+        .dropdown-item { /* Elementos del submenú */
+            color: #fff; /* Texto blanco */
+        }
+    
+        /* Cambiar el color del texto del menú al pasar el mouse */
+        .navbar a:hover,
+        .dropdown-item:hover {
+            color: #fff; /* Mantener texto blanco al pasar el mouse */
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo gris claro al pasar el mouse */
+        }
+    
+        /* Asegúrate de que el menú desplegable tenga poco margen */
+        .dropdown-menu {
+            padding: 0; /* Elimina el padding interno del menú */
+            margin: 0; /* Elimina el margen externo del menú */
+            min-width: 100px; /* Establece un ancho mínimo para el menú */
+            background-color: #000; /* Fondo negro para el menú desplegable */
+        }
+    
+        /* Asegúrate de que los elementos del menú tengan poco padding */
+        .dropdown-item {
+            padding: 5px 10px; /* Ajusta el padding interno de los elementos */
+            line-height: 1.5; /* Ajusta la altura de línea */
+        }
+    
+        /* Asegúrate de que el submenú tenga poco margen */
+        .dropdown-menu.show {
+            margin-top: -35px; /* Ajusta este valor para reducir el espacio */
+        }
+    </style>
+      
+    
 </head>
-
 
 <body>
     <div id="app">
@@ -61,62 +100,65 @@
                         </li>
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" href="/Acceso/show">
+                            <a class="nav-link dropdown-toggle" role="button" href="#"  data-bs-toggle="dropdown" aria-expanded="false">
                                 Accesos
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/Empleados/show">Empleados</a>
+                                    <a class="dropdown-item" href="/Acceso/show">Accesos</a> <!-- Ruta para ingresar accesos -->
+                                    <a class="dropdown-item" href="/Empleados/show">Empleados</a> <!-- Ruta para ingresar empleados -->
                                 </li>
                             </ul>
-                        </li>                        
-
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" href="/Menus/show" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" href="#" data-bs-toggle="dropdown">
                                 Menú
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
+                                <li>
+                                    <a class="dropdown-item" href="/Menus/show">Menú</a>
                                     <a class="dropdown-item" href="/Platos/show">Platos</a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" href="/Clientes/show">
+                        <li class="nav-item ">
+                            <a class="nav-link" role="button" href="/Clientes/show">
                                 Clientes
                             </a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" href="/Productos/show" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" href="#" data-bs-toggle="dropdown">
                                 Productos
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
+                                <li>
+                                    <a class="dropdown-item" href="/Productos/show">Productos</a>
                                     <a class="dropdown-item" href="/Categorias/show">Categorías</a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" href="/Mesas/show">
+                        <li class="nav-item ">
+                            <a class="nav-link" role="button" href="/Mesas/show">
                                 Mesas
                             </a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"  role="button" href="/Promociones/show">
+                        <li class="nav-item">
+                            <a class="nav-link"  role="button" href="/Promociones/show">
                                 Promociones
                             </a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" href="Pedidos/show" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" href="#" data-bs-toggle="dropdown">
                                 Pedidos
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
+                                <li>
+                                    <a class="dropdown-item" href="/Pedidos/show">Pedido</a>
                                     <a class="dropdown-item" href="/Detalle_pedidos/show">Detalle de pedido</a>
                                 </li>
                             </ul>
@@ -127,7 +169,8 @@
                                 Reservaciones
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
+                                <li>
+                                    <a class="dropdown-item" href="Reservaciones/show">Reservaciones</a>
                                     <a class="dropdown-item" href="Pagos/show">Pagos</a>
                                 </li>
                             </ul>
@@ -138,7 +181,8 @@
                                 Informes
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
+                                <li>
+                                    <a class="dropdown-item" href="Informes/show">Informes</a>
                                     <a class="dropdown-item" href="Detalle_informes/show">Detalles de informes</a>
                                 </li>
                             </ul>
