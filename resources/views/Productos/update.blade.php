@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Producto</title>
-  
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el titulo --}}
+@section('title', 'Productos')
+
+{{-- Definimos el contenido --}}
+@section('content')
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   
@@ -28,55 +29,72 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Modificar Producto</h3>
-    
-    <!-- Formulario para modificar producto -->
-    <div class="form-container">
-      <form id="modificarProductoForm">
-        <div class="row">
-          <div class="input-field col s6">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" class="validate" value="Tomate" required>
-          </div>
-          <div class="input-field col s6">
-            <label for="descripcion">Descripción</label>
-            <input id="descripcion" type="text" class="validate" value="Tomate manzana" required>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <label for="stock">Stock</label>
-            <br><br>
-            <input id="stock" type="number" class="validate" required>
-          </div>
-          <div class="input-field col s12">
-            <label for="estado">Estado</label>
-            <br>
-            <p>
-                <label>
-                  <input type="checkbox" />
-                  <span>Agotado</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                  <input type="checkbox" checked="checked" />
-                  <span>Activo</span>
-                </label>
-            </p>
-        </div>
-        </div>
-        <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
-    </div>
-  </div>
 
+  <h1 class="text-center">Modificar</h1>
+  <h5 class="text-center">Formulario para modificar productos</h5>
+    
+  <div class="container">
+    <form action="/Productos/update/{{ $producto->codigo }}" method="POST">
+      @csrf
+      @method('PUT')
+      <div class="row">
+          <div class="col-6">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $producto->nombre }}">
+              @error('nombre')
+                  <span class="invalid-feedback d-block" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+          </div>
+          <div class="col-6">
+            <label for="nombre">Descripción</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ $producto->descripcion }}">
+            @error('descripcion')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <div class="col-6">
+          <label for="stock">Stock</label>
+          <input id="stock" type="number" class="form-control" name="stock" value="{{ $producto->stock }}">
+          @error('stock')
+              <span class="invalid-feedback d-block" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+      </div>
+  
+      <div class="input-field col s12">
+        <label for="estado">Estado</label><br>
+        <p><br>
+          <label>
+            <input type="radio" name="estado" value="Agotado" />
+            <span>Agotado</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="radio" name="estado" value="Activo" />
+            <span>Activo</span>
+          </label>
+        </p>
+          @error('estado')
+              <span class="invalid-feedback d-block" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit">Guardar
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+</div>
+@endsection
+
+@section('scripts')
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+@endsection

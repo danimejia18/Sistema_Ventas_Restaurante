@@ -33,12 +33,12 @@
     }
   </style>
 @section('content')
-<div class="container"><br>
 <h1 class="center-align">Agregar Acceso</h1>
-<br>
-<div class="form-container">
 <h3 class="center-align">Formulario para crear Accesos</h3>
-    <form action="/Acceso/store" method="POST">
+ 
+<div class="container"><br>
+<div class="form-container">
+   <form action="/Acceso/store" method="POST">
         @csrf
         <div class="row">
             <!-- Tipo de Acceso -->

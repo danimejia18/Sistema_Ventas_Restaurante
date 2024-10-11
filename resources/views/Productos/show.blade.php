@@ -1,12 +1,13 @@
 
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mostrar Productos</title>
-  
+{{-- Definimos el titulo --}}
+@section('title', 'Productos')
+
+{{-- Definimos el contenido --}}
+@section('content')
+
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   
@@ -38,15 +39,10 @@
       margin-right: 50px
     }
   </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Mostrar Productos</h3>
-    
-    <!-- Tabla para mostrar Productos -->
-    <div class="table-container">
-      <h5 class="card-title">Productos registrados</h5>
-      <a href="create.blade.php" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
+<h1>Productos</h1>
+<h5>Listado de Productos</h5>
+<hr>
+    <a class="btn-floating btn-large waves-effect waves-light green" href="/Productos/create"><i class="material-icons">add</i></a>
       <table class="highlight responsive-table">
         <thead>
           <tr>
@@ -59,25 +55,34 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Ejemplo de informe (se pueden agregar más filas dinámicamente) -->
+          {{-- Listado de productos --}}
+          @foreach ($productos as $item)
           <tr>
-            <td>1</td>
-            <td>Tomate</td>
-            <td>Tomate manzana</td>
-            <td>24 lb</td>
-            <td>Activo</td>
-            <td>Cancelado</td>
-            <td>
-                <a href="update.blade.php" class="btn-small blue btn-editar"><i class="material-icons">edit</i></a>
-                <button class="btn-small red btn-eliminar"><i class="material-icons">delete</i></button>
-            </td>
+              <td>{{ $item->codigo }}</td>
+              <td>{{ $item->nombre }}</td>
+              <td>{{ $item->descripcion }}</td>
+              <td>{{ $item->stock }}</td>
+              <td>{{ $item->estado }}</td>
+              <td>
+                  <a class="btn btn-success btn-sm" href="/Productos/edit/{{ $item->codigo }}">Modificar</a>
+                  <button class="btn btn-danger btn-sm" 
+                          onclick="destroy(this)" 
+                          url="/Productos/destroy/{{ $item->codigo }}" 
+                          token="{{ csrf_token() }}">
+                      Eliminar
+                  </button>
+              </td>
           </tr>
+        @endforeach
         </tbody>
       </table>
-    </div>
-  </div>
+  @endsection
 
+  @section('scripts')
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+  {{-- SweetAlert --}}
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {{-- JS --}}
+  <script src="{{ asset('js/plato.js') }}"></script>
+  @endsection

@@ -1,20 +1,17 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccesoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpleadoController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PlatoController;
+use App\Http\Controllers\ProductoController;
 
 
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth');
-
-
-Auth::routes();
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Ruta para mostrar la vista show.blade.php
 Route::get('/Acceso/show', [AccesoController::class, 'index']);
@@ -93,3 +90,37 @@ Route::put('/Empleados/update/{empleado}', [EmpleadoController::class, 'update']
 
 // Ruta para eliminar empleado
 Route::delete('/Empleados/destroy/{id}', [EmpleadoController::class, 'destroy']);
+
+//Platos
+
+Route::get('Platos/show', [PlatoController::class, 'index']);
+
+Route::get('Platos/create', [PlatoController::class, 'create']);
+
+Route::get('Platos/edit/{plato}', [PlatoController::class, 'edit']);
+
+Route::post('Platos/store', [PlatoController::class, 'store']);
+
+Route::put('Platos/update/{plato}', [PlatoController::class, 'update']);
+
+Route::delete('Platos/destroy/{id}', [PlatoController::class, 'destroy']);
+
+//Productos
+
+Route::get('Productos/show', [ProductoController::class, 'index']);
+
+Route::get('Productos/create', [ProductoController::class, 'create']);
+
+Route::get('Productos/edit/{producto}', [ProductoController::class, 'edit']);
+
+Route::post('Productos/store', [ProductoController::class, 'store']);
+
+Route::put('Productos/update/{producto}', [ProductoController::class, 'update']);
+
+Route::delete('Productos/destroy/{id}', [ProductoController::class, 'destroy']);
+
+
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

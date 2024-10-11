@@ -40,8 +40,6 @@
     }
     
   </style>
-</head>
-<body>
   <div class="container"><br>
     <h3 class="center-align">Lista de Accesos</h3>
     <br>
@@ -72,8 +70,6 @@
                         Admin
                     @elseif($item->tipo_acceso == 2)
                         Empleado
-                    @else
-                        Desconocido
                     @endif
                   </td>
                   <td>{{ $item->descripcion }}</td>

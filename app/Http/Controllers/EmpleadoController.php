@@ -28,7 +28,8 @@ public function index()
         "empleados.correo",
         "empleados.telefono",
         "empleados.rol",
-        "accesos.codigo as id_acceso"
+        "empleados.contraseña",
+        "accesos.tipo_acceso as id_acceso"
     )
     ->join("accesos", "accesos.codigo", "=", "empleados.id_acceso")
     ->get();
@@ -65,14 +66,18 @@ public function store(Request $request)
         'telefono' => 'required',
         'rol' => 'required',
         'contraseña' => 'required|min:8',
-        'id_acceso' => 'required|exists:accesos,codigo', // Asegurando que el id_acceso exista en la tabla accesos
+        'id_acceso' => 'required'
     ]);
+
+
+    // Cifrar la contraseña
+    $data['contraseña'] = bcrypt($data['contraseña']);
 
     // Crear nuevo empleado
     Empleado::create($data);
 
     // Redirigir a la vista de empleados con un mensaje de éxito
-    return redirect()->route('Empleados.show');
+    return redirect('/Empleados/show');
 }
 
     /**
@@ -117,7 +122,7 @@ public function store(Request $request)
             'telefono' => 'required|numeric|digits_between:8,15',
             'rol' => 'required',
             'contraseña' => 'required|min:8',
-            'id_acceso' => 'required|exists:accesos,codigo',
+            'id_acceso' => 'required',
         ], [
             'correo.required' => 'El campo de correo es obligatorio.',
             'correo.email' => 'El correo electrónico debe ser válido.',
@@ -126,7 +131,15 @@ public function store(Request $request)
             'telefono.numeric' => 'El número de teléfono debe contener solo números.',
             'telefono.digits_between' => 'El número de teléfono debe tener entre 8 y 15 dígitos.',
         ]);
-    
+
+    // Cifrar la contraseña solo si se ha proporcionado una nueva
+    if ($request->filled('contraseña')) {
+        $data['contraseña'] = bcrypt($data['contraseña']);
+    } else {
+        // Si no se cambia la contraseña, se mantiene la actual
+        unset($data['contraseña']);
+    }
+
         // Reemplazar datos anteriores por los nuevos
         $empleado->nombre = $data['nombre'];
         $empleado->apellido = $data['apellido'];

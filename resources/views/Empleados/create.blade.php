@@ -26,51 +26,44 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
+  
+  <h1 class="text-center">Crear</h1>
+  <h5 class="text-center">Formulario para agregar Empleado</h5>
 
   <div class="container">
-    <h3 class="center-align">Agregar Empleado</h3>
-    <br>
-    <div class="form-container">
+  <div class="form-container">
       <form action="/Empleados/store" method="POST">
         @csrf
         <div class="row">
-          <div class="input-field col s6">
-            <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" name="nombre" id="nombre">
-            @error('nombre')
-            <span class="invalid-feedback d-block" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-          @enderror
-          </div>
-          <div class="row mt-2">
-            <!-- Apellido -->
-            <div class="col 12">
-                <label for="apellido">Apellido</label><br>
-                <input type="text" class="form-control" name="apellido" id="apellido">
-                @error('apellido')
-                <span class="helper-text red-text" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="row">
-              <div class="col-md-12"> 
-                  <label for="correo" class="form-label">Correo Electrónico</label><br> 
-                  <input id="correo" type="email" class="form-control @error('correo') is-invalid @enderror" name="correo" required>
-                  
-                  @error('correo')
-                  <span class="invalid-feedback" role="alert">
+          <div class="col-6">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control" name="nombre" id="nombre">
+              @error('nombre')
+                  <span class="invalid-feedback d-block" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
-              </div>
+              @enderror
           </div>
-          
-        <div class="row mt22">
-          <div class="col 12">
-            <!-- Teléfono -->
-            <label for="telefono">Teléfono</label><br>
+          <div class="col-6">
+              <label for="nombre">Apellido</label>
+              <input type="text" class="form-control" name="apellido" id="apellido">
+              @error('apellido')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+          </div>
+          <div class="col-6"> 
+              <label for="correo">Correo Electrónico</label><br> 
+              <input type="email" class="form-control" name="correo" id="correo">
+              @error('correo')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+          </div>
+          <div class="col-6">
+            <label for="telefono" class="form-label">Teléfono</label><br>
             <input type="tel" class="validate" name="telefono" id="telefono">
             @error('telefono')
             <span class="helper-text red-text" role="alert">
@@ -90,7 +83,6 @@
                   <option value="4">Personal de Limpieza</option>
               </select>
         </div>
-        </div>
         <div class="row mt22">
           <div class="col s12">
               <!-- Contraseña -->
@@ -102,30 +94,33 @@
               </span>
               @enderror
           </div>
+          
+          <div class="col-12 mt-3">
+            <label for="id_acceso">Id Acceso</label>
+            <select name="id_acceso" class="form-control">
+              <option value="">Seleccione un acceso</option>
+              @foreach ($accesos as $item)
+                  <option value="{{ $item->codigo }}">{{ $item->tipo_acceso }}</option>
+              @endforeach
+          </select>
+          
+            @error('id_acceso')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>                
       </div>
       
-      <div class="input-field col s6">
-        <label for="id_acceso">ID Acceso</label><br><br>
-        <select class="browser-default" name="id_acceso" id="id_acceso" required>
-            <option value="" disabled selected>Seleccione el ID de Acceso</option>
-            <option value="1">Admin 1</option>
-            <option value="2">Admin 2</option>
-            <option value="3">Admin 3</option>
-        </select>
-        @error('id_acceso')
-        <span class="helper-text red-text" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
+        <button class="btn waves-effect waves-light" type="submit">Guardar
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
     </div>
-    <div class="row mt-4">
-      <!-- Botón Guardar -->
-      <div class="col-12">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-      </div>
   </div>
-</form>
-</div>
 @endsection
+
+@section('scripts')
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+@endsection
