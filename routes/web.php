@@ -7,6 +7,8 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\PlatoController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\MesaController;
+
 
 
 Route::get('/home', function () {
@@ -119,6 +121,19 @@ Route::put('Productos/update/{producto}', [ProductoController::class, 'update'])
 
 Route::delete('Productos/destroy/{id}', [ProductoController::class, 'destroy']);
 
+//Mesas
+
+Route::get('Mesas/show', [MesaController::class, 'index']);
+
+Route::get('Mesas/create', [MesaController::class, 'create']);
+
+Route::get('Mesas/edit/{mesa}', [MesaController::class, 'edit']);
+
+Route::post('Mesas/store', [MesaController::class, 'store']);
+
+Route::put('Mesas/update/{mesa}', [MesaController::class, 'update']);
+
+Route::delete('Mesas/destroy/{id}', [MesaController::class, 'destroy']);
 
 
 Auth::routes();

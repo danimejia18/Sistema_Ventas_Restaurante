@@ -56,7 +56,6 @@
           </tr>
         </thead>
         <tbody>
-          <tbody>
             {{-- Listado de platos --}}
             @foreach ($platos as $item)
                 <tr>
@@ -66,13 +65,13 @@
                     <td>{{ $item->ingredientes }}</td>
                     <td>{{ $item->id_categoria }}</td>
                     <td>
-                        <a class="btn btn-success btn-sm" href="/Platos/edit/{{ $item->codigo }}">Modificar</a>
-                        <button class="btn btn-danger btn-sm" 
-                                onclick="destroy(this)" 
-                                url="/Platos/destroy/{{ $item->codigo }}" 
-                                token="{{ csrf_token() }}">
-                            Eliminar
-                        </button>
+                      <a class="btn-small blue btn-editar" href="/Mesas/edit/{{ $item->codigo }}"><i class="material-icons">edit</i></a>
+                      <button class="btn-small red btn-eliminar" 
+                              onclick="destroy(this)" 
+                              url="/Mesas/destroy/{{ $item->codigo }}" 
+                              token="{{ csrf_token() }}"><i class="material-icons">
+                              delete</i>
+                      </button>
                     </td>
                 </tr>
             @endforeach

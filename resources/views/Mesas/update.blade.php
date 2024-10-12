@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Mesa</title>
-  
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el título --}}
+@section('title', 'Mesas')
+
+{{-- Definimos el contenido --}}
+@section('content')
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   
@@ -28,65 +29,80 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
-</head>
-<body>
+ <h1 class="text-center">Modificar</h1>
+ <h5 class="text-center">Formulario para modificar mesas</h5>
+   
   <div class="container">
-    <h3 class="center-align">Modificar Mesa</h3>
-    
-    <!-- Formulario para modificar informe -->
-    <div class="form-container">
-      <form id="modificarMesaForm">
-        <div class="input-field col s12">
-            <label for="numero">Número</label>
-            <input id="numero" type="number" class="validate" value="3" required>
-        </div>
-        <div class="input-field col s6">
-            <label>Capacidad</label>
-            <br><br>
-                <select class="browser-default">
-                    <option value="" disabled selected>Seleccione la Capacidad de personas</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="4">5</option>
-                    <option value="4">6</option>
-                    <option value="4">7</option>
-                    <option value="4">8</option>
-                    <option value="4">9</option>
-                    <option value="4">10</option>
-                </select>
-        </div>
-        <div class="input-field col s6">
-            <label for="estado">Estado</label>
-            <br>
-            <p>
-                <label>
-                  <input type="checkbox" />
-                  <span>Libre</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                  <input type="checkbox" checked="checked" />
-                  <span>Reservada</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                  <input type="checkbox" />
-                  <span>Ocupada</span>
-                </label>
-            </p>
-        </div>
-        <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
+    <form action="/Mesas/update/{{ $mesa->codigo }}" method="POST">
+      @csrf
+      @method('PUT') 
+      <div class="row">
+          <div class="col-6">
+              <label for="numero">Numero</label>
+              <input type="numero" class="form-control" name="numero" id="numero" value="{{ $mesa->numero }}">
+              @error('numero')
+                  <span class="invalid-feedback d-block" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+          </div>
+    <div class="input-field col s12">
+        <label>Capacidad</label>
+        <br><br>
+            <select class="browser-default" name="capacidad" id="capacidad"  required>
+                <option value="" disabled {{ $mesa->capacidad === null ? 'selected' : '' }}>Seleccione la Capacidad de personas</option>
+                <option value="1" {{ $mesa->capacidad == '1' ? 'selected' : '' }}>1</option>
+                <option value="2" {{ $mesa->capacidad == '2' ? 'selected' : '' }}>2</option>
+                <option value="3" {{ $mesa->capacidad == '3' ? 'selected' : '' }}>3</option>
+                <option value="4" {{ $mesa->capacidad == '4' ? 'selected' : '' }}>4</option>
+                <option value="5" {{ $mesa->capacidad == '5' ? 'selected' : '' }}>5</option>
+                <option value="6" {{ $mesa->capacidad == '6' ? 'selected' : '' }}>6</option>
+                <option value="7" {{ $mesa->capacidad == '7' ? 'selected' : '' }}>7</option>
+                <option value="8" {{ $mesa->capacidad == '8' ? 'selected' : '' }}>8</option>
+                <option value="9" {{ $mesa->capacidad == '9' ? 'selected' : '' }}>9</option>
+                <option value="10" {{ $mesa->capacidad == '10' ? 'selected' : '' }}>10</option>
+            </select>
+            @error('capacidad')
+            <span class="helper-text red-text" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
     </div>
-  </div>
+    <div class="input-field col s12">
+      <label for="estado" >Estado</label><br>
+      <p><br>
+        <label>
+          <input type="radio" name="estado" value="Libre" {{ $mesa->estado == 'Libre' ? 'checked' : '' }} />
+          <span>Libre</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="radio" name="estado" value="Reservada" {{ $mesa->estado == 'Reservada' ? 'checked' : '' }} />
+          <span>Reservada</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="radio" name="estado" value="Ocupada" {{ $mesa->estado == 'Ocupada' ? 'checked' : '' }}/>
+          <span>Ocupada</span>
+        </label>
+      </p>
+        @error('estado')
+            <span class="invalid-feedback d-block" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <button class="btn waves-effect waves-light" type="submit">Guardar
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+</div>
+</div>
+@endsection
 
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+@section('scripts')
+<!-- Importar Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+@endsection

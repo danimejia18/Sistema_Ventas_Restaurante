@@ -88,7 +88,7 @@ class ClienteController extends Controller
     public function edit(Cliente $cliente)
     {
         
-        // Mostrar vista update.blade.php junto al acceso
+        // Mostrar vista update.blade.php de cliente
         return view('Clientes.update')->with(['cliente' => $cliente]);
     
     }
@@ -126,7 +126,7 @@ class ClienteController extends Controller
         $cliente->direccion = $data['direccion'];
         $cliente->updated_at = now();
 
-        // Actualizar los datos del acceso
+        // Actualizar los datos del cliente
         $cliente->save();
 
         // Redireccionar
@@ -141,7 +141,7 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        // Eliminar el acceso
+        // Eliminar el cliente
         Cliente::destroy($id);
 
         // Retornar respuesta JSON

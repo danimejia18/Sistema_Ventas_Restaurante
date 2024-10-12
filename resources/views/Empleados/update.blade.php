@@ -37,7 +37,7 @@
      <div class="row">
         <div class="input-field col s6">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" value="{{ old('nombre', $empleado->nombre) }}">
+            <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $empleado->nombre }}">
             @error('nombre')
             <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
         </div>
         <div class="input-field col s6">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control" name="apellido" id="apellido" value="{{ old('apellido', $empleado->apellido) }}">
+            <input type="text" class="form-control" name="apellido" id="apellido" value="{{ $empleado->apellido }}">
             @error('apellido')
             <span class="helper-text red-text" role="alert">
                 <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="input-field col s12">
                 <label for="correo">Correo Electrónico</label>
-                <input id="correo" type="email" class="validate" name="correo" value="{{ old('correo', $empleado->correo) }}" required>
+                <input id="correo" type="email" class="validate" name="correo" value="{{ $empleado->correo }}" required>
                 @error('correo')
                 <span class="helper-text red-text" role="alert">
                     <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
         <div class="row mt22">
             <div class="col s12">
                 <label for="telefono">Teléfono</label>
-                <input type="tel" class="validate" name="telefono" id="telefono" value="{{ old('telefono', $empleado->telefono) }}">
+                <input type="tel" class="validate" name="telefono" id="telefono" value="{{ $empleado->telefono }}">
                 @error('telefono')
                 <span class="helper-text red-text" role="alert">
                     <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
         </div>
         <div class="input-field col s6">
             <label for="rol">Rol</label><br><br>
-            <select class="browser-default" name="rol" id="rol" required>
+            <select class="browser-default" name="rol" id="rol" value="{{ $empleado->rol }}" required>
                 <option value="" disabled>Seleccione un Rol</option>
                 <option value="1" {{ $empleado->rol == 1 ? 'selected' : '' }}>Mesero</option>
                 <option value="2" {{ $empleado->rol == 2 ? 'selected' : '' }}>Cocinero</option>

@@ -82,6 +82,11 @@
                   <option value="3">Gerente</option>
                   <option value="4">Personal de Limpieza</option>
               </select>
+              @error('rol')
+            <span class="helper-text red-text" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
         <div class="row mt22">
           <div class="col s12">

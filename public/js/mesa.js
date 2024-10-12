@@ -5,7 +5,7 @@ destroy = function(e) {
     Swal.fire({
         icon: 'question',
         title: '¿Desea continuar?',
-        text: 'El plato será eliminado',
+        text: 'La mesa será eliminada',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Si'
@@ -19,7 +19,7 @@ destroy = function(e) {
                     e.closest('tr').remove();
                     Swal.fire({
                         icon: 'success',
-                        text: 'Plato eliminado'
+                        text: 'Mesa eliminada'
                     });
                 }
             };
