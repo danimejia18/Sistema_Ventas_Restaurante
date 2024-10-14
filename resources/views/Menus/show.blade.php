@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mostrar Menús</title>
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el título --}}
+@section('title', 'Menus')
+
+{{-- Definimos el contenido --}}
+@section('content')
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -20,7 +22,7 @@
       margin-top: 20px;
     }
     .table-container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
       background-color: #fff;
       border-radius: 8px;
@@ -44,7 +46,7 @@
     <!-- Tabla para mostrar Menús -->
     <div class="table-container">
       <h5 class="card-title">Menús registrados</h5>
-      <a href="create.blade.php" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
+      <a href="/Menus/create" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
       <table class="highlight responsive-table">
         <thead>
           <tr>
@@ -56,23 +58,34 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Ejemplo de informe (se pueden agregar más filas dinámicamente) -->
-          <tr>
-            <td>1</td>
-            <td>Especial Festival</td>
-            <td>3</td>
-            <td>1</td>
-            <td>
-                <a href="update.blade.php" class="btn-small blue btn-editar"><i class="material-icons">edit</i></a>
-                <button class="btn-small red btn-eliminar"><i class="material-icons">delete</i></button>
-            </td>
-          </tr>
+          {{-- Listado de menús --}}
+          @foreach ($menus as $item)
+              <tr>
+                <td>{{$item->codigo}}</td>
+                <td>{{$item->nombre}}</td>
+                <td>{{$item->id_plato}}</td>
+                <td>{{$item->id_categoria}}</td>
+                <td>
+                  <a href="/Menus/edit/{{$item->codigo}}" class="btn-small blue btn-editar"><i class="material-icons">edit</i></a>
+                  <button class="btn-small red btn-eliminar"
+                  onclick="destroy(this)"
+                  url="/Menus/destroy/{{$item->codigo}}"
+                  token="{{csrf_token()}}"><i class="material-icons">delete</i></button>
+                </td>
+              </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
   </div>
+  @endsection
 
+  @section('scripts')
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+  {{-- SweetAlert --}}
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {{-- JS --}}
+  <script src="{{ asset('js/menu.js') }}"></script>
+  @endsection
+      

@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agregar Reservación</title>
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el título --}}
+@section('title', 'Reservaciones')
+
+{{-- Definimos el contenido --}}
+@section('content')
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -35,7 +37,8 @@
     
     <!-- Formulario para agregar Reservación -->
     <div class="form-container">
-      <form id="agregarReservacionForm">
+      <form id="agregarReservacionForm" action="Reservaciones/store" method="POST">
+        @csrf
         <div class="input-field col s12">
           <label>ID Cliente</label>
           <br><br>
@@ -93,7 +96,12 @@
     </div>
   </div>
 
+  @section('scripts')
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+  {{-- SweetAlert --}}
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {{-- JS --}}
+  <script src="{{ asset('js/reservacion.js') }}"></script>
+  @endsection
+      

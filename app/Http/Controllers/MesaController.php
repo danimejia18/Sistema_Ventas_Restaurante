@@ -24,7 +24,6 @@ class MesaController extends Controller
 
         //Mostrar vista show.blade
         return view('Mesas/show')->with(['mesas' => $mesas]);
-
     }
 
     /**
@@ -79,7 +78,6 @@ class MesaController extends Controller
     {
         //Mostrar vista update.blade.php
         return view('Mesas.update')->with(['mesa' => $mesa]);
-
     }
 
     /**
@@ -109,7 +107,6 @@ class MesaController extends Controller
 
             // Redireccionar
             return redirect('/Mesas/show');
-
     }
 
     /**

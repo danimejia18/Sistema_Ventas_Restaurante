@@ -8,12 +8,15 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\PlatoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\MesaController;
-
+use App\Http\Controllers\MenuController;
 
 
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth');
+
+
+//ACCESO
 
 // Ruta para mostrar la vista show.blade.php
 Route::get('/Acceso/show', [AccesoController::class, 'index']);
@@ -32,6 +35,7 @@ Route::put('/Acceso/update/{acceso}', [AccesoController::class, 'update']);
 
 // Ruta para eliminar acceso
 Route::delete('/Acceso/destroy/{id}', [AccesoController::class, 'destroy']);
+
 
 //CATEGORIAS
 
@@ -53,6 +57,7 @@ Route::put('/Categorias/update/{categoria}', [CategoriaController::class, 'updat
 // Ruta para eliminar categoria
 Route::delete('/Categorias/destroy/{id}', [CategoriaController::class, 'destroy']);
 
+
 //CLIENTES
 
 // Ruta para mostrar la vista show.blade.php
@@ -72,6 +77,7 @@ Route::put('/Clientes/update/{cliente}', [ClienteController::class, 'update']);
 
 // Ruta para eliminar cliente
 Route::delete('/Clientes/destroy/{id}', [ClienteController::class, 'destroy']);
+
 
 //EMPLEADOS
 
@@ -93,7 +99,24 @@ Route::put('/Empleados/update/{empleado}', [EmpleadoController::class, 'update']
 // Ruta para eliminar empleado
 Route::delete('/Empleados/destroy/{id}', [EmpleadoController::class, 'destroy']);
 
-//Platos
+
+//MENÚS
+
+Route::get('Menus/show', [MenuController::class, 'index']);
+
+Route::get('Menus/create', [MenuController::class, 'create']);
+
+Route::get('Menus/edit/{plato}', [MenuController::class, 'edit']);
+
+Route::post('Menus/store', [MenuController::class, 'store']);
+
+Route::put('Menus/update/{plato}', [MenuController::class, 'update']);
+
+Route::delete('Menus/destroy/{id}', [MenuController::class, 'destroy']);
+
+
+
+//PLATOS
 
 Route::get('Platos/show', [PlatoController::class, 'index']);
 
@@ -107,7 +130,8 @@ Route::put('Platos/update/{plato}', [PlatoController::class, 'update']);
 
 Route::delete('Platos/destroy/{id}', [PlatoController::class, 'destroy']);
 
-//Productos
+
+//PRODUCTOS
 
 Route::get('Productos/show', [ProductoController::class, 'index']);
 
@@ -121,7 +145,8 @@ Route::put('Productos/update/{producto}', [ProductoController::class, 'update'])
 
 Route::delete('Productos/destroy/{id}', [ProductoController::class, 'destroy']);
 
-//Mesas
+
+//MESAS
 
 Route::get('Mesas/show', [MesaController::class, 'index']);
 

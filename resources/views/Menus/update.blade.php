@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Menú</title>
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el título --}}
+@section('title', 'Menus')
+
+{{-- Definimos el contenido --}}
+@section('content')
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -35,32 +37,49 @@
     
     <!-- Formulario para agregar informe -->
     <div class="form-container">
-      <form id="agregarMenuForm">
-        <div class="input-field col s12">
+      <form id="agregarMenuForm" action="/Menus/update/{{$menu->codigo}}" method="POST">
+        <div class="row">
+          <div class="input-field col s12">
             <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" class="validate" value="Especial Festival" required>
+            <input id="nombre" type="text" class="validate" id="nombre" value="{{$menu->nombre}}">
+            @error('nombre')
+              <span class="invalid-feedback d-block" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+          </div>
         </div>
-        <div class="input-field col s6">
-            <label>ID Plato</label>
-            <br><br>
-                <select class="browser-default">
-                    <option value="" disabled selected>Seleccione el ID del Plato</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-        </div>
-        <div class="input-field col s6">
-            <label>ID Categoría</label>
-            <br><br>
-                <select class="browser-default">
-                    <option value="" disabled selected>Seleccione el ID de la Categoría</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
+        <div class="row">
+          <div class="input-field col s6">
+            <label>Plato</label>
+            <select name="id_plato" id="id_plato" class="form-control">
+              @foreach ($platos as $item)
+                  <option value="{{ $item->codigo }}" {{($item->codigo==$menu->id_plato)? 'selected' : ''}}>
+                    {{ $item->nombre }}
+                  </option>
+              @endforeach
+            </select>
+              @error('id_plato')
+              <span class="helper-text red-text" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+          </div>
+          <div class="input-field col s6">
+            <label for="id_categoria">ID_Categoría</label>
+            <select name="id_categoria" id="id_categoria" class="form-control">
+              @foreach ($categorias as $item)
+                <option value="{{ $item->codigo }}" {{ ($item->codigo == $plato->id_categoria) ? 'selected' : '' }}>
+                    {{ $item->nombre }}
+                </option>
+              @endforeach
+            </select>
+            @error('id_categoria')
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+          </div>
         </div>
         <button class="btn waves-effect waves-light" type="submit">Guardar
           <i class="material-icons right">send</i>
@@ -68,8 +87,9 @@
       </form>
     </div>
   </div>
+  @endsection
 
+  @section('scripts')
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+  @endsection

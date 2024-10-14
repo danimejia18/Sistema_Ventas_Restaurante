@@ -24,7 +24,6 @@ class ProductoController extends Controller
         $productos = Producto::all();
 
         return view('Productos.show')->with(['productos' => $productos]);
-
     }
 
     /**

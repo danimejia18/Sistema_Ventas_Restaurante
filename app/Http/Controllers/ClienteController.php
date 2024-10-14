@@ -23,8 +23,6 @@ class ClienteController extends Controller
 
         // Mostrar vista index.blade.php junto al listado de clientes
         return view('Clientes.show')->with(['clientes' => $clientes]);
-   
-
     }
 
     /**
@@ -90,7 +88,6 @@ class ClienteController extends Controller
         
         // Mostrar vista update.blade.php de cliente
         return view('Clientes.update')->with(['cliente' => $cliente]);
-    
     }
 
     /**
