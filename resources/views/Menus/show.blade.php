@@ -25,17 +25,22 @@
       max-width: 1000px;
       margin: 0 auto;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
     }
     .table-container table {
       width: 100%;
+      border: black dotted 1px
     }
     .btn-floating
     {
       float: right;
       margin-right: 50px
+    }
+    thead
+    {
+      background-color: antiquewhite
     }
   </style>
 </head>
@@ -48,7 +53,7 @@
       <h5 class="card-title">Menús registrados</h5>
       <a href="/Menus/create" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
       <table class="highlight responsive-table">
-        <thead>
+        <thead class="striped responsive-table">
           <tr>
             <th>ID</th>
             <th>Nombre</th>

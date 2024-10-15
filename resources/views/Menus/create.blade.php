@@ -26,7 +26,7 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>

@@ -97,7 +97,7 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        // Eliminar la mesa
+        // Eliminar el menú
         Menu::destroy($id);
 
         //Retornar respuesta JSON
