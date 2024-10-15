@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 {{-- Definimos el titulo --}}
-@section('title', 'Accesos')
+@section('title', 'Crear Acceso')
 
 {{-- Definimos el contenido --}}
 @section('content')
@@ -28,14 +28,14 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 @section('content')
 <h1 class="center-align">Agregar Acceso</h1>
+<br>
 <h3 class="center-align">Formulario para crear Accesos</h3>
- 
 <div class="container"><br>
 <div class="form-container">
    <form action="/Acceso/store" method="POST">
@@ -70,14 +70,16 @@
             </div>
         </div>
 
-        <div class="row mt-4">
-            <!-- Botón Guardar -->
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-        </div>
+        <div class="col s12 mt-2">
+          <button class="btn waves-effect waves-light" type="submit">Guardar
+              <i class="material-icons right">send</i>
+          </button>
+      </div>
     </form>
 </div>
-</div>
+
+
+<!-- Importar Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 @endsection
 

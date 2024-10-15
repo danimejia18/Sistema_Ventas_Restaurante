@@ -23,7 +23,7 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
@@ -32,7 +32,7 @@
   <h5 class="text-center">Formulario para actualizar la categoría</h5>
   <hr>
 
-  <div class="container form-container">
+  <div class="container form-container center">
     <form action="/Categorias/update/{{ $categoria->codigo }}" method="POST">
         @csrf
         @method('PUT')

@@ -23,7 +23,7 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     .form-label {
@@ -37,14 +37,14 @@
   </style>
 
     <h1 class="text-center">Modificar Acceso</h1>
+    <br>
     <h5 class="text-center">Formulario para actualizar el acceso</h5>
     <hr>
 
-    <div class="container form-container">
+    <div class="container form-container center">
         <form action="/Acceso/update/{{ $acceso->codigo }}" method="POST">
             @csrf
             @method('PUT')
-
             <div class="input-field col s12">
                 <label class="form-label" for="tipo-acceso">Tipo Acceso</label>
                 <br><br>

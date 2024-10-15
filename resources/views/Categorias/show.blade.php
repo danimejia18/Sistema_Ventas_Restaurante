@@ -2,10 +2,11 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Categorías')
+@section('title', 'Categorias')
 
 {{-- Definimos el contenido --}}
 @section('content')
+  
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   
@@ -20,77 +21,79 @@
     .container {
       margin-top: 20px;
     }
-    .card {
-      border-radius: 10px;
-      border: none;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    .table-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
     }
-    .card-title {
-      color: #333;
-      text-align: center;
+    .table-container table {
+      width: 100%;
+      border: black dotted 1px
     }
-    .btn-editar,
-    .btn-eliminar {
-      margin-left: 5px;
-    }
-    .btn-floating {
+    .btn-floating
+    {
       float: right;
       margin-right: 50px;
+      bottom: 10px
+    }
+    thead
+    {
+      background-color: antiquewhite
     }
   </style>
-
-  <div class="container"><br>
-    <h3 class="center-align">Lista de Categorías</h3>
-    <br>
-    <!-- Mostrar Categorías -->
-    <div class="row">
-      <div class="col s12">
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title" >Categorías registradas</span>
-            <a href="/Categorias/create" class="btn-floating btn-large waves-effect waves-light green">
-              <i class="material-icons">add</i>
-            </a>
-            <table class="striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{-- Lista de Categorías --}}
-                @foreach ($categorias as $item)
-                <tr>
-                  <td>{{ $item->codigo }}</td>
-                  <td>{{ $item->nombre }}</td>
-                  <td>{{ $item->descripcion }}</td>
-                  <td>
-                    <a class="btn-small blue btn-editar" href="/Categorias/edit/{{ $item->codigo }}"><i class="material-icons">edit</i></a>
-                    <button class="btn-small red btn-eliminar"   
-                            onclick="destroy(this)" 
-                            url="/Categorias/destroy/{{ $item->codigo }}" 
-                            token="{{ csrf_token() }}"><i class="material-icons">
-                          delete</i>
-                    </button>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+</head>
+<body>
+  <div class="container">
+    <h3 class="center-align">Mostrar Categorías</h3>
+    
+    <!-- Tabla para mostrar Categorías -->
+    <div class="table-container">
+      <h5 class="card-title">Categorías registrados</h5>
+      <a href="/Categorias/create" class="btn-floating btn-large waves-effect waves-light green">
+        <i class="material-icons">add</i>
+      </a>
+      <table class="striped responsive-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{-- Lista de Categorías --}}
+          @foreach ($categorias as $item)
+          <tr>
+            <td>{{ $item->codigo }}</td>
+            <td>{{ $item->nombre }}</td>
+            <td>{{ $item->descripcion }}</td>
+            <td>
+              <a class="btn-small blue btn-editar" href="/Categorias/edit/{{ $item->codigo }}"><i class="material-icons">edit</i></a>
+              <button class="btn-small red btn-eliminar"   
+                      onclick="destroy(this)" 
+                      url="/Categorias/destroy/{{ $item->codigo }}" 
+                      token="{{ csrf_token() }}"><i class="material-icons">
+                    delete</i>
+              </button>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
-@endsection
+  @endsection
 
-@section('scripts')
+  @section('scripts')
+  <!-- Importar Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   {{-- SweetAlert --}}
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
   {{-- JS --}}
-  <script src="{{ asset('js/categoria.js') }}"></script>
-@endsection
+  <script src="{{ asset('js/menu.js') }}"></script>
+  @endsection
+      
