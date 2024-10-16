@@ -9,7 +9,6 @@
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -25,7 +24,7 @@
       max-width: 900px;
       margin: 0 auto;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
     }
@@ -44,12 +43,11 @@
       background-color: antiquewhite
     }
   </style>
-</head>
-<body>
+
   <div class="container">
     <h3 class="center-align">Mostrar Detalle_informes</h3>
     
-    <!-- Tabla para mostrar Detalles_informes -->
+    <!-- Tabla para mostrar Detalle_informes -->
     <div class="table-container">
       <h5 class="card-title">Detalle_informes registrados</h5>
       <a href="/Detalle_informes/create" class="btn-floating btn-large waves-effect waves-light green">
@@ -68,7 +66,6 @@
             <th>Mesa</th>
             <th>Promoción</th>
             <th>Acciones</th>
-          </tr>
         </thead>
         <tbody>
           {{-- Lista de Detalle_informes --}}
@@ -88,8 +85,7 @@
               <button class="btn-small red btn-eliminar"   
                       onclick="destroy(this)" 
                       url="/Detalle_informes/destroy/{{ $item->codigo }}" 
-                      token="{{ csrf_token() }}"><i class="material-icons">
-                    delete</i>
+                      token="{{ csrf_token() }}"><i class="material-icons">delete</i>
               </button>
             </td>
           </tr>
@@ -98,7 +94,7 @@
       </table>
     </div>
   </div>
-  @endsection
+@endsection
 
   @section('scripts')
   <!-- Importar Materialize JS -->

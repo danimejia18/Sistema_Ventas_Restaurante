@@ -10,7 +10,6 @@
 
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -23,27 +22,39 @@
       margin-top: 20px;
     }
     .table-container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
     }
     .table-container table {
       width: 100%;
+      border: black dotted 1px
     }
     .btn-floating
     {
       float: right;
-      margin-right: 50px
+      margin-right: 50px;
+      bottom: 10px
+    }
+    thead
+    {
+      background-color: antiquewhite
     }
   </style>
-<h1>Productos</h1>
-<h5>Listado de Productos</h5>
-<hr>
-    <a class="btn-floating btn-large waves-effect waves-light green" href="/Productos/create"><i class="material-icons">add</i></a>
-      <table class="highlight responsive-table">
+  
+  <div class="container">
+    <h3 class="center-align">Mostrar Productos</h3>
+    
+    <!-- Tabla para mostrar Productos -->
+    <div class="table-container">
+      <h5 class="card-title">Productos registrados</h5>
+      <a href="/Productos/create" class="btn-floating btn-large waves-effect waves-light green">
+        <i class="material-icons">add</i>
+      </a>
+      <table class="striped responsive-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -64,18 +75,19 @@
               <td>{{ $item->stock }}</td>
               <td>{{ $item->estado }}</td>
               <td>
-                  <a class="btn btn-success btn-sm" href="/Productos/edit/{{ $item->codigo }}">Modificar</a>
+                  <a class="btn-small blue btn-editar" href="/Productos/edit/{{ $item->codigo }}">Modificar</a>
                   <button class="btn btn-danger btn-sm" 
                           onclick="destroy(this)" 
                           url="/Productos/destroy/{{ $item->codigo }}" 
-                          token="{{ csrf_token() }}">
-                      Eliminar
+                          token="{{ csrf_token() }}"><i class="material-icons">delete</i>
                   </button>
               </td>
           </tr>
         @endforeach
         </tbody>
       </table>
+    </div>
+  </div>
   @endsection
 
   @section('scripts')
@@ -84,5 +96,5 @@
   {{-- SweetAlert --}}
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   {{-- JS --}}
-  <script src="{{ asset('js/plato.js') }}"></script>
+  <script src="{{ asset('js/producto.js') }}"></script>
   @endsection

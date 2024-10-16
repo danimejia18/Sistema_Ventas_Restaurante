@@ -2,13 +2,13 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Mesas')
+@section('title', 'Crear Mesa')
 
 {{-- Definimos el contenido --}}
 @section('content')
+
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -25,86 +25,61 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 
-  <h1 class="text-center">Crear</h1>
-  <h5 class="text-center">Formulario para agregar mesas</h5>
-
-  <div class="container">
-    <!-- Formulario para agregar mesa -->
-        <form action="/Mesas/store" method="POST">
-          @csrf
-          <div class="row">
-              <div class="col-6">
-                  <label for="numero">Numero</label>
-                  <input type="numero" class="form-control" name="numero" id="numero">
-                  @error('numero')
-                      <span class="invalid-feedback d-block" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
-              </div>
-        <div class="input-field col s12">
-            <label>Capacidad</label>
-            <br><br>
-                <select class="browser-default" name="capacidad">
-                    <option value="" disabled selected>Seleccione la Capacidad de personas</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="4">5</option>
-                    <option value="4">6</option>
-                    <option value="4">7</option>
-                    <option value="4">8</option>
-                    <option value="4">9</option>
-                    <option value="4">10</option>
-                </select>
-                @error('capacidad')
-                <span class="helper-text red-text" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+<div class="container">
+  <h3 class="center-align">Agregar Mesa</h3>
+  <h4>Formulario para agregar Mesa</h4>
+  <div class="form-container">
+    <form action="/Mesas/store" method="POST">
+      @csrf
+      <div class="row">
+        <div class="col s6">
+          <label for="numero">Número de mesa</label>
+          <input type="number" class="form-control" name="numero" id="numero">
+            @error('numero')
+            <span class="invalid-feedback d-block" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+          @enderror
         </div>
-        <div class="input-field col s12">
-          <label for="estado">Estado</label><br>
-          <p><br>
-            <label>
-              <input type="radio" name="estado" value="Libre" />
-              <span>Libre</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="radio" name="estado" value="Reservada" />
-              <span>Reservada</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="radio" name="estado" value="Ocupada" />
-              <span>Ocupada</span>
-            </label>
-          </p>
-            @error('estado')
-                <span class="invalid-feedback d-block" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+        <div class="col s6">
+          <label for="capacidad">Capacidad de personas</label>
+          <input type="text" class="form-control" name="capacidad" id="capacidad">
+            @error('capacidad')
+            <span class="invalid-feedback d-block" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+          @enderror
         </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <label for="estado">Estado</label>
+          <select class="form-control" name="estado" id="estado">
+              <option value="" disabled {{ old('estado', $mesa->estado ?? '') === '' ? 'selected' : '' }}>Seleccione el estado de la mesa</option>
+              <option value="1" {{ old('estado') == 1 ? 'selected' : '' }}>Reservada</option>
+              <option value="2" {{ old('estado') == 2 ? 'selected' : '' }}>Libre</option>
+          </select>
+          @error('estado')
+              <span class="invalid-feedback d-block" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+        </div>
+      </div>
+      <div class="col s12 mt-2">
         <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
+            <i class="material-icons right">send</i>
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
+</div>
+  
+    <!-- Importar Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 @endsection
-
-@section('scripts')
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-@endsection
-

@@ -44,6 +44,7 @@
       background-color: antiquewhite
     }
   </style>
+  
 </head>
 <body>
   <div class="container">
@@ -76,8 +77,7 @@
               <button class="btn-small red btn-eliminar"   
                       onclick="destroy(this)" 
                       url="/Categorias/destroy/{{ $item->codigo }}" 
-                      token="{{ csrf_token() }}"><i class="material-icons">
-                    delete</i>
+                      token="{{ csrf_token() }}"><i class="material-icons">delete</i>
               </button>
             </td>
           </tr>
@@ -94,6 +94,6 @@
   {{-- SweetAlert --}}
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   {{-- JS --}}
-  <script src="{{ asset('js/menu.js') }}"></script>
+  <script src="{{ asset('js/categoria.js') }}"></script>
   @endsection
       

@@ -29,9 +29,7 @@
   </style>
 
   <h1 class="text-center">Modificar Categoría</h1>
-  <br>
-  <h5 class="text-center">Formulario para actualizar la categoría</h5>
-  <hr>
+  <h3 class="text-center">Formulario para actualizar la Categoría</h3>
 
   <div class="container form-container center">
     <form action="/Categorias/update/{{ $categoria->codigo }}" method="POST">

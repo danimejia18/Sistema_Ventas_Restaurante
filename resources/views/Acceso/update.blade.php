@@ -29,9 +29,7 @@
   </style>
 
     <h1 class="text-center">Modificar Acceso</h1>
-    <br>
-    <h5 class="text-center">Formulario para actualizar el acceso</h5>
-    <hr>
+    <h3 class="text-center">Formulario para actualizar el Acceso</h3>
 
     <div class="container form-container center">
         <form action="/Acceso/update/{{ $acceso->codigo }}" method="POST">

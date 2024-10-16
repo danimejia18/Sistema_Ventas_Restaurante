@@ -10,7 +10,6 @@
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -23,32 +22,37 @@
       margin-top: 20px;
     }
     .table-container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
     }
     .table-container table {
       width: 100%;
+      border: black dotted 1px
     }
     .btn-floating
     {
       float: right;
-      margin-right: 50px
+      margin-right: 50px;
+      bottom: 10px
+    }
+    thead
+    {
+      background-color: antiquewhite
     }
   </style>
-</head>
-<body>
+
   <div class="container">
-    <h3 class="center-align">Mostrar Reservación</h3>
+    <h3 class="center-align">Mostrar Reservaciones</h3>
     
-    <!-- Tabla para mostrar Reservación -->
+    <!-- Tabla para mostrar Reservaciones -->
     <div class="table-container">
       <h5 class="card-title">Reservaciones registradas</h5>
-      <a href="create.blade.php" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
-      <table class="highlight responsive-table">
+      <a href="/Reservaciones/create" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
+      <table class="striped responsive-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -60,22 +64,29 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Ejemplo de informe (se pueden agregar más filas dinámicamente) -->
+          {{-- Lista de reservaciones --}}
+          @foreach ($reservaciones as $item)
           <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>2</td>
-            <td>14/02/2024  7:00</td>
-            <td>Vencida</td>
+            <td>{{ $item->codigo }}</td>
+            <td>{{ $item->id_cliente }}</td>
+            <td>{{ $item->id_mesa }}</td>
+            <td>{{ $item->fecha_hora }}</td>
+            <td>{{ $item->estado }}</td>
             <td>
-                <a href="update.blade.php" class="btn-small blue btn-editar"><i class="material-icons">edit</i></a>
-                <button class="btn-small red btn-eliminar"><i class="material-icons">delete</i></button>
+              <a class="btn-small blue btn-editar" href="/Reservaciones/edit/{{ $item->codigo }}"><i class="material-icons">edit</i></a>
+              <button class="btn-small red btn-eliminar"   
+                      onclick="destroy(this)" 
+                      url="/Reservaciones/destroy/{{ $item->codigo }}" 
+                      token="{{ csrf_token() }}"><i class="material-icons">delete</i>
+              </button>
             </td>
           </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
   </div>
+  @endsection
 
   @section('scripts')
   <!-- Importar Materialize JS -->

@@ -16,7 +16,6 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PromocionController;
 use App\Http\Controllers\ReservacionController;
-use App\Models\Reservacion;
 
 Route::get('/home', function () {
     return view('home');

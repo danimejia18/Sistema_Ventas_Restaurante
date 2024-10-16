@@ -44,6 +44,7 @@
       background-color: antiquewhite
     }
   </style>
+  
 </head>
 <body>
   <div class="container">
@@ -53,8 +54,8 @@
     <div class="table-container">
       <h5 class="card-title">Accesos registrados</h5>
       <a href="/Acceso/create" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
-      <table class="highlight responsive-table">
-        <thead class="striped responsive-table">
+      <table class="striped responsive-table">
+        <thead>
           <tr>
             <th>ID</th>
             <th>Tipo Acceso</th>
@@ -81,8 +82,7 @@
               <button class="btn-small red btn-eliminar"   
                     onclick="destroy(this)" 
                     url="/Acceso/destroy/{{ $item->codigo }}" 
-                    token="{{ csrf_token() }}"><i class="material-icons">
-                  delete</i>
+                    token="{{ csrf_token() }}"><i class="material-icons">delete</i>
               </button>
             </td>
           </tr>
@@ -99,6 +99,6 @@
   {{-- SweetAlert --}}
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   {{-- JS --}}
-  <script src="{{ asset('js/menu.js') }}"></script>
+  <script src="{{ asset('js/acceso.js') }}"></script>
   @endsection
       

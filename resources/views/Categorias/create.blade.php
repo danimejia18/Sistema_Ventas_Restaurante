@@ -2,13 +2,13 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Categorías')
+@section('title', 'Crear Categorías')
 
 {{-- Definimos el contenido --}}
 @section('content')
+
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -33,9 +33,8 @@
     }
   </style>
 
-  <h1 class="center-align">Agregar Categoría</h1>
-  <br>
-  <h3 class="center-align">Formulario para crear Categorias</h3>
+  <h3 class="center-align">Agregar Categoría</h3>
+  <h4 class="center-align">Formulario para crear Categoría</h4>
   <div class="form-container">
       <form action="/Categorias/store" method="POST">
           @csrf
@@ -72,4 +71,8 @@
         </div>
       </form>
   </div>
-@endsection
+
+  <!-- Importar Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+  @endsection

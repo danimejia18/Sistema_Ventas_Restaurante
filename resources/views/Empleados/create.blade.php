@@ -2,16 +2,16 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Crear Empleados')
+@section('title', 'Crear Empleado')
 
 {{-- Definimos el contenido --}}
 @section('content')
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <style>
     /* Estilos personalizados */
     .form-container {
@@ -22,16 +22,15 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
   
-  <h1 class="text-center">Crear</h1>
-  <h5 class="text-center">Formulario para agregar Empleado</h5>
-
   <div class="container">
-  <div class="form-container">
+    <h3 class="center-align">Agregar Empleado</h3>
+    <h4>Formulario para agregar Empleado</h4>
+    <div class="form-container">
       <form action="/Empleados/store" method="POST">
         @csrf
         <div class="row">
@@ -71,8 +70,8 @@
             </span>
             @enderror
           </div>
-      </div>
-      <div class="input-field col s6">
+        </div>
+        <div class="input-field col s6">
           <label>Rol</label><br>
           <br><br>
               <select class="browser-default" name="rol">
@@ -107,25 +106,25 @@
               @foreach ($accesos as $item)
                   <option value="{{ $item->codigo }}">{{ $item->tipo_acceso }}</option>
               @endforeach
-          </select>
+            </select>
           
             @error('id_acceso')
                 <span class="invalid-feedback d-block" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-        </div>                
-      </div>
-      
-        <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
-        </button>
+          </div>                
+        </div>
+        <div class="col s12 mt-2">
+          <button class="btn waves-effect waves-light" type="submit">Guardar
+              <i class="material-icons right">send</i>
+          </button>
+        </div>
       </form>
     </div>
   </div>
-@endsection
 
-@section('scripts')
   <!-- Importar Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-@endsection
+  
+  @endsection

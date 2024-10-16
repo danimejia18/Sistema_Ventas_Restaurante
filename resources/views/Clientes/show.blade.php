@@ -9,7 +9,6 @@
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -45,18 +44,16 @@
     }
   </style>
 
-</head>
-<body>
   <div class="container">
     <h3 class="center-align">Mostrar Clientes</h3>
     
-    <!-- Tabla para mostrar Categorías -->
+    <!-- Tabla para mostrar Clientes -->
     <div class="table-container">
       <h5 class="card-title">Clientes registrados</h5>
       <a href="/Clientes/create" class="btn-floating btn-large waves-effect waves-light green">
         <i class="material-icons">add</i>
       </a>
-      <table class="striped">
+      <table class="striped responsive-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -69,7 +66,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Lista de clientes -->
+          <!-- Lista de Clientes -->
           @foreach ($clientes as $item)
           <tr>
             <td>{{ $item->codigo }}</td>

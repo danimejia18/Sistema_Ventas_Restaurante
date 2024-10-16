@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Modificar Clientes')
+@section('title', 'Modificar Cliente')
 
 {{-- Definimos el contenido --}}
 @section('content')
@@ -29,9 +29,7 @@
 </style>
 
 <h1 class="text-center">Modificar Clientes</h1>
-<br>
-<h5 class="text-center">Formulario para actualizar los clientes</h5>
-<hr>
+<h3 class="text-center">Formulario para actualizar los clientes</h3>
 
 <div class="container form-container center">
     <form action="/Clientes/update/{{ $cliente->codigo }}" method="POST">

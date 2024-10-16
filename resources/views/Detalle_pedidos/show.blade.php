@@ -2,14 +2,13 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Modificar Categoría')
+@section('title', 'Detalle de Pedidos')
 
 {{-- Definimos el contenido --}}
 @section('content')
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -25,7 +24,7 @@
       max-width: 800px;
       margin: 0 auto;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
     }
@@ -44,8 +43,7 @@
       background-color: antiquewhite
     }
   </style>
-</head>
-<body>
+  
   <div class="container">
     <h3 class="center-align">Mostrar Detalle_pedidos</h3>
     
@@ -57,8 +55,8 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Pedido</th>
-            <th>Producto</th>
+            <th>ID Pedido</th>
+            <th>ID Producto</th>
             <th>Cantidad</th>
             <th>Precio Unitario</th>
             <th>Subtotal</th>
@@ -80,8 +78,7 @@
               <button class="btn-small red btn-eliminar"   
                       onclick="destroy(this)" 
                       url="/Detalle_pedidos/destroy/{{ $item->codigo }}" 
-                      token="{{ csrf_token() }}"><i class="material-icons">
-                    delete</i>
+                      token="{{ csrf_token() }}"><i class="material-icons">delete</i>
               </button>
             </td>
           </tr>
@@ -99,5 +96,5 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   {{-- JS --}}
   <script src="{{ asset('js/detalle_pedido.js') }}"></script>
-  @endsection
+@endsection
       

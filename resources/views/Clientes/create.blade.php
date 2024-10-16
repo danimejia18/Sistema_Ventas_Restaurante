@@ -2,14 +2,13 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Clientes')
+@section('title', 'Crear Cliente')
 
 {{-- Definimos el contenido --}}
 @section('content')
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -35,9 +34,8 @@
   </style>
 
   <div class="container">
-    <h1 class="center-align">Agregar Cliente</h>
-      <br>
-      <h3 class="center-align">Formulario para agregar Clientes</h3>
+    <h3 class="center-align">Agregar Cliente</h3>
+      <h4 class="center-align">Formulario para agregar Cliente</h4>
       <div class="form-container">
         <form action="/Clientes/store" method="POST">
             @csrf
@@ -102,12 +100,15 @@
               @enderror
             </div>
           </div>
-         <div class="row mt-4">
-              <!-- Botón Guardar -->
-              <div class="col-12">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-              </div>
+          <div class="col s12 mt-2">
+            <button class="btn waves-effect waves-light" type="submit">Guardar
+                <i class="material-icons right">send</i>
+            </button>
           </div>
       </form>
   </div>
-@endsection
+  
+  <!-- Importar Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+  @endsection

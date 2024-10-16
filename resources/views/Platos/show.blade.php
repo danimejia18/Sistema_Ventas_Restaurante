@@ -6,9 +6,9 @@
 
 {{-- Definimos el contenido --}}
 @section('content')
+
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -21,30 +21,39 @@
       margin-top: 20px;
     }
     .table-container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
     }
     .table-container table {
       width: 100%;
+      border: black dotted 1px
     }
     .btn-floating
     {
       float: right;
-      margin-right: 50px
+      margin-right: 50px;
+      bottom: 10px
+    }
+    thead
+    {
+      background-color: antiquewhite
     }
   </style>
 
-<h1>Platos</h1>
-<h5>Listado de platos</h5>
-<hr>
-
-{{-- Botón para ir al formulario de agregar producto --}}
-  <a class="btn-floating btn-large waves-effect waves-light green" href="/Platos/create"><i class="material-icons">add</i></a>
-      <table class="highlight responsive-table">
+  <div class="container">
+    <h3 class="center-align">Mostrar Platos</h3>
+    
+    <!-- Tabla para mostrar Platos -->
+    <div class="table-container">
+      <h5 class="card-title">Platos registrados</h5>
+      <a href="/Platos/create" class="btn-floating btn-large waves-effect waves-light green">
+        <i class="material-icons">add</i>
+      </a>
+      <table class="striped responsive-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -77,6 +86,8 @@
             @endforeach
         </tbody>
       </table>
+    </div>
+  </div>
   @endsection
 
   @section('scripts')

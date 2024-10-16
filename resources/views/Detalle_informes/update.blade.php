@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Detalle_informes</title>
+{{-- Heredamos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
+
+{{-- Definimos el título --}}
+@section('title', 'Modificar Detalle_informe')
+
+{{-- Definimos el contenido --}}
+@section('content')
   
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -24,7 +26,7 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
@@ -34,7 +36,7 @@
     <h3 class="center-align">Modificar Detalle_informes</h3>
     
     <!-- Formulario para agregar Detalle_informes -->
-    <div class="form-container">
+    <div class="form-container center">
       <form id="agregarDetalle_informesForm">
         <div class="row">
             <div class="input-field col s6">
@@ -139,7 +141,7 @@
     </div>
   </div>
 
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+<!-- Importar Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+@endsection

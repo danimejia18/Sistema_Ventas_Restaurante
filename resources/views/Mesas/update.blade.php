@@ -2,10 +2,11 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Mesas')
+@section('title', 'Modificar Mesa')
 
 {{-- Definimos el contenido --}}
 @section('content')
+
   <!-- Importar Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   
@@ -25,12 +26,13 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
- <h1 class="text-center">Modificar</h1>
- <h5 class="text-center">Formulario para modificar mesas</h5>
+
+ <h1 class="text-center">Modificar Mesas</h1>
+ <h5 class="text-center">Formulario para modificar Mesas</h5>
    
   <div class="container">
     <form action="/Mesas/update/{{ $mesa->codigo }}" method="POST">
@@ -100,9 +102,7 @@
   </form>
 </div>
 </div>
-@endsection
 
-@section('scripts')
-<!-- Importar Materialize JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Importar Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 @endsection
