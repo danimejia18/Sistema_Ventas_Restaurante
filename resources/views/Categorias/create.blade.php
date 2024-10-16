@@ -36,8 +36,6 @@
   <h1 class="center-align">Agregar Categoría</h1>
   <br>
   <h3 class="center-align">Formulario para crear Categorias</h3>
-
-  <div class="container"><br>
   <div class="form-container">
       <form action="/Categorias/store" method="POST">
           @csrf
@@ -74,5 +72,4 @@
         </div>
       </form>
   </div>
-</div>
 @endsection

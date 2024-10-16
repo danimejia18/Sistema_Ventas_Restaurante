@@ -12,6 +12,7 @@
   
   <!-- Fuentes de Google -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <style>
     /* Estilos personalizados */
     body {
@@ -28,13 +29,14 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 
   <div class="container">
     <h1 class="center-align">Agregar Cliente</h>
+      <br>
       <h3 class="center-align">Formulario para agregar Clientes</h3>
       <div class="form-container">
         <form action="/Clientes/store" method="POST">

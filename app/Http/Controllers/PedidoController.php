@@ -19,7 +19,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-         //Listar todos las mesas
+         //Listar todos los pedidos
          $pedidos = Pedido::all();
 
          //Mostrar vista show.blade
@@ -31,7 +31,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //Mostrar vista create.blade.php para crear una nueva mesa
+        //Mostrar vista create.blade.php para crear un nuevo pedido
         return view('Pedidos.create');
     }
 

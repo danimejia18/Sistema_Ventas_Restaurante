@@ -53,8 +53,8 @@
     <div class="table-container">
       <h5 class="card-title">Accesos registrados</h5>
       <a href="/Acceso/create" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
-      <table class="striped responsive-table">
-        <thead>
+      <table class="highlight responsive-table">
+        <thead class="striped responsive-table">
           <tr>
             <th>ID</th>
             <th>Tipo Acceso</th>

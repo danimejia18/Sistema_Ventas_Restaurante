@@ -49,9 +49,9 @@
   <div class="container">
     <h3 class="center-align">Mostrar Categorías</h3>
     
-    <!-- Tabla para mostrar Categorías -->
+    <!-- Tabla para mostrar CategoDrías -->
     <div class="table-container">
-      <h5 class="card-title">Categorías registrados</h5>
+      <h5 class="card-title">Categorías registradas</h5>
       <a href="/Categorias/create" class="btn-floating btn-large waves-effect waves-light green">
         <i class="material-icons">add</i>
       </a>

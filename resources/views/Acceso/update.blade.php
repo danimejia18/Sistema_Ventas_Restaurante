@@ -26,14 +26,6 @@
       border-radius: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .form-label {
-        font-size: 1.2em; /* Ajusta el tamaño según lo que necesites */
-        font-weight: bold; /* Opcional: negrita */
-    }
-    .form-label1{
-      font-size: 1.2em; /* Ajusta el tamaño según lo que necesites */
-      font-weight: bold; /* Opcional: negrita */
-    }
   </style>
 
     <h1 class="text-center">Modificar Acceso</h1>

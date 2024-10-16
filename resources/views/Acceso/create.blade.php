@@ -32,7 +32,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
-@section('content')
+  
 <h1 class="center-align">Agregar Acceso</h1>
 <br>
 <h3 class="center-align">Formulario para crear Accesos</h3>

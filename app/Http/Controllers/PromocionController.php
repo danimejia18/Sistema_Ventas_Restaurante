@@ -6,7 +6,7 @@ use App\Models\Plato;
 use App\Models\Promocion;
 use Illuminate\Http\Request;
 
-class PromocionesController extends Controller
+class PromocionController extends Controller
 {
     public function __construct()
     {

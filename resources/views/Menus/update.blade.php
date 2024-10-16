@@ -51,9 +51,9 @@
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <label>Plato</label>
+            <label for="plato">Plato</label>
             <select name="id_plato" id="id_plato" class="form-control">
-              @foreach ($menu as item)
+              @foreach ($menu as $item)
                   <option value="{{ $item->codigo }}" {{($item->codigo==$menu->id_plato)? 'selected' : ''}}>
                     {{ $item->nombre }}
                   </option>

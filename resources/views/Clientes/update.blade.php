@@ -23,16 +23,17 @@
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 30px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
 </style>
 
 <h1 class="text-center">Modificar Clientes</h1>
+<br>
 <h5 class="text-center">Formulario para actualizar los clientes</h5>
 <hr>
 
-<div class="container form-container">
+<div class="container form-container center">
     <form action="/Clientes/update/{{ $cliente->codigo }}" method="POST">
         @csrf
         @method('PUT')

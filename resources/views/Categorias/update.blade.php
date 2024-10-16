@@ -29,6 +29,7 @@
   </style>
 
   <h1 class="text-center">Modificar Categoría</h1>
+  <br>
   <h5 class="text-center">Formulario para actualizar la categoría</h5>
   <hr>
 

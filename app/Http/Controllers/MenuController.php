@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Menu;
+use App\Models\Plato;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -63,8 +65,15 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        //Mostrar vista update.blade.php
-        return view('Menus.update')->with(['menu' => $menu]);
+       // Listar platos para llenar select
+       $platos = Plato::all();
+       // Mostrar vista update.blade.php junto al menu y los platos
+       return view('Menus.update')->with(['menu' => $menu, 'platos' => $platos]);
+
+       // Listar categorias para llenar select
+       $categorias = Categoria::all();
+       // Mostrar vista update.blade.php junto al menu y los categorias
+       return view('Menus.update')->with(['menu' => $menu, 'categorias' => $categorias]);
     }
 
     /**
