@@ -48,7 +48,7 @@ class ClienteController extends Controller
         $data = request()->validate([
             'nombre' => 'required',
             'apellido' => 'required', 
-            'correo' => 'required|email|unique:clientes,correo,' . $cliente->codigo . ',codigo',
+            'correo' => 'required|email|unique:clientes,correo',
             'telefono' => 'required|numeric|digits_between:8,15', 
             'direccion' => 'required',
         ], [
