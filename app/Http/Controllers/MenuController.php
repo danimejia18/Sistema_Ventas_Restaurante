@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Plato;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
+
 
 class MenuController extends Controller
 {
@@ -14,35 +17,56 @@ class MenuController extends Controller
 
     /**
      * Display a listing of the resource.
+     * 
+     * @return \Illuminate\Http\Response
+     * 
      */
-    public function index()
+   public function index()
     {
-        //Listar todos las menus
-        $menus = Menu::all();
-
-        //Mostrar vista show.blade
-        return view('Menus/show')->with(['menus' => $menus]);
+        // Listar todos los menús con sus platos y categorías
+        $menus = Menu::select(
+            "menus.codigo",
+            "menus.nombre",
+            "platos.nombre as id_plato", // Suponiendo que hay un campo 'nombre' en la tabla 'platos'
+            "categorias.nombre as id_categoria" // Suponiendo que hay un campo 'nombre' en la tabla 'categorias'
+        )
+        ->join("platos", "platos.codigo", "=", "menus.id_plato") // Cambia 'codigo' por la clave primaria de la tabla 'platos'
+        ->join("categorias", "categorias.codigo", "=", "menus.id_categoria") // Cambia 'codigo' por la clave primaria de la tabla 'categorias'
+        ->get();
+    
+        // Mostrar vista show.blade.php junto al listado de menús
+        return view('Menus.show')->with(['menus' => $menus]);
+    
     }
 
     /**
      * Show the form for creating a new resource.
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //Mostrar vista create.blade.php para crear un nuevo menú
-        return view('Menus.create');
-    }
+    {// Listar platos y categorías para llenar select
+        $platos = Plato::all();
+        $categorias = Categoria::all();
+        
+        // Mostrar vista create.blade.php junto al listado de platos y categorías
+        return view('Menus.create')->with(['platos' => $platos, 'categorias' => $categorias]);
+   }
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(Request $request)
     {
         //Validar datos
         $data = request()->validate([
-            'nombre' => 'required',
-            'id_plato' => 'required',
-            'id_categoria' => 'required'
+            'nombre' => 'required','string','max:50',
+            'id_plato' => 'required','integer',
+            'id_categoria' => 'required', 'integer',
             ]);
     
             Menu::create($data);
@@ -52,31 +76,41 @@ class MenuController extends Controller
 
     /**
      * Display the specified resource.
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function edit(Menu $menu)
     {
-        //Mostrar vista update.blade.php
-        return view('Menus.update')->with(['menu' => $menu]);
+        $platos = Plato::all(); // Obtener todos los platos
+        $categorias = Categoria::all();
+        //Mostrar vista update.blade.php   
+        return view('Menus.update')->with(['menu' => $menu, 'platos' => $platos, 'categorias' => $categorias]);
+   
     }
 
     /**
      * Update the specified resource in storage.
+     *  @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Menu $menu)
     {
         //Validar datos
         $data = request()->validate([
-            'nombre' => 'required',
-            'id_plato' => 'required',
-            'id_categoria' => 'required'
+            'nombre' => 'required','string', 'max:50',
+            'id_plato' => 'required','integer',
+            'id_categoria' => 'required', 'integer',
             ]);
 
             // Reemplazar datos anteriores por los nuevos
@@ -94,6 +128,9 @@ class MenuController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

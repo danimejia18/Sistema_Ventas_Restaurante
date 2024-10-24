@@ -4,11 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccesoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DetalleInformeController;
+use App\Http\Controllers\DetallePedidoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\PlatoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PagoController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PromocionController;
+use App\Http\Controllers\ReservacionController;
+use App\Http\Controllers\InformeController;
+
 
 
 Route::get('/home', function () {
@@ -79,6 +87,38 @@ Route::put('/Clientes/update/{cliente}', [ClienteController::class, 'update']);
 Route::delete('/Clientes/destroy/{id}', [ClienteController::class, 'destroy']);
 
 
+
+//DETALLE_INFORMES
+
+Route::get('/Detalle_informes/show', [DetalleInformeController::class, 'index']);
+
+Route::get('/Detalle_informes/create', [DetalleInformeController::class, 'create']);
+
+Route::get('/Detalle_informes/edit/{detalle_informe}', [DetalleInformeController::class, 'edit']);
+
+Route::post('/Detalle_informes/store', [DetalleInformeController::class, 'store']);
+
+Route::put('/Detalle_informes/update/{detalle_informe}', [DetalleInformeController::class, 'update']);
+
+Route::delete('/Detalle_informes/destroy/{id}', [DetalleInformeController::class, 'destroy']);
+
+
+
+//DETALLE_PEDIDOS
+
+Route::get('/Detalle_pedidos/show', [DetallePedidoController::class, 'index']);
+
+Route::get('/Detalle_pedidos/create', [DetallePedidoController::class, 'create']);
+
+Route::get('/Detalle_pedidos/edit/{detalle_pedido}', [DetallePedidoController::class, 'edit']);
+
+Route::post('/Detalle_pedidos/store', [DetallePedidoController::class, 'store']);
+
+Route::put('/Detalle_pedidos/update/{detalle_pedido}', [DetallePedidoController::class, 'update']);
+
+Route::delete('/Detalle_pedidos/destroy/{id}', [DetallePedidoController::class, 'destroy']);
+
+
 //EMPLEADOS
 
 // Ruta para mostrar la vista show.blade.php
@@ -91,7 +131,7 @@ Route::get('/Empleados/create', [EmpleadoController::class, 'create']);
 Route::get('/Empleados/edit/{empleado}', [EmpleadoController::class, 'edit']);
 
 // Ruta para insertar Empleado
-Route::post('/Empleados/store', [EmpleadoController::class, 'store']);
+Route::post('/Empleados/store', [EmpleadoController::class, 'store'])->name('empleados.store');
 
 // Ruta para modificar Empleado
 Route::put('/Empleados/update/{empleado}', [EmpleadoController::class, 'update']);
@@ -100,65 +140,148 @@ Route::put('/Empleados/update/{empleado}', [EmpleadoController::class, 'update']
 Route::delete('/Empleados/destroy/{id}', [EmpleadoController::class, 'destroy']);
 
 
+//INFORMES
+
+Route::get('/Informes/show', [InformeController::class, 'index']);
+
+Route::get('/Informes/create', [InformeController::class, 'create']);
+
+Route::get('/Informes/edit/{informe}', [InformeController::class, 'edit']);
+
+Route::post('/Informes/store', [InformeController::class, 'store']);
+
+Route::put('/Informes/update/{informe}', [InformeController::class, 'update']);
+
+Route::delete('/Informes/destroy/{id}', [InformeController::class, 'destroy']);
+
+
 //MENÚS
 
-Route::get('Menus/show', [MenuController::class, 'index']);
+Route::get('/Menus/show', [MenuController::class, 'index']);
 
-Route::get('Menus/create', [MenuController::class, 'create']);
+Route::get('//Menus/create', [MenuController::class, 'create']);
 
-Route::get('Menus/edit/{plato}', [MenuController::class, 'edit']);
+Route::get('/Menus/edit/{menu}', [MenuController::class, 'edit']);
 
-Route::post('Menus/store', [MenuController::class, 'store']);
+Route::post('/Menus/store', [MenuController::class, 'store']);
 
-Route::put('Menus/update/{plato}', [MenuController::class, 'update']);
+Route::put('/Menus/update/{menu}', [MenuController::class, 'update']);
 
-Route::delete('Menus/destroy/{id}', [MenuController::class, 'destroy']);
+Route::delete('/Menus/destroy/{id}', [MenuController::class, 'destroy']);
+
+
+
+//MESAS
+
+Route::get('/Mesas/show', [MesaController::class, 'index']);
+
+Route::get('/Mesas/create', [MesaController::class, 'create']);
+
+Route::get('/Mesas/edit/{mesa}', [MesaController::class, 'edit']);
+
+Route::post('/Mesas/store', [MesaController::class, 'store']);
+
+Route::put('/Mesas/update/{mesa}', [MesaController::class, 'update']);
+
+Route::delete('/Mesas/destroy/{id}', [MesaController::class, 'destroy']);
+
+
+
+//PAGOS
+
+Route::get('/Pagos/show', [PagoController::class, 'index']);
+
+Route::get('/Pagos/create', [PagoController::class, 'create']);
+
+Route::get('/Pagos/edit/{pago}', [PagoController::class, 'edit']);
+
+Route::post('/Pagos/store', [PagoController::class, 'store']);
+
+Route::put('/Pagos/update/{pago}', [PagoController::class, 'update']);
+
+Route::delete('/Pagos/destroy/{id}', [PagoController::class, 'destroy']);
+
+
+//PEDIDOS
+
+Route::get('/Pedidos/show', [PedidoController::class, 'index']);
+
+Route::get('/Pedidos/create', [PedidoController::class, 'create']);
+
+Route::get('/Pedidos/edit/{pedido}', [PedidoController::class, 'edit']);
+
+Route::post('/Pedidos/store', [PedidoController::class, 'store']);
+
+Route::put('/Pedidos/update/{pedido}', [PedidoController::class, 'update']);
+
+Route::delete('/Pedidos/destroy/{id}', [PedidoController::class, 'destroy']);
+
 
 
 
 //PLATOS
 
-Route::get('Platos/show', [PlatoController::class, 'index']);
+Route::get('/Platos/show', [PlatoController::class, 'index']);
 
-Route::get('Platos/create', [PlatoController::class, 'create']);
+Route::get('/Platos/create', [PlatoController::class, 'create']);
 
-Route::get('Platos/edit/{plato}', [PlatoController::class, 'edit']);
+Route::get('/Platos/edit/{plato}', [PlatoController::class, 'edit']);
 
-Route::post('Platos/store', [PlatoController::class, 'store']);
+Route::post('/Platos/store', [PlatoController::class, 'store']);
 
-Route::put('Platos/update/{plato}', [PlatoController::class, 'update']);
+Route::put('/Platos/update/{plato}', [PlatoController::class, 'update']);
 
-Route::delete('Platos/destroy/{id}', [PlatoController::class, 'destroy']);
+Route::delete('/Platos/destroy/{id}', [PlatoController::class, 'destroy']);
 
 
 //PRODUCTOS
 
-Route::get('Productos/show', [ProductoController::class, 'index']);
+Route::get('/Productos/show', [ProductoController::class, 'index']);
 
-Route::get('Productos/create', [ProductoController::class, 'create']);
+Route::get('/Productos/create', [ProductoController::class, 'create']);
 
-Route::get('Productos/edit/{producto}', [ProductoController::class, 'edit']);
+Route::get('/Productos/edit/{producto}', [ProductoController::class, 'edit']);
 
-Route::post('Productos/store', [ProductoController::class, 'store']);
+Route::post('/Productos/store', [ProductoController::class, 'store']);
 
-Route::put('Productos/update/{producto}', [ProductoController::class, 'update']);
+Route::put('/Productos/update/{producto}', [ProductoController::class, 'update']);
 
-Route::delete('Productos/destroy/{id}', [ProductoController::class, 'destroy']);
+Route::delete('/Productos/destroy/{id}', [ProductoController::class, 'destroy']);
 
 
-//MESAS
 
-Route::get('Mesas/show', [MesaController::class, 'index']);
+//PROMOCIONES
 
-Route::get('Mesas/create', [MesaController::class, 'create']);
+Route::get('/Promociones/show', [PromocionController::class, 'index']);
 
-Route::get('Mesas/edit/{mesa}', [MesaController::class, 'edit']);
+Route::get('/Promociones/create', [PromocionController::class, 'create']);
 
-Route::post('Mesas/store', [MesaController::class, 'store']);
+Route::get('/Promociones/edit/{promocion}', [PromocionController::class, 'edit']);
 
-Route::put('Mesas/update/{mesa}', [MesaController::class, 'update']);
+Route::post('/Promociones/store', [PromocionController::class, 'store']);
 
-Route::delete('Mesas/destroy/{id}', [MesaController::class, 'destroy']);
+Route::put('/Promociones/update/{promocion}', [PromocionController::class, 'update']);
+
+Route::delete('/Promociones/destroy/{id}', [PromocionController::class, 'destroy']);
+
+
+
+//RESERVACIONES
+
+Route::get('/Reservaciones/show', [ReservacionController::class, 'index']);
+
+Route::get('/Reservaciones/create', [ReservacionController::class, 'create']);
+
+Route::get('/Reservaciones/edit/{reservacion}', [ReservacionController::class, 'edit']);
+
+Route::post('/Reservaciones/store', [ReservacionController::class, 'store']);
+
+Route::put('/Reservaciones/update/{reservacion}', [ReservacionController::class, 'update']);
+
+Route::delete('/Reservaciones/destroy/{id}', [ReservacionController::class, 'destroy']);
+
+
+
 
 
 Auth::routes();

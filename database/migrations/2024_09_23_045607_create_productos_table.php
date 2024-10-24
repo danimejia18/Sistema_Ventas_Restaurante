@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id('codigo');
-            $table->string('nombre', 30);
+            $table->string('nombre', 100);
             $table->text('descripcion');
-            $table->integer('stock');
-            $table->string('estado')->default('Existente');
+            $table->integer('stock');            
+            $table->string('estado')->default('en existencia');
+
            $table->timestamps();
         });
     }

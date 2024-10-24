@@ -44,18 +44,35 @@ class MesaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //Validar datos
-        $data = request()->validate([
-        'numero' => 'required',
-        'capacidad' => 'required',
-        'estado' => 'required'
+{
+    // Validar datos
+    $data = request()->validate([
+        'numero' => ['required', 'integer', 'unique:mesas,numero'], // Número de mesa requerido y único
+        'capacidad' => ['required', 'integer', 'min:1'], // Capacidad requerida y debe ser un número positivo
+        'estado' => 'required|in:Disponible,reservada,ocupada', // Estado requerido
+     ], [
+        'numero.required' => 'El número de mesa es obligatorio.',
+        'numero.integer' => 'El número de mesa debe ser un número entero.',
+        'numero.unique' => 'El número de mesa ya está registrado.',
+        'capacidad.required' => 'La capacidad es obligatoria.',
+        'capacidad.integer' => 'La capacidad debe ser un número entero.',
+        'capacidad.min' => 'La capacidad debe ser al menos 1.',
+        'estado.required' => 'El estado de la mesa es obligatorio.',
+        'estado.in' => 'El estado debe ser: Disponible, Reservada, u Ocupada.',
+    ]);
+
+    // Crear nueva mesa
+         Mesa::create([
+            'numero' => $data['numero'],
+            'capacidad' => $data['capacidad'],
+            'estado' => $data['estado'],
         ]);
+    
 
-        Mesa::create($data);
+    // Redirigir a la vista de mesas con un mensaje de éxito
+    return redirect('/Mesas/show');
+}
 
-        return redirect('/Mesas/show');
-    }
 
     /**
      * Display the specified resource.
@@ -89,25 +106,32 @@ class MesaController extends Controller
      */
     public function update(Request $request, Mesa $mesa)
     {
-         //Validar datos
-         $data = request()->validate([
-            'numero' => 'required',
-            'capacidad' => 'required',
-            'estado' => 'required'
-            ]);
-
-            // Reemplazar datos anteriores por los nuevos
-            $mesa->numero = $data['numero'];
-            $mesa->capacidad = $data['capacidad'];
-            $mesa->estado = $data['estado'];
-            $mesa->updated_at = now();
-
-            // Actualizar los datos de la mesa
-            $mesa->save();
-
-            // Redireccionar
-            return redirect('/Mesas/show');
+        // Validar datos
+        $data = request()->validate([
+            'numero' => ['required'], // Ignorar el registro actual
+            'capacidad' => ['required', 'min:1'], // Capacidad requerida
+           'estado' => 'required|in:Disponible,reservada,ocupada', // Estado requerido
+        ], [
+            'numero.required' => 'El número de mesa es obligatorio.',
+            'numero.integer' => 'El número de mesa debe ser un número entero.',
+            'capacidad.required' => 'La capacidad es obligatoria.',
+            'capacidad.integer' => 'La capacidad debe ser un número entero.',
+            'capacidad.min' => 'La capacidad debe ser al menos 1.',
+            'estado.required' => 'El estado de la mesa es obligatorio.',
+            'estado.in' => 'El estado debe ser: Disponible, Reservada, u Ocupada.',
+        ]);
+    
+        // Actualizar los datos
+        $mesa->numero = $data['numero'];
+        $mesa->capacidad = $data['capacidad'];
+        $mesa->estado = $data['estado'];
+        $mesa->updated_at = now();
+        $mesa->save();
+    
+        // Redireccionar
+        return redirect('/Mesas/show');
     }
+    
 
     /**
      * Remove the specified resource from storage.

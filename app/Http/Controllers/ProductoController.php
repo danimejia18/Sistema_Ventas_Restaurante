@@ -45,22 +45,28 @@ class ProductoController extends Controller
      * 
      */
 
-    public function store(Request $request)
-    {
-        // Validar campos
-        $data = request()->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'stock' => 'required',
-            'estado' => 'required',
-        ]);
-
-        //Crear nuevo producto
-        Producto::create($data);
-
-        //Redireccionar a la lista de productos
-        return redirect('/Productos/show');
-    }
+     public function store(Request $request)
+     {
+         // Validar campos
+         $data = request()->validate([
+             'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+             'descripcion' => ['required', 'string', 'max:255'],
+             'stock' => ['required', 'integer', 'min:0'],
+             'estado' => ['required', 'in:en existencia, agotada'], // Cambiar a 'in' para validar los valores
+         ]);
+     
+         // Crear nuevo producto
+         Producto::create([
+             'nombre' => $data['nombre'],
+             'descripcion' => $data['descripcion'],
+             'stock' => $data['stock'],
+             'estado' => $data['estado'],
+         ]);
+     
+         // Redireccionar a la lista de productos
+         return redirect('/Productos/show');
+     }
+     
 
     /**
      * Display the specified resource.
@@ -94,30 +100,31 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, Producto $producto)
-    {
-        // Validar campos
-        $data = request()->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'stock' => 'required',
-            'estado' => 'required'
-        ]);
-
-        // Reemplazar datos anteriores por los nuevos
-        $producto->nombre = $data['nombre'];
-        $producto->descripcion = $data['descripcion'];
-        $producto->stock = $data['stock'];
-        $producto->estado = $data['estado'];
-        $producto->updated_at= now();
-
-        // Enviar a guardar la actualización
-        $producto->save();
-
-        // Redireccionar a la lista de productos
-        return redirect('/Productos/show');
-    }
-
+     public function update(Request $request, Producto $producto)
+     {
+         // Validar campos
+         $data = request()->validate([
+             'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+             'descripcion' => ['required', 'string', 'max:255'],
+             'stock' => ['required', 'integer', 'min:0'],
+             'estado' => ['required', 'in:en existencia,agotada'], // Verifica los valores permitidos
+         ]);
+     
+         // Reemplazar datos anteriores por los nuevos
+         $producto->nombre = $data['nombre'];
+         $producto->descripcion = $data['descripcion'];
+         $producto->stock = $data['stock'];
+         $producto->estado = $data['estado']; // Asegúrate de que esto esté correcto
+         $producto->updated_at = now(); // Esto es opcional
+     
+         // Guardar la actualización
+         $producto->save();
+     
+         // Redireccionar a la lista de productos
+         return redirect('/Productos/show');
+     }
+    
+    
     /**
      * Remove the specified resource from storage.
      * 

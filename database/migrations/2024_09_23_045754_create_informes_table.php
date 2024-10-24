@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('codigo');
             $table->dateTime('fecha_hora');
             $table->string('usuario_activo');
-            $table->string('empresa', 50);
-            $table->text('rangos_fecha', 50)->nullable();
+            $table->string('empresa', 100);
+            $table->text('rangos_fecha')->nullable();
            $table->timestamps();
         });
     }

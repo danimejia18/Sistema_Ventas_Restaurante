@@ -31,10 +31,14 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //Mostrar vista create.blade.php para crear una nueva mesa
-        return view('Pedidos.create');
+        // Obtener clientes y empleados de la base de datos
+        $clientes = Cliente::all();
+        $empleados = Empleado::all();
+    
+        // Pasar los datos a la vista
+        return view('Pedidos.create', compact('clientes', 'empleados'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -42,13 +46,13 @@ class PedidoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-            'id_cliente' => 'required',
-            'id_empleado' => 'required',
-            'fecha' => 'required',
-            'total' => 'required',
-            'estado' => 'required'
-            ]);
-    
+            'id_cliente' => 'required|exists:Clientes,codigo', // Asegura que id_cliente exista en la tabla clientes
+            'id_empleado' => 'required|exists:Empleados,codigo', // Asegura que id_empleado exista en la tabla empleados
+            'fecha' => 'required|date', // Asegura que sea una fecha válida
+            'total' => 'required|decimal|min:0', // Asegura que sea un número y mayor que 0
+            'estado' => 'required|in:pendiente,completado,cancelado' // Limitar a valores específicos
+        ]);
+        
             Pedido::create($data);
     
             return redirect('/Pedidos/show');
@@ -85,11 +89,11 @@ class PedidoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-            'id_cliente' => 'required',
-            'id_empleado' => 'required',
-            'fecha' => 'required',
-            'total' => 'required',
-            'estado' => 'required'
+                'id_cliente' => 'required|exists:clientes,codigo', // Asegura que id_cliente exista en la tabla clientes
+                'id_empleado' => 'required|exists:empleados,codigo', // Asegura que id_empleado exista en la tabla empleados
+                'fecha' => 'required|date', // Asegura que sea una fecha válida
+                'total' => 'required|decimal|min:0', // Asegura que sea un número y mayor que 0
+                'estado' => 'required|in:pendiente,completado,cancelado' // Limitar a valores específicos
             ]);
 
             // Reemplazar datos anteriores por los nuevos

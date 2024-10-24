@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plato;
+
 use App\Models\Promocion;
+use App\Models\Plato;
 use Illuminate\Http\Request;
 
-class PromocionesController extends Controller
+class PromocionController extends Controller
 {
     public function __construct()
     {
@@ -15,50 +16,86 @@ class PromocionesController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     * 
      */
     public function index()
     {
-        //Listar todos las promociones
-        $promociones = Promocion::all();
-
-        //Mostrar vista show.blade
-        return view('Promociones/show')->with(['promociones' => $promociones]);
+        // Listar todas las promociones junto con los detalles del plato asociado
+        $promociones = Promocion::select(
+            "promociones.codigo",
+            "promociones.nombre",
+            "promociones.descripcion",
+            "promociones.descuento",
+            "promociones.fecha_inicio",
+            "promociones.fecha_fin",
+            "promociones.estado",
+            "platos.nombre as plato_nombre",
+        )
+        ->join("platos", "platos.codigo", "=", "promociones.id_plato")
+        ->get();
+    
+        // Mostrar la vista promociones.show junto con el listado de promociones
+        return view('/Promociones/show')->with(['promociones' => $promociones]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //Mostrar vista create.blade.php para crear una nueva promocion
-        return view('Promociones.create');
+        // Listar platos para llenar el select
+        $platos = Plato::all();
+    
+        // Mostrar la vista create.blade.php junto al listado de platos
+        return view('Promociones.create')->with(['platos' => $platos]);
     }
+    
 
     /**
      * Store a newly created resource in storage.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //Validar datos
+        // Validar los datos de la solicitud
         $data = request()->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'id_plato' => 'required',
-            'descuento' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required',
-            'estado' => 'required'
-            ]);
+            'nombre' => 'required|string|max:50',
+            'descripcion' => 'nullable|string',
+            'id_plato' => 'required|exists:platos,codigo', // Verifica que el plato exista
+            'descuento' => 'required|decimal:10,2|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio', // La fecha de fin debe ser posterior o igual a la fecha de inicio
+            'estado' => 'required|string|in:confirmada,no confirmada', // Agregar validación para asegurarse de que sea uno de los valores permitidos
+        ]);
     
-            Promocion::create($data);
+        // Crear una nueva promoción
+        Promocion::create([
+            'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
+            'id_plato' => $data['id_plato'],
+            'descuento' => $data['descuento'],
+            'fecha_inicio' => $data['fecha_inicio'],
+            'fecha_fin' => $data['fecha_fin'],
+            'estado' => $data['estado'],
+        ]);
     
-            return redirect('/Promociones/show');
+        // Redirigir a la vista de promociones
+        return redirect('/Promociones/show');
     }
+    
 
     /**
      * Display the specified resource.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
@@ -76,19 +113,23 @@ class PromocionesController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Promocion $promocion)
     {
         //Validar datos
         $data = request()->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'id_plato' => 'required',
-            'descuento' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required',
-            'estado' => 'required'
-            ]);
+            'nombre' => 'required|string|max:50',
+            'descripcion' => 'nullable|string',
+            'id_plato' => 'required|exists:platos,codigo', // Verifica que el plato exista
+            'descuento' => 'required|decimal:10,2|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio', // La fecha de fin debe ser posterior o igual a la fecha de inicio
+            'estado' => 'required|string|in:confirmada,no confirmada', // Agregar validación para asegurarse de que sea uno de los valores permitidos
+        ]);
 
             // Reemplazar datos anteriores por los nuevos
             $promocion->nombre = $data['nombre'];
@@ -109,6 +150,9 @@ class PromocionesController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id('codigo');
-            $table->string('nombre', 20);
+            $table->string('nombre', 50);
             $table->unsignedBigInteger('id_plato');
             $table->unsignedBigInteger('id_categoria');
 

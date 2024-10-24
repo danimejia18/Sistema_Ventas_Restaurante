@@ -6,95 +6,123 @@
 
 {{-- Definimos el contenido --}}
 @section('content')
-  <!-- Importar Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
-  <!-- Fuentes de Google -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-  <style>
-    /* Estilos personalizados */
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 20px;
-    }
-    .form-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-  </style>
+    <!-- Importar Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-  <h1 class="text-center">Modificar</h1>
-  <h5 class="text-center">Formulario para modificar productos</h5>
-    
-  <div class="container">
-    <form action="/Productos/update/{{ $producto->codigo }}" method="POST">
-      @csrf
-      @method('PUT')
-      <div class="row">
-          <div class="col-6">
-              <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $producto->nombre }}">
-              @error('nombre')
-                  <span class="invalid-feedback d-block" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
-          </div>
-          <div class="col-6">
-            <label for="nombre">Descripción</label>
-            <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ $producto->descripcion }}">
-            @error('descripcion')
-                <span class="invalid-feedback d-block" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .table-container table {
+            width: 100%;
+            border: black dotted 1px
+        }
+
+        .btn-floating {
+            float: right;
+            margin-right: 50px;
+            bottom: 10px
+        }
+
+        thead {
+            background-color: antiquewhite
+        }
+    </style>
+
+    <div class="container">
+        <div class="table-container">
+            <h5 class="card-title">Modificar Producto</h5>
+            <form action="/Productos/update/{{ $producto->codigo }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="col-6">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre"
+                            value="{{ $producto->nombre }}">
+                        @error('nombre')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-6">
+                        <label for="nombre">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" id="descripcion"
+                            value="{{ $producto->descripcion }}">
+                        @error('descripcion')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-6">
+                        <label for="stock">Stock</label>
+                        <input id="stock" type="number" class="form-control" name="stock"
+                            value="{{ $producto->stock }}">
+                        @error('stock')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="input-field col s6">
+                        <label for="estado">Estado</label>
+                        <br><br>
+                        <p>
+                            <label>
+                                <input type="radio" name="estado" value="en existencia" required />
+                                <span>En existencia</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="radio" name="estado" value="agotada" required />
+                                <span>Agotado</span>
+                            </label>
+                        </p>
+                        @error('estado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col s6">
+                        <button class="btn waves-effect waves-light" type="submit">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="col s6">
+                        <a class="btn waves-effect waves-light" href="/Platos/show">Cancelar
+                            <i class="material-icons right">cancel</i>
+                        </a>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col-6">
-          <label for="stock">Stock</label>
-          <input id="stock" type="number" class="form-control" name="stock" value="{{ $producto->stock }}">
-          @error('stock')
-              <span class="invalid-feedback d-block" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
-      </div>
-  
-      <div class="input-field col s12">
-        <label for="estado">Estado</label><br>
-        <p><br>
-          <label>
-            <input type="radio" name="estado" value="Agotado" />
-            <span>Agotado</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="radio" name="estado" value="Activo" />
-            <span>Activo</span>
-          </label>
-        </p>
-          @error('estado')
-              <span class="invalid-feedback d-block" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
-      </div>
-    </div>
-    <button class="btn waves-effect waves-light" type="submit">Guardar
-      <i class="material-icons right">send</i>
-    </button>
-  </form>
-</div>
-@endsection
+    @endsection
 
-@section('scripts')
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-@endsection
+    @section('scripts')
+        <!-- Importar Materialize JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    @endsection

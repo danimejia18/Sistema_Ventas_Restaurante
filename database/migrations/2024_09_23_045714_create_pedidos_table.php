@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedidos', function (Blueprint $table) {
-            $table->id('codigo');
-            $table->unsignedBigInteger('id_cliente');
-            $table->unsignedBigInteger('id_empleado');
-            $table->dateTime('fecha');
-            $table->decimal('total', 8, 2);
-            $table->string('estado')->default('pendiente');
+    Schema::create('pedidos', function (Blueprint $table) {
+        $table->id('codigo');
+        $table->unsignedBigInteger('id_cliente');
+        $table->unsignedBigInteger('id_empleado');
+        $table->dateTime('fecha');
+        $table->decimal('total', 8, 2);
+        $table->string('estado')->default('pendiente');
 
         $table->foreign('id_cliente')->references('codigo')->on('clientes');
         $table->foreign('id_empleado')->references('codigo')->on('empleados');
-            $table->timestamps();
-        });
+            
+        $table->timestamps();
+        
+    });
     }
 
     /**

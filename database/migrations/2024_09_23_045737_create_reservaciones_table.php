@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_mesa');
             $table->dateTime('fecha_hora');
             $table->string('estado')->default('pendiente');
-            
+
         $table->foreign('id_cliente')->references('codigo')->on('clientes');
         $table->foreign('id_mesa')->references('codigo')->on('mesas');
            $table->timestamps();

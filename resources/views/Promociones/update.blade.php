@@ -1,107 +1,149 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Promoción</title>
-  
-  <!-- Importar Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
-  <!-- Fuentes de Google -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-  <style>
-    /* Estilos personalizados */
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 20px;
-    }
-    .form-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Modificar Promoción</h3>
-    
-    <!-- Formulario para agregar Promoción -->
-    <div class="form-container">
-      <form id="agregarPromocionForm">
-        <div class="row">
-          <div class="input-field col s6">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" class="validate" value="Especial San Valentín" required>
-          </div>
-          <div class="input-field col s6">
-            <label for="descripcion">Descripción</label>
-            <input id="descripcion" type="text" class="validate" value="Disfruta una comida especial con tu amor especial" required>
-          </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label>ID Plato</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Plato</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-            <div class="input-field col s6">
-                <label for="descuento">Descuento</label>
-                <br><br>
-                <input id="descuento" type="float" class="validate" value="20%" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <br>
-                <label for="fecha_inicio">Fecha inicio</label>
-                <input id="fecha_inicio" type="date" class="validate" value="10/02/2024	" required>
-            </div>
-            <div class="input-field col s6">
-                <br>
-                <label for="fecha_fin">Fecha fin</label>
-                <input id="fecha_fin" type="date" class="validate" value="15/02/2024" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="estado">Estado</label>
-                <br>
-                <p>
-                    <label>
-                        <input type="checkbox" />
-                        <span>Activa</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input type="checkbox" checked="checked" />
-                        <span>Vencida</span>
-                    </label>
-                </p>
-            </div>
-        </div>
-        <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
-    </div>
-  </div>
+{{-- Heredemos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
 
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+{{-- Definimos el título --}}
+@section('title', 'Modificar Promociones')
+
+{{-- Definimos el contenido --}}
+@section('content')
+    <!-- Importar Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .table-container table {
+            width: 100%;
+            border: black dotted 1px
+        }
+
+        .btn-floating {
+            float: right;
+            margin-right: 50px;
+            bottom: 10px
+        }
+
+        thead {
+            background-color: antiquewhite
+        }
+    </style>
+
+    <h5 class="text-center">Formulario para modificar mesas</h5>
+
+    <div class="container">
+        <div class="table-container">
+            <h5 class="card-title">Promociones registradas</h5>
+            <form action="/Promociones/update/{{ $promocion->codigo }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" type="text" name="nombre" class="form-control"
+                            value="{{ $promocion->nombre }}" required>
+                        @error('nombre')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="descripcion">Descripción</label>
+                        <input id="descripcion" type="text" name="descipcion" class="form-control"
+                            value="{{ $promocion->descripcion }}" required>
+                        @error('descripcion')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-12 mt-3">
+                        <label for="id_plato">ID_Plato</label>
+                        <select name="id_plato" id="id_plato" name="id_plato" class="form-control">
+                            @foreach ($platos as $item)
+                                <option value="{{ $item->codigo }}"
+                                    {{ $item->codigo == $promocion->id_plato ? 'selected' : '' }}>
+                                    {{ $item->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_plato')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="descuento">Descuento</label>
+                        <br><br>
+                        <input id="descuento" type="float" name="descuento" class="form-control"
+                            value="{{ $promocion->descuento }}" required>
+                    </div><br><br>
+                    <div class="input-field col s6">
+                        <br>
+                        <label for="fecha_inicio">Fecha inicio</label>
+                        <input id="fecha_inicio" type="date" name="fecha_inicio" class="form-control"
+                            value="{{ $promocion->fecha_inicio }}" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <br>
+                        <label for="fecha_fin">Fecha fin</label>
+                        <input id="fecha_fin" type="date" name="fecha_fin" class="form-control"
+                            value="{{ $promocion->fecha_fin }}" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="estado">Estado</label>
+                        <br><br>
+                            <label>
+                                <input type="radio" name="estado" value="confirmada" required />
+                                <span>Confirmada</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="estado" value="No confirmada" required />
+                                <span>No confirmada</span>
+                            </label>
+                        @error('estado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col s6">
+                            <button class="btn waves-effect waves-light" type="submit">Guardar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col s6">
+                        <a class="btn waves-effect waves-light" href="/Promociones/show">Cancelar
+                            <i class="material-icons right">cancel</i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Importar Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+@endsection

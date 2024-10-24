@@ -47,9 +47,15 @@ class AccesoController extends Controller
     {
         // Validar campos
         $data = request()->validate([
-            'tipo_acceso' => 'required',
-            'descripcion' => 'required',
-        ]);
+            'tipo_acceso' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
+            'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
+        ], [
+            'tipo_acceso.required' => 'El campo tipo_acceso es obligatorio.',
+            'tipo_acceso.regex' => 'El tipo_acceso solo puede contener letras, espacios y guiones.',
+            
+            'descripcion.required' => 'El campo descripcion es obligatorio.',
+            'descripcion.regex' => 'El descripcion solo puede contener letras, espacios y guiones.',
+           ]);
 
         // Crear nuevo acceso
         Acceso::create($data);
@@ -64,7 +70,7 @@ class AccesoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
@@ -92,9 +98,15 @@ class AccesoController extends Controller
     {
         // Validar campos
         $data = request()->validate([
-            'tipo_acceso' => 'required',
-            'descripcion' => 'required',
-        ]);
+            'tipo_acceso' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
+            'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
+        ], [
+            'tipo_acceso.required' => 'El campo tipo_acceso es obligatorio.',
+            'tipo_acceso.regex' => 'El tipo_acceso solo puede contener letras, espacios y guiones.',
+            
+            'descripcion.required' => 'El campo descripcion es obligatorio.',
+            'descripcion.regex' => 'El descripcion solo puede contener letras, espacios y guiones.',
+           ]);
 
         // Reemplazar datos anteriores por los nuevos
         $acceso->tipo_acceso = $data['tipo_acceso'];

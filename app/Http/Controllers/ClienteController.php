@@ -44,27 +44,21 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //Validar campos
         $data = request()->validate([
-            'nombre' => 'required',
-            'apellido' => 'required', 
-            'correo' => 'required|email|unique:clientes,correo',
-            'telefono' => 'required|numeric|digits_between:8,15', 
-            'direccion' => 'required',
+            'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'apellido' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'correo' => ['required', 'email', 'max:150', 'unique:clientes,correo'],
+            'telefono' => ['required', 'numeric', 'digits:8'],
+            'direccion' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-]+$/u'],
         ], [
-            'correo.required' => 'El campo de correo es obligatorio.',
-            'correo.email' => 'El correo electrónico debe ser válido.',
-            'correo.unique' => 'Este correo ya está registrado para otro cliente.',
-            'telefono.required' => 'El número de teléfono es obligatorio.',
-            'telefono.numeric' => 'El número de teléfono debe contener solo números.',
-            'telefono.digits_between' => 'El número de teléfono debe tener entre 8 y 15 dígitos.',
+            'nombre.regex' => 'El nombre solo puede contener letras, espacios y guiones.',
+            'apellido.regex' => 'El apellido solo puede contener letras, espacios y guiones.',
+            'telefono.size' => 'El número de teléfono debe tener exactamente 8 dígitos.',
+            // ... otros mensajes personalizados
         ]);
-
-        // Crear nuevo cliente
+    
         Cliente::create($data);
-
-        //Redireccionar
-        return redirect('/Clientes/show');
+        return redirect('/Clientes/show')->with('success', 'Cliente creado exitosamente.');
     }
 
     /**
@@ -99,22 +93,20 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-       //Validar campos
-       $data = request()->validate([
-        'nombre' => 'required',
-        'apellido' => 'required', 
-        'correo' => 'required|email|unique:clientes,correo', 
-        'telefono' => 'required|numeric|digits_between:8,10', 
-        'direccion' => 'required',
-    ], [
-        'correo.required' => 'El campo de correo es obligatorio.',
-        'correo.email' => 'El correo electrónico debe ser válido.',
-        'correo.unique' => 'Este correo ya está registrado para otro cliente.',
-        'telefono.required' => 'El número de teléfono es obligatorio.',
-        'telefono.numeric' => 'El número de teléfono debe contener solo números.',
-        'telefono.digits_between' => 'El número de teléfono debe tener entre 8 y 15 dígitos.',
-    ]);
-
+        $data = request()->validate([
+            'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'apellido' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'correo' => ['required', 'email', 'max:150'],
+            'telefono' => ['required', 'numeric', 'digits:8'],
+            'direccion' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-]+$/u'],
+        ], [
+            'nombre.regex' => 'El nombre solo puede contener letras, espacios y guiones.',
+            'apellido.regex' => 'El apellido solo puede contener letras, espacios y guiones.',
+            'telefono.size' => 'El número de teléfono debe tener exactamente 8 dígitos.',
+            // ... otros mensajes personalizados
+        ]);
+    
+        
         // Reemplazar datos anteriores por los nuevos
         $cliente->nombre = $data['nombre'];
         $cliente->apellido = $data['apellido'];
@@ -125,10 +117,9 @@ class ClienteController extends Controller
 
         // Actualizar los datos del cliente
         $cliente->save();
+        return redirect('/Clientes/show')->with('success', 'Cliente creado exitosamente.');
+        }
 
-        // Redireccionar
-        return redirect('/Clientes/show');
-    }
 
     /**
      * Remove the specified resource from storage.

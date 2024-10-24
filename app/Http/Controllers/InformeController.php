@@ -38,18 +38,21 @@ class InformeController extends Controller
      */
     public function store(Request $request)
     {
-        //Validar datos
+        // Validar los datos
         $data = request()->validate([
-        'fecha_hora' => 'required',
-        'usuario_activo' => 'required',
-        'empresa' => 'required',
-        'rangos_fecha' => 'required'
+            'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
+            'usuario_activo' => 'required|boolean', // Asegúrate de que sea un valor booleano (1 o 0)
+            'empresa' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'rangos_fecha' => 'required|string' // Valida como cadena, pero esto depende del formato que estés usando
         ]);
-
+    
+        // Crear el informe
         Informe::create($data);
-
+    
+        // Redireccionar a la vista de informes
         return redirect('/Informes/show');
     }
+    
 
     /**
      * Display the specified resource.
@@ -75,11 +78,11 @@ class InformeController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-            'fecha_hora' => 'required',
-            'usuario_activo' => 'required',
-            'empresa' => 'required',
-            'rangos_fecha' => 'required'
-            ]);
+            'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
+            'usuario_activo' => 'required|boolean', // Asegúrate de que sea un valor booleano (1 o 0)
+            'empresa' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'rangos_fecha' => 'required|string' // Valida como cadena, pero esto depende del formato que estés usando
+        ]);
 
             // Reemplazar datos anteriores por los nuevos
             $informe->fecha_hora = $data['fecha_hora'];

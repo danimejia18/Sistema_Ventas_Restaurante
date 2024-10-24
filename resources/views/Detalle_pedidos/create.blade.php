@@ -1,90 +1,136 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agregar Detalle_pedidos</title>
-  
-  <!-- Importar Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
-  <!-- Fuentes de Google -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-  <style>
-    /* Estilos personalizados */
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 20px;
-    }
-    .form-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Agregar Detalle_pedidos</h3>
-    
-    <!-- Formulario para agregar Detalle_pedidos -->
-    <div class="form-container">
-      <form id="agregarDetalle_pedidosForm">
-        <div class="row">
-            <div class="input-field col s6">
-                <label>ID Pedido</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Pedido</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-            <div class="input-field col s6">
-                <label>ID Producto</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Producto</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="cantidad">Cantidad</label>
-                <input id="cantidad" type="number" class="validate" required>
-            </div>
-            <div class="input-field col s6">
-                <label for="PrecioU">Precio Unitario</label>
-                <br><br>
-                <input id="PrecioU" type="decimal" class="validate" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="subtotal">Subtotal</label>
-                <input id="subtotal" type="text" class="validate" required>
-            </div>
-        </div>
-        <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
-    </div>
-  </div>
+{{-- Heredamos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
 
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+{{-- Definimos el título de la página --}}
+@section('title', 'Agregar Detalle de Pedidos')
+
+{{-- Definimos el contenido principal --}}
+@section('content')
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .table-container table {
+            width: 100%;
+            border: black dotted 1px
+        }
+
+        .btn-floating {
+            float: right;
+            margin-right: 50px;
+            bottom: 10px
+        }
+
+        thead {
+            background-color: antiquewhite
+        }
+    </style>
+
+@section('content')
+    <h1 class="center-align">Agregar Detalle de pedido</h1>
+    <br>
+    <h3 class="center-align">Formulario para crear Detalle de pedido</h3>
+    <div class="container"><br>
+        <div class="table-container">
+            <div class="form-container">
+                <form action="/Detalle_pedidos/store" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="id_pedido">ID Pedido</label>
+                            <br><br>
+                            <select class="browser-default" id="id_pedido" name="id_pedido">
+                                <option value="" disabled selected>Seleccione el ID del Pedido</option>
+                                @foreach ($pedidos as $pedido)
+                                    <option value="{{ $pedido->codigo }}">{{ $pedido->codigo }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_pedido')
+                                <span class="helper-text red-text" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="input-field col s6">
+                            <label for="id_producto">ID Producto</label>
+                            <br><br>
+                            <select class="browser-default" id="id_producto" name="id_producto">
+                                <option value="" disabled selected>Seleccione el ID del Producto</option>
+                                @foreach ($productos as $producto)
+                                    <option value="{{ $producto->codigo }}">{{ $producto->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_producto')
+                                <span class="helper-text red-text" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="cantidad">Cantidad</label>
+                            <input id="cantidad" type="number" name="cantidad" class="validate" required>
+                            @error('cantidad')
+                                <span class="helper-text red-text" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="input-field col s6">
+                            <label for="precio_unitario">Precio Unitario</label>
+                            <input id="precio_unitario" type="decimal" name="precio_unitario" class="validate" required>
+                            @error('precio_unitario')
+                                <span class="helper-text red-text" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="subtotal">Subtotal</label>
+                            <input id="subtotal" type="decimal" name="subtotal" class="validate" required>
+                            @error('subtotal')
+                                <span class="helper-text red-text" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+            <div class="row mt-2">
+                <div class="col s6">
+                    <button class="btn waves-effect waves-light" type="submit">Guardar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                <div class="col s6">
+                    <a class="btn waves-effect waves-light" href="/Detalle_pedidos/show">Cancelar
+                        <i class="material-icons right">cancel</i>
+                    </a>
+                </div>
+            </div>
+                </form>
+            </div>
+        </div>
+    @endsection

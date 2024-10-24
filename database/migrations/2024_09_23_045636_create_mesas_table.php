@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mesas', function (Blueprint $table) {
-            $table->id('codigo');
-            $table->string('numero');
-            $table->integer('capacidad');
-            $table->string('estado')->default('Disponible');
+            $table->id('codigo'); // Dejar que Laravel maneje el ID automáticamente
+            $table->string('numero')->unique(); // Número de mesa debe ser único
+            $table->integer('capacidad')->min(1); // Capacidad debe ser un entero, se puede agregar validación en el controlador
+            $table->string('estado')->default('Disponible'); // Estado por defecto
             $table->timestamps();
         });
     }

@@ -23,7 +23,7 @@ class ReservacionController extends Controller
         $reservaciones = Reservacion::all();
 
         //Mostrar vista show.blade
-        return view('Reservaciones/show')->with(['reservaciones' => $reservaciones]);
+        return view('/Reservaciones/show')->with(['reservaciones' => $reservaciones]);
     }
 
     /**
@@ -42,15 +42,15 @@ class ReservacionController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-            'id_cliente' => 'required',
-            'id_mesa' => 'required',
-            'fecha_hora' => 'required',
-            'estado' => 'required'
-            ]);
+        'id_cliente' => 'required|exists:clientes,codigo', // Verifica que el cliente exista
+        'id_mesa' => 'required|exists:mesas,codigo', // Verifica que la mesa exista
+        'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
+        'estado' => 'required|in:reservado,cancelado,completado' // Asegúrate de que el estado sea uno de los permitidos
+        ]);
+
+        Reservacion::create($data);
     
-            Reservacion::create($data);
-    
-            return redirect('/Reservaciones/show');
+        return redirect('/Reservaciones/show');
     }
 
     /**
@@ -84,11 +84,11 @@ class ReservacionController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-            'id_cliente' => 'required',
-            'id_mesa' => 'required',
-            'fecha_hora' => 'required',
-            'estado' => 'required'
-            ]);
+            'id_cliente' => 'required|exists:clientes,codigo', // Verifica que el cliente exista
+            'id_mesa' => 'required|exists:mesas,codigo', // Verifica que la mesa exista
+            'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
+            'estado' => 'required|in:reservado,cancelado,completado' // Asegúrate de que el estado sea uno de los permitidos
+        ]);
 
             // Reemplazar datos anteriores por los nuevos
             $reservacion->id_cliente = $data['id_cliente'];

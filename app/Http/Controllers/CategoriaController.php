@@ -47,8 +47,16 @@ class CategoriaController extends Controller
     {
         // Validar campos
         $data = request()->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
+            'nombre' => 'required|string|max:100|regex:/^[\p{L}\s\-]+$/u',
+            'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
+        
+        ], [
+            'nombre.required' => 'El campo nombre es obligatorio.',
+            'nombre.regex' => 'El nombre solo puede contener letras, espacios y guiones.',
+            
+            'descripcion.required' => 'El campo descripcion es obligatorio.',
+            'descripcion.regex' => 'El descripcion solo puede contener letras, espacios y guiones.',
+           
         ]);
 
         // Crear nueva categoría
@@ -92,9 +100,16 @@ class CategoriaController extends Controller
     {
         // Validar campos
         $data = request()->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-        ]);
+            'nombre' => 'required|string|max:100|regex:/^[\p{L}\s\-]+$/u',
+            'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
+        
+        ], [
+            'nombre.required' => 'El campo nombre es obligatorio.',
+            'nombre.regex' => 'El nombre solo puede contener letras, espacios y guiones.',
+            
+            'descripcion.required' => 'El campo descripcion es obligatorio.',
+            'descripcion.regex' => 'El descripcion solo puede contener letras, espacios y guiones.',
+           ]);
     
         // Reemplazar datos anteriores por los nuevos
         $categoria->nombre = $data['nombre'];

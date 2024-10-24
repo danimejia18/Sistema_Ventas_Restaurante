@@ -21,7 +21,7 @@ class PagoController extends Controller
         $pagos = Pago::all();
 
         //Mostrar vista show.blade
-        return view('Pagos/show')->with(['pagos' => $pagos]);
+        return view('/Pagos/show')->with(['pagos' => $pagos]);
     }
 
     /**
@@ -30,7 +30,7 @@ class PagoController extends Controller
     public function create()
     {
          //Mostrar vista create.blade.php para crear un nuevo pago
-         return view('Pagos.create');
+         return view('/Pagos/create');
     }
 
     /**
@@ -40,16 +40,15 @@ class PagoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-            'id_pedido' => 'required',
-            'monto' => 'required',
-            'metodo' => 'required',
-            'fecha' => 'required',
-            'estado' => 'required'
-            ]);
-    
-            Pago::create($data);
-    
-            return redirect('/Pagos/show');
+        'id_pedido' => 'required|exists:pedidos,id', // Verifica que el pedido exista
+        'monto' => 'required|numeric|min:0', // Asegúrate de que el monto sea un número positivo
+        'metodo' => 'required|in:efectivo,tarjeta,transferencia', // Asegúrate de que el método sea uno de los permitidos
+        'fecha' => 'required|date', // Asegúrate de que sea una fecha válida
+        'estado' => 'required|in:pagado,no_pagado' // Asegúrate de que el estado sea uno de los permitidos
+        ]);
+        Pago::create($data);
+
+        return redirect('/Pagos/show');
     }
 
     /**
@@ -76,11 +75,11 @@ class PagoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-            'id_pedido' => 'required',
-            'monto' => 'required',
-            'metodo' => 'required',
-            'fecha' => 'required',
-            'estado' => 'required'
+           'id_pedido' => 'required|exists:pedidos,id', // Verifica que el pedido exista
+            'monto' => 'required|numeric|min:0', // Asegúrate de que el monto sea un número positivo
+            'metodo' => 'required|in:efectivo,tarjeta,transferencia', // Asegúrate de que el método sea uno de los permitidos
+            'fecha' => 'required|date', // Asegúrate de que sea una fecha válida
+            'estado' => 'required|in:pagado,pendiente' // Asegúrate de que el estado sea uno de los permitidos
             ]);
 
             // Reemplazar datos anteriores por los nuevos

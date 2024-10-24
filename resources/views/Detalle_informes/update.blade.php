@@ -1,145 +1,214 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modificar Detalle_informes</title>
-  
-  <!-- Importar Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
-  <!-- Fuentes de Google -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-  <style>
-    /* Estilos personalizados */
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 20px;
-    }
-    .form-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h3 class="center-align">Modificar Detalle_informes</h3>
-    
-    <!-- Formulario para agregar Detalle_informes -->
-    <div class="form-container">
-      <form id="agregarDetalle_informesForm">
-        <div class="row">
-            <div class="input-field col s6">
-                <label>ID Informe</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Informe</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-            <div class="input-field col s6">
-                <label>ID Pedido</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Pedido</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label>ID Cliente</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Cliente</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-            <div class="input-field col s6">
-                <label>ID Empleado</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Empleado</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label>ID Pago</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID del Pago</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-            <div class="input-field col s6">
-                <label>ID Reservación</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID de la Reservación</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s6">
-                <label>ID Mesa</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID de la Mesa</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-            <div class="input-field col s6">
-                <label>ID Promoción</label>
-                <br><br>
-                    <select class="browser-default">
-                        <option value="" disabled selected>Seleccione el ID de la Promoción</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-            </div>
-        </div>
-        <button class="btn waves-effect waves-light" type="submit">Guardar
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
-    </div>
-  </div>
+{{-- Heredamos la estructura del archivo app.blade.php --}}
+@extends('layouts.app')
 
-  <!-- Importar Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+{{-- Definimos el título de la página --}}
+@section('title', 'Modificar Detalle del Informe')
+
+{{-- Definimos el contenido principal --}}
+@section('content')
+
+    <style>
+        /* Estilos personalizados */
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .form-container form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            font-size: 1.2em;
+            /* Ajusta el tamaño según lo que necesites */
+            font-weight: bold;
+            /* Opcional: negrita */
+        }
+
+        .form-label1 {
+            font-size: 1.2em;
+            /* Ajusta el tamaño según lo que necesites */
+            font-weight: bold;
+            /* Opcional: negrita */
+        }
+    </style>
+    <div class="container">
+        <h3 class="center-align">Modificar Detalle del Informe</h3>
+
+        <!-- Formulario para modificar un Detalle de Informe -->
+        <div class="container form-container center">
+            <form action="/Detalle_informes/update/{{ $detalle_informe->codigo }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="id_informe">ID Informe</label>
+                        <br><br>
+                        <select class="browser-default" id="id_informe" name="id_informe">
+                            <option value="" disabled>Seleccione el ID del Informe</option>
+                            @foreach ($informes as $informe)
+                                <option value="{{ $informe->codigo }}"
+                                    {{ $detalleInforme->id_informe == $informe->codigo ? 'selected' : '' }}>
+                                    {{ $informe->codigo }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_informe')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="id_pedido">ID Pedido</label>
+                        <br><br>
+                        <select class="browser-default" id="id_pedido" name="id_pedido">
+                            <option value="" disabled>Seleccione el ID del Pedido</option>
+                            @foreach ($pedidos as $pedido)
+                                <option value="{{ $pedido->codigo }}"
+                                    {{ $detalleInforme->id_pedido == $pedido->codigo ? 'selected' : '' }}>
+                                    {{ $pedido->codigo }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_pedido')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="id_cliente">ID Cliente</label>
+                        <br><br>
+                        <select class="browser-default" id="id_cliente" name="id_cliente">
+                            <option value="" disabled>Seleccione el ID del Cliente</option>
+                            @foreach ($clientes as $cliente)
+                                <option value="{{ $cliente->codigo }}"
+                                    {{ $detalleInforme->id_cliente == $cliente->codigo ? 'selected' : '' }}>
+                                    {{ $cliente->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_cliente')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="id_empleado">ID Empleado</label>
+                        <br><br>
+                        <select class="browser-default" id="id_empleado" name="id_empleado">
+                            <option value="" disabled>Seleccione el ID del Empleado</option>
+                            @foreach ($empleados as $empleado)
+                                <option value="{{ $empleado->id }}"
+                                    {{ $detalleInforme->id_empleado == $empleado->id ? 'selected' : '' }}>
+                                    {{ $empleado->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_empleado')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="id_pago">ID Pago</label>
+                        <br><br>
+                        <select class="browser-default" id="id_pago" name="id_pago">
+                            <option value="" disabled>Seleccione el ID del Pago</option>
+                            @foreach ($pagos as $pago)
+                                <option value="{{ $pago->codigo }}"
+                                    {{ $detalleInforme->id_pago == $pago->codigo ? 'selected' : '' }}>
+                                    {{ $pago->codigo }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_pago')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="id_reservacion">ID Reservación</label>
+                        <br><br>
+                        <select class="browser-default" id="id_reservacion" name="id_reservacion">
+                            <option value="" disabled>Seleccione el ID de la Reservación</option>
+                            @foreach ($reservaciones as $reservacion)
+                                <option value="{{ $reservacion->codigo }}"
+                                    {{ $detalleInforme->id_reservacion == $reservacion->codigo ? 'selected' : '' }}>
+                                    {{ $reservacion->codigo }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_reservacion')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="id_mesa">ID Mesa</label>
+                        <br><br>
+                        <select class="browser-default" id="id_mesa" name="id_mesa">
+                            <option value="" disabled>Seleccione el ID de la Mesa</option>
+                            @foreach ($mesas as $mesa)
+                                <option value="{{ $mesa->codigo }}"
+                                    {{ $detalleInforme->id_mesa == $mesa->codigo ? 'selected' : '' }}>
+                                    {{ $mesa->numero }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_mesa')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="id_promocion">ID Promoción</label>
+                        <br><br>
+                        <select class="browser-default" id="id_promocion" name="id_promocion">
+                            <option value="" disabled>Seleccione el ID de la Promoción</option>
+                            @foreach ($promociones as $promocion)
+                                <option value="{{ $promocion->codigo }}"
+                                    {{ $detalleInforme->id_promocion == $promocion->codigo ? 'selected' : '' }}>
+                                    {{ $promocion->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_promocion')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col s6">
+                        <button class="btn waves-effect waves-light" type="submit">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="col s6">
+                        <a class="btn waves-effect waves-light" href="/Detalle_informe/show">Cancelar
+                            <i class="material-icons right">cancel</i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection

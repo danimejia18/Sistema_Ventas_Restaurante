@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('promociones', function (Blueprint $table) {
             $table->id('codigo');
-            $table->string('nombre', 20);
-            $table->text('descripcion', 50)->nullable();
+            $table->string('nombre', 50);
+            $table->text('descripcion')->nullable();
             $table->unsignedBigInteger('id_plato');
             $table->decimal('descuento', 5, 2);
             $table->date('fecha_inicio');
