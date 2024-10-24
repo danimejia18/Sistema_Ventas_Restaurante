@@ -59,6 +59,8 @@ class DetalleInformeController extends Controller
             'mesas' => $mesas,
             'promociones' => $promociones
         ]);
+        //Mostrar vista create.blade.php para crear un nuevo detalle_informe
+        return view('Detalle_informes.create');
     }
 
     /**
@@ -83,6 +85,21 @@ class DetalleInformeController extends Controller
     
         // Redirigir a la vista de detalles del informe
         return redirect('/Detalle_informes/show');
+        //Validar datos
+        $data = request()->validate([
+            'id_informe' => 'required',
+            'id_pedido' => 'required',
+            'id_cliente' => 'required',
+            'id_empleado' => 'required',
+            'id_pago' => 'required',
+            'id_reservacion' => 'required',
+            'id_mesa' => 'required',
+            'id_promocion' => 'required'
+            ]);
+    
+            DetalleInforme::create($data);
+    
+            return redirect('/Detalle_informes/show');
     }
     
 
@@ -155,7 +172,16 @@ class DetalleInformeController extends Controller
             'id_reservacion' => 'required|exists:reservaciones,codigo', // Asegúrate de que la reservación exista
             'id_mesa' => 'required|exists:mesas,codigo', // Asegúrate de que la mesa exista
             'id_promocion' => 'required|exists:promociones,codigo' // Asegúrate de que la promoción exista
-        ]);
+        ],[
+            'id_informe' => 'required',
+            'id_pedido' => 'required',
+            'id_cliente' => 'required',
+            'id_empleado' => 'required',
+            'id_pago' => 'required',
+            'id_reservacion' => 'required',
+            'id_mesa' => 'required',
+            'id_promocion' => 'required'
+            ]);
 
             // Reemplazar datos anteriores por los nuevos
             $detalle_informe->id_informe = $data['id_informe'];

@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Crear Empleados')
+@section('title', 'Crear Empleado')
 
 {{-- Definimos el contenido --}}
 @section('content')

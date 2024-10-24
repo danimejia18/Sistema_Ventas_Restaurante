@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+
 use App\Http\Controllers\AccesoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\DetalleInformeController;
 use App\Http\Controllers\DetallePedidoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\PlatoController;
@@ -16,7 +18,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PromocionController;
 use App\Http\Controllers\ReservacionController;
 use App\Http\Controllers\InformeController;
-
+use App\Http\Controllers\DetalleInformeController;
 
 
 Route::get('/home', function () {
@@ -272,16 +274,13 @@ Route::get('/Reservaciones/show', [ReservacionController::class, 'index']);
 
 Route::get('/Reservaciones/create', [ReservacionController::class, 'create']);
 
-Route::get('/Reservaciones/edit/{reservacion}', [ReservacionController::class, 'edit']);
+Route::get('Reservaciones/edit/{mesa}', [ReservacionController::class, 'edit']);
 
-Route::post('/Reservaciones/store', [ReservacionController::class, 'store']);
+Route::post('Reservaciones/store', [ReservacionController::class, 'store']);
 
-Route::put('/Reservaciones/update/{reservacion}', [ReservacionController::class, 'update']);
+Route::put('Reservaciones/update/{mesa}', [ReservacionController::class, 'update']);
 
-Route::delete('/Reservaciones/destroy/{id}', [ReservacionController::class, 'destroy']);
-
-
-
+Route::delete('Reservaciones/destroy/{id}', [ReservacionController::class, 'destroy']);
 
 
 Auth::routes();

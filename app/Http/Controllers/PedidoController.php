@@ -19,7 +19,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-         //Listar todos las mesas
+         //Listar todos los pedidos
          $pedidos = Pedido::all();
 
          //Mostrar vista show.blade

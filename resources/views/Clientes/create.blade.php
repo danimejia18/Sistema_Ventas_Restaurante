@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Clientes')
+@section('title', 'Crear Cliente')
 
 {{-- Definimos el contenido --}}
 @section('content')

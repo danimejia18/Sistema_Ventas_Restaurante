@@ -46,7 +46,7 @@
 
     <h1 class="text-center">Modificar Categoria</h1>
     <br>
-    <h5 class="text-center">Formulario para actualizar el Categoria</h5>
+    <h5 class="text-center">Formulario para actualizar la Categoria</h5>
     <hr>
 
     <div class="container form-container center">

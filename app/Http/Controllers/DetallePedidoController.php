@@ -57,8 +57,6 @@ class DetallePedidoController extends Controller
     // Redirigir con un mensaje de éxito
     return redirect('/Detalle_pedidos/show');
 }
-
-
     /**
      * Display the specified resource.
      */
@@ -98,7 +96,7 @@ class DetallePedidoController extends Controller
     
         // Calcular el subtotal
         $data['subtotal'] = $data['cantidad'] * $data['precio_unitario'];
-    
+
             // Reemplazar datos anteriores por los nuevos
             $detalle_pedido->id_pedido = $data['id_pedido'];
             $detalle_pedido->id_producto = $data['id_producto'];
