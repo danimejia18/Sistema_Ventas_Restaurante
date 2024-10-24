@@ -53,8 +53,6 @@
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Modificar Mesa</h5>
-
-            <!-- Formulario para actualizar mesa -->
             <form action="/Mesas/update/{{ $mesa->codigo }}" method="POST">
 
                 @csrf

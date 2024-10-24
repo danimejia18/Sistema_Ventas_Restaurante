@@ -46,76 +46,67 @@
         }
     </style>
 
+    <h1 class="text-center">Actualizar Pago</h1>
+    <h5 class="text-center">Formulario para actualizar el pago seleccionado</h5>
+
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Modificar Pago</h5>
-            <form action="/Pagos/update/{{ $pago->codigo }}" method="POST">
+            <form action="/Pagos/update/{{ $pagos->codigo }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="id_pedido">ID_PEDIDO</label>
-                        <select name="id_pedido" id="id_categoria" class="form-control">
-                            @foreach ($pedidos as $item)
+                        <label for="id_pedido">ID Pedido</label>
+                        <select id="id_pedido" name="id_pedido" class="browser-default" required>
+                            <option value="" disabled selected>Seleccione el ID del Pedido</option>
+                            @foreach ($pagos as $pedido)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $item->codigo == $pago->id_pedido ? 'selected' : '' }}>
+                                    {{ $item->codigo == $pagos->id_pedido ? 'selected' : '' }}>
                                     {{ $item->codigo }}
                                 </option>
+                                <!-- Muestra el ID del pedido -->
                             @endforeach
                         </select>
-                        @error('id_categoria')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="input-field col s6">
                         <label for="monto">Monto</label>
-                        <br><br>
-                        <input id="monto" type="decimal" class="validate" value="{{ $pago->monto }}" required>
-                        @error('nonto')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input id="monto" name="monto" type="number" step="0.01" class="validate" value="{{ $pago->monto }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <label for="metodo">Método</label>
-                        <br>
                         <p>
                             <label>
-                                <input type="checkbox" checked="checked" />
+                                <input type="checkbox" name="metodo[]" value="efectivo" />
                                 <span>Efectivo</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" name="metodo[]" value="transferencia" />
                                 <span>Transferencia</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field col s6">
                         <label for="fecha">Fecha</label>
-                        <br>
-                        <input id="fecha" type="date" class="validate" required>
+                        <input id="fecha" name="fecha" type="date" class="validate" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <label for="estado">Estado</label>
-                        <br>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" name="estado[]" value="Pendiente" />
                                 <span>Pendiente</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" checked="checked" />
+                                <input type="checkbox" name="estado[]" value="Cancelado" />
                                 <span>Cancelado</span>
                             </label>
                         </p>

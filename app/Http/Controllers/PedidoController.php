@@ -74,12 +74,12 @@ class PedidoController extends Controller
         // Listar clientes para llenar select
         $clientes = Cliente::all();
         // Mostrar vista update.blade.php junto al pedido y los clientes
-        return view('Pedidos.update')->with(['pedido' => $pedido, 'clientes' => $clientes]);
+        return view('Pedidos.update')->with(['pedidos' => $pedido, 'clientes' => $clientes]);
 
         // Listar empleados para llenar select
         $empleados = Empleado::all();
         // Mostrar vista update.blade.php junto al pedido y los empleados
-        return view('Pedidos.update')->with(['pedido' => $pedido, 'empleados' => $empleados]);
+        return view('Pedidos.update')->with(['pedidos' => $pedido, 'empleados' => $empleados]);
     }
 
     /**

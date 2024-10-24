@@ -68,7 +68,7 @@ class InformeController extends Controller
     public function edit(Informe $informe)
     {
          //Mostrar vista update.blade.php
-         return view('Informes.update')->with(['mesa' => $informe]);
+         return view('Informes.update')->with(['informes' => $informe]);
     }
 
     /**

@@ -57,15 +57,25 @@
                         <label for="id_pedido">ID Pedido</label>
                         <select id="id_pedido" name="id_pedido" class="browser-default" required>
                             <option value="" disabled selected>Seleccione el ID del Pedido</option>
-                            @foreach ($pedidos as $pedido)
+                            @foreach ($pagos as $pedido)
                                 <option value="{{ $pedido->id }}">{{ $pedido->id }}</option>
                                 <!-- Muestra el ID del pedido -->
                             @endforeach
+                            @error('id_pedido')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </select>
                     </div>
                     <div class="input-field col s6">
                         <label for="monto">Monto</label>
                         <input id="monto" name="monto" type="number" step="0.01" class="validate" required>
+                        @error('monto')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
@@ -73,20 +83,36 @@
                         <label for="metodo">Método</label>
                         <p>
                             <label>
-                                <input type="checkbox" name="metodo[]" value="Efectivo" />
+                                <input type="checkbox" name="metodo" value="efectivo" />
                                 <span>Efectivo</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" name="metodo[]" value="Transferencia" />
+                                <input type="checkbox" name="metodo" value="tarjeta" />
+                                <span>Tarjeta</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="metodo" value="transferencia" />
                                 <span>Transferencia</span>
                             </label>
                         </p>
+                        @error('metodo')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="input-field col s6">
                         <label for="fecha">Fecha</label>
                         <input id="fecha" name="fecha" type="date" class="validate" required>
+                        @error('fecha')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
@@ -94,16 +120,21 @@
                         <label for="estado">Estado</label>
                         <p>
                             <label>
-                                <input type="checkbox" name="estado[]" value="Pendiente" />
+                                <input type="checkbox" name="estado" value="pendiente" />
                                 <span>Pendiente</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" name="estado[]" value="Cancelado" />
+                                <input type="checkbox" name="estado" value="cancelado" />
                                 <span>Cancelado</span>
                             </label>
                         </p>
+                        @error('estado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mt-2">

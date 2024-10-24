@@ -73,7 +73,7 @@
                     @foreach ($pagos as $item)
                         <tr>
                             <td>{{ $item->codigo }}</td>
-                            <td>{{ $item->ID_Pedido }}</td>
+                            <td>{{ $item->id_pedido }}</td>
                             <td>{{ $item->monto }}</td>
                             <td>{{ $item->metodo }}</td>
                             <td>{{ $item->fecha }}</td>

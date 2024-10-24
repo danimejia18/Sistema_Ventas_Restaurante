@@ -47,28 +47,47 @@
         }
     </style>
 
+    <h1 class="text-center">Actualizar Informe</h1>
+    <h5 class="text-center">Formulario para actualizar el informe seleccionado</h5>
+
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Modificar Informe</h5>
-            <form action="/Informes/update/{{ $informe->codigo }}" method="POST">
-                <input type="hidden" id="idInforme" name="idInforme">
+            <form action="/Informes/update/{{ $informes->codigo }}" method="POST">
+                @csrf
+                @method('PUT')
                 <div class="input-field">
                     <label for="fechaHora">Fecha y Hora</label>
                     <br>
-                    <input id="fechaHora" type="date" class="validate" value="2024-09-30" required>
-                    <input id="fechaHora" type="time" class="validate" value="10:00 AM" required>
+                    <input name="fecha_hora" id="fecha_hora" type="date" class="validate" value="2024-09-30" value="{{ old('fecha_hora', $informes->fecha_hora) }}" required>
+                    <input name="fecha_hora" id="fecha_hora" type="time" class="validate" value="10:00 AM" value="{{ old('fecha_hora', $informes->fecha_hora) }}" required>
+                    @error('fecha_hora')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="input-field">
                     <label for="usuarioActivo">Usuario Activo</label>
-                    <input id="usuarioActivo" type="text" class="validate" value="Usuario1" required>
+                    <input id="usuarioActivo" type="text" class="validate" required>
                 </div>
                 <div class="input-field">
                     <label for="empresa">Empresa</label>
-                    <input id="empresa" type="text" class="validate" value="Empresa1" required>
+                    <input name="empresa" id="empresa" type="text" class="validate" value="{{ old('empresa', $informes->empresa) }}" required>
+                    @error('empresa')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="input-field">
                     <label for="rangosFecha">Rangos de Fecha</label>
-                    <input id="rangosFecha" type="text" class="validate" value="2024-09-01 a 2024-09-30" required>
+                    <input name="rangos_fecha" id="rangos_fecha" type="text" class="validate" value="{{ old('rangos_fecha', $informes->rangos_fecha) }}" required>
+                    @error('rangos_fecha')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="row mt-2">
                     <div class="col s6">

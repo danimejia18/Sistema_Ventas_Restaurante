@@ -52,7 +52,7 @@
                             <option value="" disabled>Seleccione el ID del Informe</option>
                             @foreach ($informes as $informe)
                                 <option value="{{ $informe->codigo }}"
-                                    {{ $detalleInforme->id_informe == $informe->codigo ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_informe == $informe->codigo ? 'selected' : '' }}>
                                     {{ $informe->codigo }}
                                 </option>
                             @endforeach
@@ -70,7 +70,7 @@
                             <option value="" disabled>Seleccione el ID del Pedido</option>
                             @foreach ($pedidos as $pedido)
                                 <option value="{{ $pedido->codigo }}"
-                                    {{ $detalleInforme->id_pedido == $pedido->codigo ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_pedido == $pedido->codigo ? 'selected' : '' }}>
                                     {{ $pedido->codigo }}
                                 </option>
                             @endforeach
@@ -90,7 +90,7 @@
                             <option value="" disabled>Seleccione el ID del Cliente</option>
                             @foreach ($clientes as $cliente)
                                 <option value="{{ $cliente->codigo }}"
-                                    {{ $detalleInforme->id_cliente == $cliente->codigo ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_cliente == $cliente->codigo ? 'selected' : '' }}>
                                     {{ $cliente->nombre }}
                                 </option>
                             @endforeach
@@ -108,7 +108,7 @@
                             <option value="" disabled>Seleccione el ID del Empleado</option>
                             @foreach ($empleados as $empleado)
                                 <option value="{{ $empleado->id }}"
-                                    {{ $detalleInforme->id_empleado == $empleado->id ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_empleado == $empleado->id ? 'selected' : '' }}>
                                     {{ $empleado->nombre }}
                                 </option>
                             @endforeach
@@ -128,7 +128,7 @@
                             <option value="" disabled>Seleccione el ID del Pago</option>
                             @foreach ($pagos as $pago)
                                 <option value="{{ $pago->codigo }}"
-                                    {{ $detalleInforme->id_pago == $pago->codigo ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_pago == $pago->codigo ? 'selected' : '' }}>
                                     {{ $pago->codigo }}
                                 </option>
                             @endforeach
@@ -146,7 +146,7 @@
                             <option value="" disabled>Seleccione el ID de la Reservación</option>
                             @foreach ($reservaciones as $reservacion)
                                 <option value="{{ $reservacion->codigo }}"
-                                    {{ $detalleInforme->id_reservacion == $reservacion->codigo ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_reservacion == $reservacion->codigo ? 'selected' : '' }}>
                                     {{ $reservacion->codigo }}
                                 </option>
                             @endforeach
@@ -166,7 +166,7 @@
                             <option value="" disabled>Seleccione el ID de la Mesa</option>
                             @foreach ($mesas as $mesa)
                                 <option value="{{ $mesa->codigo }}"
-                                    {{ $detalleInforme->id_mesa == $mesa->codigo ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_mesa == $mesa->codigo ? 'selected' : '' }}>
                                     {{ $mesa->numero }}
                                 </option>
                             @endforeach
@@ -184,7 +184,7 @@
                             <option value="" disabled>Seleccione el ID de la Promoción</option>
                             @foreach ($promociones as $promocion)
                                 <option value="{{ $promocion->codigo }}"
-                                    {{ $detalleInforme->id_promocion == $promocion->codigo ? 'selected' : '' }}>
+                                    {{ $detalle_informe->id_promocion == $promocion->codigo ? 'selected' : '' }}>
                                     {{ $promocion->nombre }}
                                 </option>
                             @endforeach

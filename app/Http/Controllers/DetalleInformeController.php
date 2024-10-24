@@ -116,45 +116,28 @@ class DetalleInformeController extends Controller
      */
     public function edit(DetalleInforme $detalle_informe)
     {
-        // Listar informes para llenar select
-        $informes = Informe::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los informes
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'informes' => $informes]);
+        // Recuperar todas las listas necesarias
+    $informes = Informe::all();
+    $pedidos = Pedido::all();
+    $clientes = Cliente::all();
+    $empleados = Empleado::all();
+    $pagos = Pago::all();
+    $reservaciones = Reservacion::all();
+    $mesas = Mesa::all();
+    $promociones = Promocion::all();
 
-        // Listar pedidos para llenar select
-        $pedidos = Pedido::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los pedidos
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'pedidos' => $pedidos]);
-
-        // Listar clientes para llenar select
-        $clientes = Cliente::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los clientes
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'clientes' => $clientes]);
-
-        // Listar empleados para llenar select
-        $empleados = Empleado::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los empleados
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'empleados' => $empleados]);
-
-        // Listar pagos para llenar select
-        $pagos = Pago::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los pagos
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'pagos' => $pagos]);
-
-        // Listar reservaciones para llenar select
-        $reservaciones = Reservacion::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los reservaciones
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'reservaciones' => $reservaciones]);
-
-        // Listar mesas para llenar select
-        $mesas = Mesa::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los mesas
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'mesas' => $mesas]);
-
-        // Listar promociones para llenar select
-        $promociones = Promocion::all();
-        // Mostrar vista update.blade.php junto al detalle_informe y los promociones
-        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'promociones' => $promociones]);
+    // Pasar todas las variables a la vista
+    return view('Detalle_informes.update')->with([
+        'detalle_informe' => $detalle_informe,
+        'informes' => $informes,
+        'pedidos' => $pedidos,
+        'clientes' => $clientes,
+        'empleados' => $empleados,
+        'pagos' => $pagos,
+        'reservaciones' => $reservaciones,
+        'mesas' => $mesas,
+        'promociones' => $promociones
+    ]);
     }
 
     /**
