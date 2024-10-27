@@ -46,10 +46,13 @@
         }
     </style>
 
+    <h1 class="text-center">Actualizar Pago</h1>
+    <h5 class="text-center">Formulario para actualizar el pago seleccionado</h5>
+
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Modificar Pago</h5>
-            <form action="/Pagos/update/{{ $pago->codigo }}" method="POST">
+            <form action="/Pagos/update/{{ $pagos->codigo }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">

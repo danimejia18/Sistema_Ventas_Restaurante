@@ -61,6 +61,11 @@
                                 <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
 
                             @endforeach
+                            @error('id_pedido')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </select>
                     </div>
                     <div class="input-field col s6">
@@ -79,11 +84,19 @@
                         <p>
                             <label>
                                 <input type="checkbox" name="metodo" value="efectivo" />
+                                <input type="checkbox" name="metodo" value="efectivo" />
                                 <span>Efectivo</span>
                             </label>
                         </p>
                         <p>
                             <label>
+                                <input type="checkbox" name="metodo" value="tarjeta" />
+                                <span>Tarjeta</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="metodo" value="transferencia" />
                                 <input type="checkbox" name="metodo" value="tarjeta" />
                                 <span>Tarjeta</span>
                             </label>

@@ -47,8 +47,8 @@
             background-color: antiquewhite
         }
     </style>
+    
     </head>
-
     <body>
         <div class="container">
             <h1 class="center-align">Mostrar Detalle de informes</h1>
