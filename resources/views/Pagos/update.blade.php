@@ -54,25 +54,18 @@
                 @method('PUT')
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="id_pedido">ID_PEDIDO</label>
-                        <select name="id_pedido" id="id_categoria" class="form-control">
+                        <label for="id_pedido">Pedido</label>
+                        <select type="text" class="form-control" id="id_pedido" name="id_pedido" value="{{ $pago->id_pedido }}" required>
+                            <option value="" disabled selected>Seleccione el ID del Pedido</option>
                             @foreach ($pedidos as $item)
-                                <option value="{{ $item->codigo }}"
-                                    {{ $item->codigo == $pago->id_pedido ? 'selected' : '' }}>
-                                    {{ $item->codigo }}
-                                </option>
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+
                             @endforeach
                         </select>
-                        @error('id_categoria')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="input-field col s6">
                         <label for="monto">Monto</label>
-                        <br><br>
-                        <input id="monto" type="decimal" class="validate" value="{{ $pago->monto }}" required>
+                        <input type="number" class="form-control" name="monto" id="monto" value="{{ $pago->monto }}">
                         @error('nonto')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -83,42 +76,60 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <label for="metodo">Método</label>
-                        <br>
                         <p>
                             <label>
-                                <input type="checkbox" checked="checked" />
+                                <input type="checkbox" name="metodo" value="efectivo" />
                                 <span>Efectivo</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" name="metodo" value="tarjeta" />
+                                <span>Tarjeta</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="metodo" value="transferencia" />
                                 <span>Transferencia</span>
                             </label>
                         </p>
+                        @error('metodo')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="input-field col s6">
                         <label for="fecha">Fecha</label>
-                        <br>
-                        <input id="fecha" type="date" class="validate" required>
+                        <input id="fecha" name="fecha" type="date" class="validate" value="{{ $pago->fecha }}" required>
+                        @error('fecha')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <label for="estado">Estado</label>
-                        <br>
                         <p>
                             <label>
-                                <input type="checkbox" />
-                                <span>Pendiente</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="checkbox" checked="checked" />
+                                <input type="radio" name="estado" value="pagado" required/>
                                 <span>Cancelado</span>
                             </label>
                         </p>
+                        <p>
+                            <label>
+                                <input type="radio" name="estado" value="pendiente" required/>
+                                <span>Pendiente</span>
+                            </label>
+                        </p>
+                        @error('estado')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mt-2">

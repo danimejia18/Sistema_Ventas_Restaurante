@@ -64,7 +64,7 @@
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Rol</th>
-                        <th>password</th>
+                        <th>Contraseña</th>
                         <th>Id Acceso</th>
                         <th>Acciones</th>
                     </tr>

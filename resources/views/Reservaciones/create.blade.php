@@ -50,59 +50,68 @@
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Crear Reservación</h5>
-            <div class="form-container">
-                <form action="/Reseraciones/store" method="POST">
+                <form action="/Reservaciones/store" method="POST">
                     @csrf
-                    <div class="input-field col s12">
-                        <label>ID Cliente</label>
-                        <br><br>
-                        <select class="browser-default" name="id_cliente" required>
-                            <option value="" disabled selected>Seleccione el ID del Cliente</option>
-                            @foreach ($clientes as $cliente)
-                                <option value="{{ $cliente->codigo }}">{{ $cliente->nombre }}</option>
+                    <div class="row">
+                    <div class="input-field col s6">
+                        <label for="id_cliente">ID Cliente</label><br><br>
+                        <select name="id_cliente" class="form-control" name="id_cliente" id="id_cliente" required>
+                            <option value="" disabled selected>Seleccione un cliente</option>
+                            @foreach ($clientes as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
                             @endforeach
                         </select>
+                        @error('id_cliente')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    
+                    <div class="input-field col s6">
+                        <label for="id_mesa">ID Mesa</label><br><br>
+                        <select name="id_mesa" class="form-control" name="id_mesa" id="id_mesa" required>
+                            <option value="" disabled selected>Seleccione una mesa</option>
+                            @foreach ($mesas as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->numero }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_mesa')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    
+                    <div class="input-field col s6">
+                        <label for="fecha_hora">Fecha y Hora</label><br>
+                        <input id="fecha_hora" type="datetime-local" name="fecha_hora" class="validate" required>
+                        @error('fecha_hora')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="input-field col s12">
-                        <label>ID Mesa</label>
-                        <br><br>
-                        <select class="browser-default" name="id_mesa" required>
-                            <option value="" disabled selected>Seleccione el ID de la Mesa</option>
-                            @foreach ($mesas as $mesa)
-                                <option value="{{ $mesa->codigo }}">{{ $mesa->numero }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <label for="fecha_hora">Fecha y Hora</label>
-                        <br><br>
-                        <input id="fecha" type="date" name="fecha" class="validate" required>
-                        <input id="hora" type="time" name="hora" class="validate" required>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <label for="estado">Estado</label>
-                        <br><br>
+                        <label for="estado">Estado</label><br><br>
                         <p>
                             <label>
-                                <input type="checkbox" name="estado[]" value="activa" />
-                                <span>Activa</span>
+                                <input name="estado" type="radio" value="reservado" required />
+                                <span>Reservada</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" name="estado[]" value="cancelada" />
-                                <span>Cancelada</span>
+                                <input name="estado" type="radio" value="cancelado" required />
+                                <span>Cancelado</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" name="estado[]" value="vencida" />
-                                <span>Vencida</span>
+                                <input name="estado" type="radio" value="vencido" required />
+                                <span>Vencido</span>
                             </label>
-                        </p>
+                        </p>                        
+                        @error('estado')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
 
                     <div class="row mt-2">

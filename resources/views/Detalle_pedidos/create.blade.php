@@ -1,11 +1,16 @@
 {{-- Heredamos la estructura del archivo app.blade.php --}}
 @extends('layouts.app')
 
-{{-- Definimos el título de la página --}}
+{{-- Definimos el título --}}
 @section('title', 'Agregar Detalle de Pedidos')
 
-{{-- Definimos el contenido principal --}}
+{{-- Definimos el contenido --}}
 @section('content')
+
+    <!-- Importar Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
         /* Estilos personalizados */
         body {
@@ -27,89 +32,86 @@
 
         .table-container table {
             width: 100%;
-            border: black dotted 1px
+            border: black dotted 1px;
         }
 
         .btn-floating {
             float: right;
             margin-right: 50px;
-            bottom: 10px
+            bottom: 10px;
         }
 
         thead {
-            background-color: antiquewhite
+            background-color: antiquewhite;
         }
     </style>
 
-@section('content')
-    <h1 class="center-align">Agregar Detalle de pedido</h1>
-    <br>
-    <h3 class="center-align">Formulario para crear Detalle de pedido</h3>
-    <div class="container"><br>
+    <div class="container">
+        <h1 class="center-align">Crear Pedido</h1>
+        <h3 class="center-align">Formulario para agregar detalles del pedido</h3>
+        
         <div class="table-container">
-            <div class="form-container">
-                <form action="/Detalle_pedidos/store" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <label for="id_pedido">ID Pedido</label>
-                            <br><br>
-                            <select class="browser-default" id="id_pedido" name="id_pedido">
-                                <option value="" disabled selected>Seleccione el ID del Pedido</option>
-                                @foreach ($pedidos as $pedido)
-                                    <option value="{{ $pedido->codigo }}">{{ $pedido->codigo }}</option>
-                                @endforeach
-                            </select>
-                            @error('id_pedido')
-                                <span class="helper-text red-text" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="input-field col s6">
-                            <label for="id_producto">ID Producto</label>
-                            <br><br>
-                            <select class="browser-default" id="id_producto" name="id_producto">
-                                <option value="" disabled selected>Seleccione el ID del Producto</option>
-                                @foreach ($productos as $producto)
-                                    <option value="{{ $producto->codigo }}">{{ $producto->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @error('id_producto')
-                                <span class="helper-text red-text" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+            <form action="/Detalle_pedidos/store" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col s6">
+                        <label for="id_pedido">ID Pedido</label>
+                        <select class="form-control" id="id_pedido" name="id_pedido" required>
+                            @foreach ($pedidos as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_pedido')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <label for="cantidad">Cantidad</label>
-                            <input id="cantidad" type="number" name="cantidad" class="validate" required>
-                            @error('cantidad')
-                                <span class="helper-text red-text" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="input-field col s6">
-                            <label for="precio_unitario">Precio Unitario</label>
-                            <input id="precio_unitario" type="decimal" name="precio_unitario" class="validate" required>
-                            @error('precio_unitario')
-                                <span class="helper-text red-text" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    <div class="col s6">
+                        <label for="id_producto">ID Producto</label>
+                        <select class="form-control" id="id_producto" name="id_producto" required>
+                            @foreach ($productos as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_producto')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col s6">
+                        <label for="cantidad">Cantidad</label>
+                        <input id="cantidad" type="number" name="cantidad" class="validate" required oninput="calculateSubtotal()" 
+                               style="border: 1px solid #bdbdbd; padding: 8px; border-radius: 4px;">
+                        @error('cantidad')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    
+                    <div class="col s6">
+                        <label for="precio_unitario">Precio Unitario</label>
+                        <input id="precio_unitario" type="number" name="precio_unitario" class="validate" step="0.01" required 
+                               oninput="calculateSubtotal()" 
+                               style="border: 1px solid #bdbdbd; padding: 8px; border-radius: 4px;">
+                        @error('precio_unitario')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="col s6">
                             <label for="subtotal">Subtotal</label>
-                            <input id="subtotal" type="decimal" name="subtotal" class="validate" required>
+                            <input id="subtotal" type="number" name="subtotal" class="validate" readonly 
+                                   style="border: 1px solid #bdbdbd; padding: 8px; border-radius: 4px; background-color: #f1f1f1;">
                             @error('subtotal')
                                 <span class="helper-text red-text" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -117,20 +119,30 @@
                             @enderror
                         </div>
                     </div>
+                    
 
-            <div class="row mt-2">
-                <div class="col s6">
-                    <button class="btn waves-effect waves-light" type="submit">Guardar
-                        <i class="material-icons right">send</i>
-                    </button>
+                <div class="row mt-2">
+                    <div class="col s6">
+                        <button class="btn waves-effect waves-light" type="submit">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="col s6">
+                        <a class="btn waves-effect waves-light" href="/Detalle_pedidos/show">Cancelar
+                            <i class="material-icons right">cancel</i>
+                        </a>
+                    </div>
                 </div>
-                <div class="col s6">
-                    <a class="btn waves-effect waves-light" href="/Detalle_pedidos/show">Cancelar
-                        <i class="material-icons right">cancel</i>
-                    </a>
-                </div>
-            </div>
-                </form>
-            </div>
+            </form>
         </div>
-    @endsection
+    </div>
+
+    <script>
+        function calculateSubtotal() {
+            const cantidad = parseFloat(document.getElementById('cantidad').value) || 0;
+            const precioUnitario = parseFloat(document.getElementById('precio_unitario').value) || 0;
+            const subtotal = cantidad * precioUnitario;
+            document.getElementById('subtotal').value = subtotal.toFixed(2); // Muestra el subtotal con 2 decimales
+        }
+    </script>
+@endsection

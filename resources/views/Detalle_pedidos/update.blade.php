@@ -42,21 +42,15 @@
     <hr>
 
     <div class="container form-container center">
-        <form action="/Detalle_pedidos/update/{{ $detalle_pedido->codigo }}" method="POST">
+        <form action="/Detalle_pedidos/update/{{ $detalle_pedidos->codigo }}" method="POST">
             @csrf
             @method('PUT')
-
             <div class="row">
-                <div class="input-field col s6">
+                <div class="col s6">
                     <label for="id_pedido">ID Pedido</label>
-                    <br><br>
-                    <select class="browser-default" id="id_pedido" name="id_pedido" required>
-                        <option value="" disabled>Seleccione el ID del Pedido</option>
-                        @foreach ($pedidos as $pedido)
-                            <option value="{{ $pedido->codigo }}"
-                                {{ $pedido->codigo == $detallePedido->id_pedido ? 'selected' : '' }}>
-                                {{ $pedido->codigo }}
-                            </option>
+                    <select class="form-control" id="id_pedido" name="id_pedido" value="{{ $detalle_pedidos->id_pedido }}" required>
+                        @foreach ($pedidos as $item)
+                            <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
                         @endforeach
                     </select>
                     @error('id_pedido')
@@ -66,16 +60,11 @@
                     @enderror
                 </div>
 
-                <div class="input-field col s6">
+                <div class="col s6">
                     <label for="id_producto">ID Producto</label>
-                    <br><br>
-                    <select class="browser-default" id="id_producto" name="id_producto" required>
-                        <option value="" disabled>Seleccione el ID del Producto</option>
-                        @foreach ($productos as $producto)
-                            <option value="{{ $producto->codigo }}"
-                                {{ $producto->codigo == $detallePedido->id_producto ? 'selected' : '' }}>
-                                {{ $producto->nombre }}
-                            </option>
+                    <select class="form-control" id="id_producto" name="id_producto" value="{{ $detalle_pedidos->id_producto }}" required>
+                        @foreach ($productos as $item)
+                            <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
                         @endforeach
                     </select>
                     @error('id_producto')
@@ -87,44 +76,43 @@
             </div>
 
             <div class="row">
-                <div class="input-field col s6">
+                <div class="col s6">
                     <label for="cantidad">Cantidad</label>
-                    <input id="cantidad" type="number" name="cantidad" class="validate"
-                        value="{{ old('cantidad', $detallePedido->cantidad) }}" required>
+                    <input id="cantidad" type="number" name="cantidad" class="validate" required oninput="calculateSubtotal()" 
+                           style="border: 1px solid #bdbdbd; padding: 8px; border-radius: 4px;">
                     @error('cantidad')
                         <span class="helper-text red-text" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-
-                <div class="input-field col s6">
+                
+                <div class="col s6">
                     <label for="precio_unitario">Precio Unitario</label>
-                    <input id="precio_unitario" type="decimal" name="precio_unitario" class="validate"
-                        value="{{ old('precio_unitario', $detallePedido->precio_unitario) }}" required>
+                    <input id="precio_unitario" type="number" name="precio_unitario" class="validate" step="0.01" required 
+                           oninput="calculateSubtotal()" 
+                           style="border: 1px solid #bdbdbd; padding: 8px; border-radius: 4px;">
                     @error('precio_unitario')
                         <span class="helper-text red-text" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="input-field col s6">
-                    <label for="subtotal">Subtotal</label>
-                    <input id="subtotal" type="decimal" name="subtotal" class="validate"
-                        value="{{ old('subtotal', $detallePedido->subtotal) }}" required>
-                    @error('subtotal')
-                        <span class="helper-text red-text" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                
+                <div class="row">
+                    <div class="col s6">
+                        <label for="subtotal">Subtotal</label>
+                        <input id="subtotal" type="number" name="subtotal" class="validate" readonly 
+                               style="border: 1px solid #bdbdbd; padding: 8px; border-radius: 4px; background-color: #f1f1f1;">
+                        @error('subtotal')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-            </div>
+                
 
-            <div class="row mt-2">
-                <div class="col s6">
             <div class="row mt-2">
                 <div class="col s6">
                     <button class="btn waves-effect waves-light" type="submit">Guardar
@@ -139,4 +127,20 @@
             </div>
         </form>
     </div>
+</div>
+@endsection
+
+@section('scripts')
+    <!-- Importar Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+    function calculateSubtotal() {
+        const cantidad = parseFloat(document.getElementById('cantidad').value) || 0;
+        const precioUnitario = parseFloat(document.getElementById('precio_unitario').value) || 0;
+        const subtotal = cantidad * precioUnitario;
+        document.getElementById('subtotal').value = subtotal.toFixed(2); // Muestra el subtotal con 2 decimales
+    
+    }
+</script>
 @endsection

@@ -13,6 +13,7 @@ return new class extends Migration
     {
     Schema::create('pedidos', function (Blueprint $table) {
         $table->id('codigo');
+        $table->string('nombre', 100);
         $table->unsignedBigInteger('id_cliente');
         $table->unsignedBigInteger('id_empleado');
         $table->dateTime('fecha');

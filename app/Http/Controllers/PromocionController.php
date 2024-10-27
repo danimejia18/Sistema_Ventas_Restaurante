@@ -30,13 +30,13 @@ class PromocionController extends Controller
             "promociones.fecha_inicio",
             "promociones.fecha_fin",
             "promociones.estado",
-            "platos.nombre as plato_nombre",
+            "platos.nombre as id_plato",
         )
         ->join("platos", "platos.codigo", "=", "promociones.id_plato")
         ->get();
     
         // Mostrar la vista promociones.show junto con el listado de promociones
-        return view('/Promociones/show')->with(['promociones' => $promociones]);
+        return view('Promociones.show')->with(['promociones' => $promociones]);
     }
     
 
@@ -67,22 +67,14 @@ class PromocionController extends Controller
             'nombre' => 'required|string|max:50',
             'descripcion' => 'nullable|string',
             'id_plato' => 'required|exists:platos,codigo', // Verifica que el plato exista
-            'descuento' => 'required|decimal:10,2|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
+            'descuento' => 'required|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio', // La fecha de fin debe ser posterior o igual a la fecha de inicio
             'estado' => 'required|string|in:confirmada,no confirmada', // Agregar validación para asegurarse de que sea uno de los valores permitidos
         ]);
     
         // Crear una nueva promoción
-        Promocion::create([
-            'nombre' => $data['nombre'],
-            'descripcion' => $data['descripcion'],
-            'id_plato' => $data['id_plato'],
-            'descuento' => $data['descuento'],
-            'fecha_inicio' => $data['fecha_inicio'],
-            'fecha_fin' => $data['fecha_fin'],
-            'estado' => $data['estado'],
-        ]);
+        Promocion::create($data);
     
         // Redirigir a la vista de promociones
         return redirect('/Promociones/show');
@@ -102,6 +94,8 @@ class PromocionController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function edit(Promocion $promocion)
     {
@@ -125,7 +119,7 @@ class PromocionController extends Controller
             'nombre' => 'required|string|max:50',
             'descripcion' => 'nullable|string',
             'id_plato' => 'required|exists:platos,codigo', // Verifica que el plato exista
-            'descuento' => 'required|decimal:10,2|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
+            'descuento' => 'required|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio', // La fecha de fin debe ser posterior o igual a la fecha de inicio
             'estado' => 'required|string|in:confirmada,no confirmada', // Agregar validación para asegurarse de que sea uno de los valores permitidos

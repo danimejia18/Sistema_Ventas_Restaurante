@@ -60,7 +60,8 @@
                 <table class="striped responsive-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>ID_Cliente</th>
+                            <th>Nombre</th>
                             <th>ID_Cliente</th>
                             <th>ID_Empleado</th>
                             <th>Fecha</th>
@@ -74,10 +75,11 @@
                         @foreach ($pedidos as $item)
                             <tr>
                                 <td>{{ $item->codigo }}</td>
+                                <td>{{ $item->nombre }}</td>
                                 <td>{{ $item->id_cliente }}</td>
                                 <td>{{ $item->id_empleado }}</td>
                                 <td>{{ $item->fecha }}</td>
-                                <td>{{ $item->fecha }}</td>
+                                <td>{{ $item->total }}</td>
                                 <td>{{ $item->estado }}</td>
                                 <td>
                                     <a class="btn-small blue btn-editar" href="/Pedidos/edit/{{ $item->codigo }}"><i

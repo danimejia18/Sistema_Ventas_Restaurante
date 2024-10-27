@@ -23,78 +23,135 @@
             margin-top: 20px;
         }
 
-        .form-container {
-            max-width: 600px;
+        .table-container {
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
             background-color: #fff;
-            border-radius: 8px;
+            border-radius: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .table-container table {
+            width: 100%;
+            border: black dotted 1px
+        }
+
+        .btn-floating {
+            float: right;
+            margin-right: 50px;
+            bottom: 10px
+        }
+
+        thead {
+            background-color: antiquewhite
         }
     </style>
 
-    <div class="container">
-        <h3 class="center-align">Modificar Pedido</h3>
+<h3 class="text-center">Modificar Pedido</h3>
 
         <!-- Formulario para modificar informe -->
-        <div class="form-container">
-            <form action="/Pedidos/update/{{ $pedido->codigo }}" method="POST">
+    <div class="container">
+        <div class="table-container">
+            <h5 class="card-title">Pedidos registrados</h5>
+            <form action="/Pedidos/update/{{ $pedidos->codigo }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="input-field col s6">
-                        <label>ID Cliente</label>
-                        <br><br>
-                        <select class="browser-default">
-                            <option value="" disabled selected>Seleccione el ID del Cliente</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $promocion->nombre }}">
+                        @error('nombre')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    <div class="input-field col s6">
-                        <label>ID Empleado</label>
-                        <br><br>
-                        <select class="browser-default">
-                            <option value="" disabled selected>Seleccione el ID del Empleado</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                    <div class="col-12 mt-3">
+                        <label for="id_cliente">Cliente</label>
+                        <select type="text" class="form-control" name="id_cliente" id="id_cliente" value="{{ $pedidos->id_cliente }}" required>
+                            @foreach ($clientes as $item)
+                                <option value="{{ $item->codigo }}">
+                                    {{ $item->nombre }}
+                                </option>
+                            @endforeach
                         </select>
+                        @error('id_cliente')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <label for="id_empleado">Empleado</label>
+                        <select type="text" class="form-control" name="id_empleado" id="id_empleado" value="{{ $pedidos->id_empleado }}" required>
+                            @foreach ($empleados as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_empleado')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="input-field col s6">
+                    <!-- Campo de Fecha -->
+                    <div class="col-md-6 mt-3">
                         <label for="fecha">Fecha</label>
-                        <br>
-                        <input id="fecha" type="date" class="validate" required>
+                        <input id="fecha" type="date" name="fecha" class="form-control" value="{{ $pedidos->fecha }}" required>
+                        @error('fecha')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="input-field col s6">
+                
+                    <!-- Campo de Total -->
+                    <div class="col-md-6 mt-3">
                         <label for="total">Total</label>
-                        <br><br>
-                        <input id="total" type="decimal" class="validate" value="50.00" required>
+                        <input id="total" type="number" name="total" class="form-control" value="{{ $pedidos->total }}" required>
+                        @error('total')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="input-field col s12">
-                        <label for="estado">Estado</label>
-                        <br><br>
-                        <p>
-                            <label>
-                                <input type="checkbox" />
-                                <span>Pendiente</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="checkbox" checked="checked" />
-                                <span>Cancelado</span>
-                            </label>
-                        </p>
+                        <fieldset>
+                            <legend>Estado</legend> <!-- Cambia 'Estado' a un título sobre las opciones -->
+                
+                            <p>
+                                <label>
+                                    <input name="estado" type="radio" value=" {{ $pedidos->estado == 'pendiente' ? 'checked' : '' }}" required />
+                                    <span>Pendiente</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input name="estado" type="radio" value="{{ $pedidos->estado == 'cancelado' ? 'checked' : '' }}" required />
+                                    <span>Cancelado</span>
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input name="estado" type="radio" value="{{ $pedidos->estado == 'completado' ? 'checked' : '' }}" required />
+                                    <span>Completado</span>
+                                </label>
+                            </p>   
+                
+                            @error('estado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </fieldset>
                     </div>
                 </div>
+                
+
                 <div class="row mt-2">
                     <div class="col s6">
                         <button class="btn waves-effect waves-light" type="submit">Guardar
@@ -110,6 +167,7 @@
             </form>
         </div>
     </div>
+    
 
     <!-- Importar Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

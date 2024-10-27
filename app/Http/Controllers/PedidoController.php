@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Models\Pedido;
@@ -19,9 +19,24 @@ class PedidoController extends Controller
      */
     public function index()
     {
-         //Listar todos los pedidos
-         $pedidos = Pedido::all();
-
+        $pedidos = Pedido::select(
+        "pedidos.codigo",
+        "pedidos.nombre",
+        "pedidos.fecha",
+        "pedidos.total",
+        "pedidos.estado",
+        "clientes.nombre as id_cliente",
+        "empleados.nombre as id_empleado",
+    )
+    ->join("clientes", "clientes.codigo", "=", "pedidos.id_cliente")
+    ->join("empleados", "empleados.codigo", "=", "pedidos.id_empleado")
+    ->get()
+    
+    ->map(function($pedido) {
+        // Formatear la fecha
+        $pedido->fecha = Carbon::parse($pedido->fecha)->format('Y-m-d');
+        return $pedido;
+    });
          //Mostrar vista show.blade
          return view('Pedidos/show')->with(['pedidos' => $pedidos]);
     }
@@ -46,10 +61,11 @@ class PedidoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
+            'nombre' => 'required|string|max:100',
             'id_cliente' => 'required|exists:Clientes,codigo', // Asegura que id_cliente exista en la tabla clientes
             'id_empleado' => 'required|exists:Empleados,codigo', // Asegura que id_empleado exista en la tabla empleados
             'fecha' => 'required|date', // Asegura que sea una fecha válida
-            'total' => 'required|decimal|min:0', // Asegura que sea un número y mayor que 0
+            'total' => 'required|numeric|regex:/^\d{1,10}(\.\d{1,2})?$/|min:0', // Asegura que sea un número y mayor que 0
             'estado' => 'required|in:pendiente,completado,cancelado' // Limitar a valores específicos
         ]);
         
@@ -61,7 +77,7 @@ class PedidoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
@@ -71,16 +87,18 @@ class PedidoController extends Controller
      */
     public function edit(Pedido $pedido)
     {
-        // Listar clientes para llenar select
+        // Listar clientes y empleados para llenar los selects
         $clientes = Cliente::all();
-        // Mostrar vista update.blade.php junto al pedido y los clientes
-        return view('Pedidos.update')->with(['pedido' => $pedido, 'clientes' => $clientes]);
-
-        // Listar empleados para llenar select
         $empleados = Empleado::all();
-        // Mostrar vista update.blade.php junto al pedido y los empleados
-        return view('Pedidos.update')->with(['pedido' => $pedido, 'empleados' => $empleados]);
+    
+        // Pasar los datos a la vista update.blade.php junto al pedido
+        return view('Pedidos.update')->with([
+            'pedidos' => $pedido,
+            'clientes' => $clientes,
+            'empleados' => $empleados
+        ]);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -89,14 +107,16 @@ class PedidoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-                'id_cliente' => 'required|exists:clientes,codigo', // Asegura que id_cliente exista en la tabla clientes
-                'id_empleado' => 'required|exists:empleados,codigo', // Asegura que id_empleado exista en la tabla empleados
-                'fecha' => 'required|date', // Asegura que sea una fecha válida
-                'total' => 'required|decimal|min:0', // Asegura que sea un número y mayor que 0
-                'estado' => 'required|in:pendiente,completado,cancelado' // Limitar a valores específicos
+            'nombre' => 'required|string|max:100',
+            'id_cliente' => 'required|exists:Clientes,codigo', // Asegura que id_cliente exista en la tabla clientes
+            'id_empleado' => 'required|exists:Empleados,codigo', // Asegura que id_empleado exista en la tabla empleados
+            'fecha' => 'required', 'date', // Asegura que sea una fecha válida
+            'total' => 'required|numeric|regex:/^\d{1,10}(\.\d{1,2})?$/|min:0', // Asegura que sea un número y mayor que 0
+            'estado' => 'required|in:pendiente,completado,cancelado' // Limitar a valores específicos
             ]);
 
             // Reemplazar datos anteriores por los nuevos
+            $pedido->nombre = $data['nombre'];
             $pedido->id_cliente = $data['id_cliente'];
             $pedido->id_empleado = $data['id_empleado'];
             $pedido->fecha = $data['fecha'];

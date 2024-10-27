@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
+        /* Estilos personalizados */
         body {
             background-color: #f8f9fa;
         }
@@ -29,6 +30,21 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
+
+        .table-container table {
+            width: 100%;
+            border: black dotted 1px;
+        }
+
+        .btn-floating {
+            float: right;
+            margin-right: 50px;
+            bottom: 10px;
+        }
+
+        thead {
+            background-color: antiquewhite;
+        }
     </style>
 
     <div class="container">
@@ -38,37 +54,49 @@
             {{-- Formulario para crear pedido --}}
             <form action="/Pedidos/store" method="POST">
                 @csrf
-
-                <div class="row">
+                <div class="row">                    
                     <div class="input-field col s6">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre">
+                        @error('nombre')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-12 mt-3">
                         <label for="id_cliente">Cliente</label>
-                        <select class="browser-default" name="id_cliente" required>
-                            <option value="" disabled selected>Seleccione un Cliente</option>
-                            @foreach ($clientes as $cliente)
-                                <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                        <select type="text" class="form-control" name="id_cliente" id="id_cliente" required>
+                            @foreach ($clientes as $item)
+                                <option value="{{ $item->codigo }}">
+                                    {{ $item->nombre }}
+                                </option>
                             @endforeach
                         </select>
                         @error('id_cliente')
-                            <span class="helper-text red-text">{{ $message }}</span>
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
 
-                    <div class="input-field col s6">
+                    <div class="col-12 mt-3">
                         <label for="id_empleado">Empleado</label>
-                        <select class="browser-default" name="id_empleado" required>
-                            <option value="" disabled selected>Seleccione un Empleado</option>
-                            @foreach ($empleados as $empleado)
-                                <option value="{{ $empleado->id }}">{{ $empleado->nombre }}</option>
+                        <select type="text" class="form-control" name="id_empleado" id="id_empleado" required>
+                            @foreach ($empleados as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
                             @endforeach
                         </select>
                         @error('id_empleado')
-                            <span class="helper-text red-text">{{ $message }}</span>
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col-12 mt-3">
                         <label for="fecha">Fecha</label>
                         <input id="fecha" type="date" name="fecha" class="validate" required>
                         @error('fecha')
@@ -105,9 +133,11 @@
                                 <input name="estado" type="radio" value="completado" required />
                                 <span>Completado</span>
                             </label>
-                        </p>
+                        </p>                        
                         @error('estado')
-                            <span class="helper-text red-text">{{ $message }}</span>
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                 </div>

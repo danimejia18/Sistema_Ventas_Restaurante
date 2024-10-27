@@ -5,7 +5,7 @@ destroy = function(e) {
     Swal.fire({
         icon: 'question',
         title: '¿Desea continuar?',
-        text: 'EL Detalle_pedido será eliminado',
+        text: 'EL Detalle de pedido será eliminado',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Si'
@@ -19,7 +19,7 @@ destroy = function(e) {
                     e.closest('tr').remove();
                     Swal.fire({
                         icon: 'success',
-                        text: 'Detalle_pedido eliminado'
+                        text: 'Detalle de pedidos eliminado'
                     });
                 }
             };

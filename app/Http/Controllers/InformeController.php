@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
+
+use Carbon\Carbon;
 
 use App\Models\Informe;
 use Illuminate\Http\Request;
@@ -11,102 +12,140 @@ class InformeController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //Listar todos los informes
-        $informes = Informe::all();
+        // Obtener todos los informes
+        $informes = Informe::all()     
+        ->map(function($informe) {
+            // Formatear la fecha
+            $informe->fecha_creacion = Carbon::parse($informe->fecha_creacion)->format('Y-m-d');
+            return $informe;
+        });
+        
 
-        //Mostrar vista show.blade
-        return view('Informes/show')->with(['informes' => $informes]);
+        return view('Informes.show')->with(['informes' => $informes]);
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //Mostrar vista create.blade.php para crear un nuevo informe
+        // Mostrar vista para crear un nuevo informe
         return view('Informes.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // Validar los datos
+        // Validar los datos del formulario
         $data = request()->validate([
-            'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
-            'usuario_activo' => 'required|boolean', // Asegúrate de que sea un valor booleano (1 o 0)
-            'empresa' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
-            'rangos_fecha' => 'required|string' // Valida como cadena, pero esto depende del formato que estés usando
+            'titulo' => ['required', 'string', 'max:150', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'descripcion' => ['nullable', 'string', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'fecha_creacion' => ['required', 'date'],
+            'estado' => ['required', 'in:pendiente,aprobado,rechazado']
+        ], [
+            'titulo.required' => 'El título del informe es obligatorio.',
+            'fecha_creacion.required' => 'La fecha del informe es obligatoria.',
+            'estado.required' => 'El estado del informe es obligatorio.'
         ]);
-    
-        // Crear el informe
+        
+
+        // Crear nuevo informe
         Informe::create($data);
-    
-        // Redireccionar a la vista de informes
+
+        // Redirigir a la vista de informes con un mensaje de éxito
         return redirect('/Informes/show');
     }
-    
 
-    /**
+        /**
      * Display the specified resource.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
-    {
-        //
-    }
+
+     public function show($id)
+     {
+         //
+     }
+ 
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function edit(Informe $informe)
     {
-         //Mostrar vista update.blade.php
-         return view('Informes.update')->with(['mesa' => $informe]);
+        $informe->fecha_creacion = Carbon::parse($informe->fecha_creacion)->format('Y-m-d');
+
+        // Mostrar vista para editar el informe
+        return view('Informes.update')->with(['informe' => $informe]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Informe $informe)
     {
-        //Validar datos
+        // Validar los datos del formulario
         $data = request()->validate([
-            'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
-            'usuario_activo' => 'required|boolean', // Asegúrate de que sea un valor booleano (1 o 0)
-            'empresa' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
-            'rangos_fecha' => 'required|string' // Valida como cadena, pero esto depende del formato que estés usando
+            'titulo' => ['required', 'string', 'max:150', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'descripcion' => ['nullable', 'string', 'regex:/^[\p{L}\s\-\']+$/u'],
+            'fecha_creacion' => ['required', 'date'],
+            'estado' => ['required', 'in:pendiente,aprobado,rechazado']
+        ], [
+            'titulo.required' => 'El título del informe es obligatorio.',
+            'fecha_creacion.required' => 'La fecha del informe es obligatoria.',
+            'estado.required' => 'El estado del informe es obligatorio.'
         ]);
 
-            // Reemplazar datos anteriores por los nuevos
-            $informe->fecha_hora = $data['fecha_hora'];
-            $informe->usuario_activo = $data['usuario_activo'];
-            $informe->empresa = $data['empresa'];
-            $informe->rangos_fecha = $data['rangos_fecha'];
-            $informe->updated_at = now();
+        $informe->titulo = $data['titulo'];
+        $informe->descripcion = $data['descripcion'];
+        $informe->fecha_creacion = $data['fecha_creacion'];
+        $informe->estado = $data['estado'];
+        $informe->updated_at = now();
 
-            // Actualizar los datos del informe
-            $informe->save();
+        $data['fecha_creacion'] = Carbon::parse($data['fecha_creacion'])->format('Y-m-d');
 
-            // Redireccionar
-            return redirect('/Informes/show');
+        // Actualizar el informe
+        $informe->save();
+
+        // Redirigir a la vista de informes con un mensaje de éxito
+        return redirect('/Informes/show');
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         // Eliminar el informe
         Informe::destroy($id);
 
-        //Retornar respuesta JSON
+        // Retornar respuesta JSON
         return response()->json(['res' => true]);
     }
 }

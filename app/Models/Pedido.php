@@ -12,5 +12,5 @@ class Pedido extends Model
     protected $primaryKey = 'codigo'; // Llave primaria de la tabla
     public $incrementing = true;
     protected $keyType = 'int';
-    protected $fillable = ['id_cliente', 'id_empleado', 'fecha', 'total', 'estado']; // Campos para asignación masiva
+    protected $fillable = ['nombre', 'id_cliente', 'id_empleado', 'fecha', 'total', 'estado']; // Campos para asignación masiva
 }

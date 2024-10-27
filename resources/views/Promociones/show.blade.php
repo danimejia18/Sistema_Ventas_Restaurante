@@ -68,16 +68,17 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
+                <tbody>
                 <!-- Ejemplo de informe (se pueden agregar más filas dinámicamente) -->
                 @foreach ($promociones as $item)
                     <tr>
                         <td>{{ $item->codigo }}</td>
                         <td>{{ $item->nombre }}</td>
                         <td>{{ $item->descripcion }}</td>
-                        <td>{{ $item->ID_Plato }}</td>
+                        <td>{{ $item->id_plato }}</td>
                         <td>{{ $item->descuento }}</td>
-                        <td>{{ $item->Fecha_inicio }}</td>
-                        <td>{{ $item->Fecha_fin }}</td>
+                        <td>{{ $item->fecha_inicio }}</td>
+                        <td>{{ $item->fecha_fin }}</td>
                         <td>{{ $item->estado === 'confirmada' ? 'Confirmada' : 'No confirmada' }}</td>
                         <td>
                             <a class="btn-small blue btn-editar" href="/Promociones/edit/{{ $item->codigo }}"><i

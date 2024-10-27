@@ -5,7 +5,7 @@ destroy = function(e) {
     Swal.fire({
         icon: 'question',
         title: '¿Desea continuar?',
-        text: 'El Dettale_informe será eliminado',
+        text: 'El Dettale de informe será eliminado',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Si'

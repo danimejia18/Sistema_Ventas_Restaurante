@@ -58,8 +58,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <label for="nombre">Nombre</label>
-                        <input id="nombre" type="text" name="nombre" class="form-control"
-                            value="{{ $promocion->nombre }}" required>
+                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $promocion->nombre }}">
                         @error('nombre')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -68,76 +67,99 @@
                     </div>
                     <div class="input-field col s6">
                         <label for="descripcion">Descripción</label>
-                        <input id="descripcion" type="text" name="descipcion" class="form-control"
-                            value="{{ $promocion->descripcion }}" required>
+                        <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ $promocion->descripcion }}">
                         @error('descripcion')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-12 mt-3">
-                        <label for="id_plato">ID_Plato</label>
-                        <select name="id_plato" id="id_plato" name="id_plato" class="form-control">
-                            @foreach ($platos as $item)
-                                <option value="{{ $item->codigo }}"
-                                    {{ $item->codigo == $promocion->id_plato ? 'selected' : '' }}>
-                                    {{ $item->nombre }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('id_plato')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <div>
+                        <div class="col-12 mt-3">
+                            <label for="id_plato">ID_Plato</label>
+                            <select type="text" class="form-control" name="id_plato" id="id_plato" value="{{ $promocion->id_plato }}">
+                                @foreach ($platos as $item)
+                                    <option value="{{ $item->codigo }}">
+                                        {{ $item->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('id_plato')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="input-field col s6">
+                            <label for="descuento">Descuento</label>
+                            <br><br>
+                            <input type="num" class="form-control" name="descuento" id="descuento" value="{{ $promocion->descuento }}">
+                            @error('descuento')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="input-field col s6">
-                        <label for="descuento">Descuento</label>
-                        <br><br>
-                        <input id="descuento" type="float" name="descuento" class="form-control"
-                            value="{{ $promocion->descuento }}" required>
-                    </div><br><br>
-                    <div class="input-field col s6">
-                        <br>
-                        <label for="fecha_inicio">Fecha inicio</label>
-                        <input id="fecha_inicio" type="date" name="fecha_inicio" class="form-control"
-                            value="{{ $promocion->fecha_inicio }}" required>
+                    <div>
+                        <div class="input-field col s6">
+                            <br>
+                            <label for="fecha_inicio">Fecha inicio</label>
+                            <input id="fecha_inicio" type="date" name="fecha_inicio" class="form-control" value="{{ $promocion->fecha_inicio }}" required>
+
+                            @error('fecha_inicio')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="input-field col s6">
+                            <br>
+                            <label for="fecha_fin">Fecha fin</label>
+                            <input id="fecha_fin" type="date" name="fecha_fin" class="form-control" value="{{ $promocion->fecha_fin }}" required>
+
+                            @error('fecha_fin')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="input-field col s6">
-                        <br>
-                        <label for="fecha_fin">Fecha fin</label>
-                        <input id="fecha_fin" type="date" name="fecha_fin" class="form-control"
-                            value="{{ $promocion->fecha_fin }}" required>
-                    </div>
+                </div>
+                <div>
                     <div class="input-field col s6">
                         <label for="estado">Estado</label>
                         <br><br>
+                        <p>
                             <label>
-                                <input type="radio" name="estado" value="confirmada" required />
+                                <input type="radio" name="estado" value="confirmada"  required />
                                 <span>Confirmada</span>
                             </label>
+                        </p>
+                        <p>
                             <label>
-                                <input type="radio" name="estado" value="No confirmada" required />
-                                <span>No confirmada</span>
+                                <input type="radio" name="estado" value="no confirmada" required />
+                                <span>No Confirmada</span>
                             </label>
+                        </p>
                         @error('estado')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
+                    </div>                    
+                </div>
                     <div class="row mt-2">
                         <div class="col s6">
                             <button class="btn waves-effect waves-light" type="submit">Guardar
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
-                    </div>
-                    <div class="col s6">
-                        <a class="btn waves-effect waves-light" href="/Promociones/show">Cancelar
-                            <i class="material-icons right">cancel</i>
-                        </a>
+                        <div class="col s6">
+                            <a class="btn waves-effect waves-light" href="/Promociones/show">Cancelar
+                                <i class="material-icons right">cancel</i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </form>

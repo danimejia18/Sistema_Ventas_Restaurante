@@ -8,9 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Informe extends Model
 {
     use HasFactory;
-    protected $table = 'informes'; // Nombre de la tabla
+
+    // Define el nombre de la tabla, si no sigue la convención de plural
+    protected $table = 'informes';
     protected $primaryKey = 'codigo'; // Llave primaria de la tabla
     public $incrementing = true;
     protected $keyType = 'int';
-    protected $fillable = ['fecha_hora', 'usuario_activo', 'empresa', 'rangos_fecha']; // Campos para asignación masiva
+    protected $fillable = ['titulo', 'descripcion', 'fecha_creacion', 'estado'];
+
+    // Relación con el modelo DetalleInforme
+    public function detalles()
+    {
+        return $this->hasMany(DetalleInforme::class, 'informe_id');
+    }
 }

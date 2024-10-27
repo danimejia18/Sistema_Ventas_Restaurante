@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use App\Models\Cliente;
 use App\Models\Mesa;
@@ -20,19 +21,39 @@ class ReservacionController extends Controller
     public function index()
     {
         //Listar todas las reservaciones
-        $reservaciones = Reservacion::all();
+        $reservaciones = Reservacion::select(
+            "reservaciones.codigo", 
+            "reservaciones.estado",
+            "reservaciones.fecha_hora",
+            "clientes.nombre as id_cliente",
+            "mesas.numero as id_mesa",
+
+        )    
+        ->join('clientes', 'clientes.codigo', '=', 'reservaciones.id_cliente')
+        ->join('mesas', 'mesas.codigo', '=', 'reservaciones.id_mesa')
+        ->get()
+        
+        ->map(function($reservacion) {
+            // Formatear la fecha
+            $reservacion->fecha_hora = Carbon::parse($reservacion->fecha_hora)->format('d-m-Y H:i');
+            return $reservacion;
+        });
 
         //Mostrar vista show.blade
         return view('/Reservaciones/show')->with(['reservaciones' => $reservaciones]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.              
      */
     public function create()
     {
+        // Obtener clientes y empleados de la base de datos
+        $clientes = Cliente::all();
+        $mesas = Mesa::all();
+    
         //Mostrar vista create.blade.php para crear una nueva Reservacion
-        return view('Reservaciones.create');
+        return view('Reservaciones.create')->with(['clientes' => $clientes, 'mesas' => $mesas]);
     }
 
     /**
@@ -45,7 +66,7 @@ class ReservacionController extends Controller
         'id_cliente' => 'required|exists:clientes,codigo', // Verifica que el cliente exista
         'id_mesa' => 'required|exists:mesas,codigo', // Verifica que la mesa exista
         'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
-        'estado' => 'required|in:reservado,cancelado,completado' // Asegúrate de que el estado sea uno de los permitidos
+        'estado' => 'required|in:reservado,cancelado,vencido' // Asegúrate de que el estado sea uno de los permitidos
         ]);
 
         Reservacion::create($data);
@@ -56,7 +77,7 @@ class ReservacionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
@@ -66,15 +87,12 @@ class ReservacionController extends Controller
      */
     public function edit(Reservacion $reservacion)
     {
-        // Listar clientes para llenar select
+        //  llenar select
         $clientes = Cliente::all();
-        // Mostrar vista update.blade.php junto a la reservacion y los clientes
-        return view('Reservaciones.update')->with(['reservacion' => $reservacion, 'clientes' => $clientes]);
-
-        // Listar mesas para llenar select
         $mesas = Mesa::all();
-        // Mostrar vista update.blade.php junto a la reservacion y las mesas
-        return view('Reservaciones.update')->with(['reservacion' => $reservacion, 'mesas' => $mesas]);
+        // Mostrar vista update.blade.php junto a la reservacion y los clientes
+        return view('Reservaciones.update')->with(['reservacion' => $reservacion, 'clientes' => $clientes, 'mesas' => $mesas]);
+
     }
 
     /**

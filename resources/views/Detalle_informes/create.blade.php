@@ -65,7 +65,7 @@
                         <label for="id_pedido">ID Pedido</label>
                         <select name="id_pedido" id="id_pedido" class="form-control">
                             @foreach ($pedidos as $item)
-                                <option value="{{ $item->codigo }}"></option>
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
                             @endforeach
                         </select>
                         @error('id_pedido')
@@ -110,10 +110,12 @@
                 </div><br>
                 <div class="row">
                     <div class="col s6">
-                        <label for="id_reservacion">ID Pago</label>
-                        <select name="id_reservacion" id="id_reservacion" class="form-control">
+                        <label for="id_pago">ID Pago</label>
+                        <select name="id_pago" id="id_pago" class="form-control">
                             @foreach ($pagos as $item)
-                                <option value="{{ $item->codigo }}"></option>
+                                <option value="{{ $item->codigo }}">
+                                    {{ $item->codigo }}
+                                </option>
                             @endforeach
                         </select>
                         @error('id_pago')
@@ -126,7 +128,9 @@
                         <label for="id_reservacion">ID Reservación</label>
                         <select name="id_reservacion" id="id_reservacion" class="form-control">
                             @foreach ($reservaciones as $item)
-                                <option value="{{ $item->codigo }}"></option>
+                                <option value="{{ $item->codigo }}">
+                                    {{ $item->codigo }}
+                                </option>
                             @endforeach
                         </select>
                         @error('id_reservacion')

@@ -1,8 +1,8 @@
-{{-- Heredemos la estructura del archivo app.blade.php --}}
+<!-- resources/views/Informes/create.blade.php -->
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
-@section('title', 'Modificar Informe')
+@section('title', 'Crear Informe')
 
 {{-- Definimos el contenido --}}
 @section('content')
@@ -12,80 +12,82 @@
 
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .container {
+        /* Estilos personalizados */
+        .form-container {
             margin-top: 20px;
         }
 
-        .table-container {
-            max-width: 1000px;
+        .form-container form {
+            max-width: 600px;
             margin: 0 auto;
+            padding: 20px;
             background-color: #fff;
             border-radius: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .table-container table {
-            width: 100%;
-            border: black dotted 1px
-        }
-
-        .btn-floating {
-            float: right;
-            margin-right: 50px;
-            bottom: 10px
-        }
-
-        thead {
-            background-color: antiquewhite
         }
     </style>
 
+    <h1 class="text-center">Crear</h1>
+    <h5 class="text-center">Formulario para agregar Informe</h5>
+
     <div class="container">
         <div class="table-container">
-            <h5 class="card-title">Modificar Informe</h5>
-            <form action="/Informes/update/{{ $informe->codigo }}" method="POST">
-                <input type="hidden" id="idInforme" name="idInforme">
-                <div class="input-field">
-                    <label for="fechaHora">Fecha y Hora</label>
-                    <br>
-                    <input id="fechaHora" type="date" class="validate" value="2024-09-30" required>
-                    <input id="fechaHora" type="time" class="validate" value="10:00 AM" required>
-                </div>
-                <div class="input-field">
-                    <label for="usuarioActivo">Usuario Activo</label>
-                    <input id="usuarioActivo" type="text" class="validate" value="Usuario1" required>
-                </div>
-                <div class="input-field">
-                    <label for="empresa">Empresa</label>
-                    <input id="empresa" type="text" class="validate" value="Empresa1" required>
-                </div>
-                <div class="input-field">
-                    <label for="rangosFecha">Rangos de Fecha</label>
-                    <input id="rangosFecha" type="text" class="validate" value="2024-09-01 a 2024-09-30" required>
-                </div>
-                <div class="row mt-2">
-                    <div class="col s6">
-                        <button class="btn waves-effect waves-light" type="submit">Guardar
-                            <i class="material-icons right">send</i>
-                        </button>
+            <div class="form-container">
+                <form action="/Informes/update/{{ $informe->codigo }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" name="titulo" class="form-control" value="{{ $informe->titulo }}" required>
+                        @error('titulo')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
-                    <div class="col s6">
-                        <a class="btn waves-effect waves-light" href="/Informes/show">Cancelar
-                            <i class="material-icons right">cancel</i>
-                        </a>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea name="descripcion" class="form-control" value="{{ $informe->descripcion }}"></textarea>
+                        @error('descripcion')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
-                </div>
-            </form>
+                    
+
+                    <div class="form-group">
+                        <label for="fecha_creacion">Fecha</label>
+                        <input type="date" name="fecha_creacion" class="form-control" value="{{ $informe->fecha_creacion }}" required>
+                        @error('fecha_creacion')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select name="estado" class="form-control" value="{{ $informe->estado }}"required>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="aprobado">Aprobado</option>
+                            <option value="rechazado">Rechazado</option>
+                        </select>
+                        @error('estado')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col s6">
+                            <button class="btn waves-effect waves-light" type="submit">Guardar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                        <div class="col s6">
+                            <a class="btn waves-effect waves-light" href="/Informes/show">Cancelar
+                                <i class="material-icons right">cancel</i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
-    <!-- Importar Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-@endsection
+        @endsection

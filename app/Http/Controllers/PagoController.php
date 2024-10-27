@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
+
 
 use App\Models\Pago;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class PagoController extends Controller
@@ -18,7 +21,23 @@ class PagoController extends Controller
     public function index()
     {
         //Listar todos los pagos
-        $pagos = Pago::all();
+        $pagos = Pago::select(
+            "pagos.codigo", 
+            "pagos.monto", 
+            "pagos.metodo", 
+            "pagos.fecha", 
+            "pagos.estado", 
+            "pedidos.nombre as id_pedido",
+
+        )
+        ->join('pedidos', 'pedidos.codigo', '=', 'pagos.id_pedido')
+        ->get()
+        
+        ->map(function($pago) {
+            // Formatear la fecha
+            $pago->fecha = Carbon::parse($pago->fecha)->format('d-m-Y');
+            return $pago;
+        });
 
         //Mostrar vista show.blade
         return view('/Pagos/show')->with(['pagos' => $pagos]);
@@ -29,8 +48,10 @@ class PagoController extends Controller
      */
     public function create()
     {
+        $pedidos = Pedido::all();
+
          //Mostrar vista create.blade.php para crear un nuevo pago
-         return view('/Pagos/create');
+         return view('Pagos.create')->with(['pedidos' => $pedidos]);
     }
 
     /**
@@ -40,12 +61,13 @@ class PagoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-        'id_pedido' => 'required|exists:pedidos,id', // Verifica que el pedido exista
+        'id_pedido' => 'required|exists:pedidos,codigo', // Verifica que el pedido exista
         'monto' => 'required|numeric|min:0', // Asegúrate de que el monto sea un número positivo
         'metodo' => 'required|in:efectivo,tarjeta,transferencia', // Asegúrate de que el método sea uno de los permitidos
         'fecha' => 'required|date', // Asegúrate de que sea una fecha válida
-        'estado' => 'required|in:pagado,no_pagado' // Asegúrate de que el estado sea uno de los permitidos
+        'estado' => 'required|in:pagado,pendiente' // Asegúrate de que el estado sea uno de los permitidos
         ]);
+
         Pago::create($data);
 
         return redirect('/Pagos/show');
@@ -54,7 +76,7 @@ class PagoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
@@ -64,8 +86,10 @@ class PagoController extends Controller
      */
     public function edit(Pago $pago)
     {
+        $pedidos = Pedido::all();
+
         //Mostrar vista update.blade.php
-        return view('Pagos.update')->with(['pago' => $pago]);
+        return view('Pagos.update')->with(['pago' => $pago, 'pedidos' => $pedidos]);
     }
 
     /**
@@ -75,8 +99,8 @@ class PagoController extends Controller
     {
         //Validar datos
         $data = request()->validate([
-           'id_pedido' => 'required|exists:pedidos,id', // Verifica que el pedido exista
-            'monto' => 'required|numeric|min:0', // Asegúrate de que el monto sea un número positivo
+           'id_pedido' => 'required|exists:pedidos,codigo', // Verifica que el pedido exista
+            'monto' => 'required|numeric|min:1', // Asegúrate de que el monto sea un número positivo
             'metodo' => 'required|in:efectivo,tarjeta,transferencia', // Asegúrate de que el método sea uno de los permitidos
             'fecha' => 'required|date', // Asegúrate de que sea una fecha válida
             'estado' => 'required|in:pagado,pendiente' // Asegúrate de que el estado sea uno de los permitidos

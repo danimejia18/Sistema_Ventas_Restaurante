@@ -106,7 +106,7 @@ Route::delete('/Detalle_informes/destroy/{id}', [DetalleInformeController::class
 
 
 
-//DETALLE_PEDIDOS
+//detalle_pedidos
 
 Route::get('/Detalle_pedidos/show', [DetallePedidoController::class, 'index']);
 
@@ -116,7 +116,7 @@ Route::get('/Detalle_pedidos/edit/{detalle_pedido}', [DetallePedidoController::c
 
 Route::post('/Detalle_pedidos/store', [DetallePedidoController::class, 'store']);
 
-Route::put('/Detalle_pedidos/update/{detalle_pedido}', [DetallePedidoController::class, 'update']);
+Route::put('/Detalle_pedidos/{detalle_pedidos}', [DetallePedidoController::class, 'update']);
 
 Route::delete('/Detalle_pedidos/destroy/{id}', [DetallePedidoController::class, 'destroy']);
 
@@ -274,11 +274,11 @@ Route::get('/Reservaciones/show', [ReservacionController::class, 'index']);
 
 Route::get('/Reservaciones/create', [ReservacionController::class, 'create']);
 
-Route::get('Reservaciones/edit/{mesa}', [ReservacionController::class, 'edit']);
+Route::get('Reservaciones/edit/{reservacion}', [ReservacionController::class, 'edit']);
 
 Route::post('Reservaciones/store', [ReservacionController::class, 'store']);
 
-Route::put('Reservaciones/update/{mesa}', [ReservacionController::class, 'update']);
+Route::put('Reservaciones/update/{reservacion}', [ReservacionController::class, 'update']);
 
 Route::delete('Reservaciones/destroy/{id}', [ReservacionController::class, 'destroy']);
 

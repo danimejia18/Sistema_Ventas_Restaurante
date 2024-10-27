@@ -93,7 +93,7 @@
                         <div class="input-field col s6">
                             <label for="descuento">Descuento</label>
                             <br><br>
-                            <input type="float" class="form-control" name="descuento" id="descuento">
+                            <input type="num" class="form-control" name="descuento" id="descuento">
                             @error('descuento')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -116,7 +116,7 @@
                         <div class="input-field col s6">
                             <br>
                             <label for="fecha_fin">Fecha fin</label>
-                            <input id="fecha_fin" type="date" name="fecha_inicio" class="form-control"required>
+                            <input id="fecha_fin" type="date" name="fecha_fin" class="form-control" required>
 
                             @error('fecha_fin')
                                 <span class="invalid-feedback d-block" role="alert">
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> 
         </div>
     </div>
 @endsection

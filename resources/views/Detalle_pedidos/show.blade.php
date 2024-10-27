@@ -46,12 +46,13 @@
             background-color: antiquewhite
         }
     </style>
-    <div class="container">
-        <h1 class="center-align">Mostrar Detalle de pedidos</h1>
 
-        <!-- Tabla para mostrar Detalle_pedidos -->
+    <h3 class="center-align">Detalle de Pedidos</h3>
+    <br>
+    <div class="container">
+        <!-- Mostrar Clientes -->
         <div class="table-container">
-            <h5 class="card-title">Detalle de pedidos registrados</h5>
+            <span class="card-title">Pedidos registrados</span>
             <a href="/Detalle_pedidos/create" class="btn-floating btn-large waves-effect waves-light green"><i
                     class="material-icons">add</i></a>
             <table class="striped responsive-table">
@@ -67,7 +68,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- Lista de Detalle_pedidos --}}
+                    {{-- Lista de detalle_pedidos --}}
                     @foreach ($detalle_pedidos as $item)
                         <tr>
                             <td>{{ $item->codigo }}</td>

@@ -54,7 +54,7 @@
         <!-- Tabla para mostrar Menús -->
         <div class="table-container">
             <h5 class="card-title">Menús reservaciones</h5>
-            <a class="btn-floating btn-large waves-effect waves-light green" href="/Reservaciones/create"><i
+            <a href="/Reservaciones/create" class="btn-floating btn-large waves-effect waves-light green"><i
                     class="material-icons">add</i></a>
             <table class="striped responsive-table">
                 <thead>

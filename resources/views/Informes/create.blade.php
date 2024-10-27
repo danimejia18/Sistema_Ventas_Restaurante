@@ -1,4 +1,4 @@
-{{-- Heredemos la estructura del archivo app.blade.php --}}
+<!-- resources/views/Informes/create.blade.php -->
 @extends('layouts.app')
 
 {{-- Definimos el título --}}
@@ -12,88 +12,82 @@
 
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <style>
         /* Estilos personalizados */
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .container {
+        .form-container {
             margin-top: 20px;
         }
 
-        .table-container {
-            max-width: 1000px;
+        .form-container form {
+            max-width: 600px;
             margin: 0 auto;
+            padding: 20px;
             background-color: #fff;
             border-radius: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .table-container table {
-            width: 100%;
-            border: black dotted 1px
-        }
-
-        .btn-floating {
-            float: right;
-            margin-right: 50px;
-            bottom: 10px
-        }
-
-        thead {
-            background-color: antiquewhite
         }
     </style>
 
-@section('content')
-    <h1 class="center-align">Agregar Informe</h1>
-    <br>
-    <h3 class="center-align">Formulario para crear Informe</h3>
-    <div class="container"><br>
+    <h1 class="text-center">Crear</h1>
+    <h5 class="text-center">Formulario para agregar Informe</h5>
+
+    <div class="container">
         <div class="table-container">
             <div class="form-container">
                 <form action="/Informes/store" method="POST">
                     @csrf
-                    <div class="row">
-                        <!-- Tipo de Acceso -->
-                        <div class="input-field">
-                            <label for="fechaHora">Fecha y Hora</label>
-                            <br>
-                            <input id="FechaHora" type="date" class="validate" required>
-                            <input id="FechaHora" type="time" class="validate" required>
+
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" name="titulo" class="form-control" required>
+                        @error('titulo')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea name="descripcion" class="form-control"></textarea>
+                        @error('descripcion')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="fecha_creacion">Fecha</label>
+                        <input type="date" name="fecha_creacion" class="form-control" required>
+                        @error('fecha_creacion')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select name="estado" class="form-control" required>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="aprobado">Aprobado</option>
+                            <option value="rechazado">Rechazado</option>
+                        </select>
+                        @error('estado')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col s6">
+                            <button class="btn waves-effect waves-light" type="submit">Guardar
+                                <i class="material-icons right">send</i>
+                            </button>
                         </div>
-                        <div class="input-field">
-                            <label for="usuarioActivo">Usuario Activo</label>
-                            <input id="usuarioActivo" type="text" class="validate" required>
-                        </div>
-                        <div class="input-field">
-                            <label for="empresa">Empresa</label>
-                            <input id="empresa" type="text" class="validate" required>
-                        </div>
-                        <div class="input-field">
-                            <label for="rangosFecha">Rangos de Fecha</label>
-                            <input id="rangosFecha" type="text" class="validate" required>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col s6">
-                                <button class="btn waves-effect waves-light" type="submit">Guardar
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                            <div class="col s6">
-                                <a class="btn waves-effect waves-light" href="/Informes/show">Cancelar
-                                    <i class="material-icons right">cancel</i>
-                                </a>
-                            </div>
+                        <div class="col s6">
+                            <a class="btn waves-effect waves-light" href="/Informes/show">Cancelar
+                                <i class="material-icons right">cancel</i>
+                            </a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-        <!-- Importar Materialize JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    @endsection
+    </div>
+        @endsection

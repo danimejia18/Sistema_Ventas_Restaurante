@@ -50,84 +50,84 @@
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Actualizar Reservación</h5>
-            <form action="/Feservaciones/update/{{ $reservaciones->codigo }}" method="POST">
+            <form action="/Reservaciones/update/{{ $reservacion->codigo }}" method="POST">
                 @csrf
                 @method('PUT') <!-- Esto indica que se está haciendo una actualización -->
 
-                <div class="input-field col s12">
-                    <label>ID Cliente</label>
-                    <br><br>
-                    <select class="browser-default" name="id_cliente" required>
-                        <option value="" disabled>Seleccione el ID del Cliente</option>
-                        @foreach ($clientes as $cliente)
-                            <option value="{{ $cliente->codigo }}"
-                                {{ $cliente->codigo == $reservacion->id_cliente ? 'selected' : '' }}>
-                                {{ $cliente->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="input-field col s12">
-                    <label>ID Mesa</label>
-                    <br><br>
-                    <select class="browser-default" name="id_mesa" required>
-                        <option value="" disabled>Seleccione el ID de la Mesa</option>
-                        @foreach ($mesas as $mesa)
-                            <option value="{{ $mesa->codigo }}"
-                                {{ $mesa->codigo == $reservacion->id_mesa ? 'selected' : '' }}>
-                                {{ $mesa->numero }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="input-field col s6">
-                    <label for="fecha_hora">Fecha y Hora</label>
-                    <br><br>
-                    <input id="fecha" type="date" name="fecha" class="validate"
-                        value="{{ \Carbon\Carbon::parse($reservacion->fecha_hora)->format('Y-m-d') }}" required>
-                    <input id="hora" type="time" name="hora" class="validate"
-                        value="{{ \Carbon\Carbon::parse($reservacion->fecha_hora)->format('H:i') }}" required>
-                </div>
-
-                <div class="input-field col s6">
-                    <label for="estado">Estado</label>
-                    <br><br>
-                    <p>
-                        <label>
-                            <input type="checkbox" name="estado[]" value="activa"
-                                {{ in_array('activa', $reservacion->estado) ? 'checked' : '' }} />
-                            <span>Activa</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input type="checkbox" name="estado[]" value="cancelada"
-                                {{ in_array('cancelada', $reservacion->estado) ? 'checked' : '' }} />
-                            <span>Cancelada</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input type="checkbox" name="estado[]" value="vencida"
-                                {{ in_array('vencida', $reservacion->estado) ? 'checked' : '' }} />
-                            <span>Vencida</span>
-                        </label>
-                    </p>
-                </div>
-                <div class="row mt-2">
-                    <div class="col s6">
-                        <button class="btn waves-effect waves-light" type="submit">Guardar
-                            <i class="material-icons right">send</i>
-                        </button>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="id_cliente">ID Cliente</label><br><br>
+                        <select name="id_cliente" class="form-control" name="id_cliente" id="id_cliente" value="{{ $reservacion->id_cliente }}" required>
+                            <option value="" disabled selected>Seleccione un cliente</option>
+                            @foreach ($clientes as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_cliente')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="col s6">
-                        <a class="btn waves-effect waves-light" href="/Reservaciones/show">Cancelar
-                            <i class="material-icons right">cancel</i>
-                        </a>
+                    
+                    <div class="input-field col s6">
+                        <label for="id_mesa">ID Mesa</label><br><br>
+                        <select name="id_mesa" class="form-control" name="id_mesa" id="id_mesa" value="{{ $reservacion->id_mesa }}" required>
+                            <option value="" disabled selected>Seleccione una mesa</option>
+                            @foreach ($mesas as $item)
+                                <option value="{{ $item->codigo }}">{{ $item->numero }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_mesa')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
                     </div>
-                </div>
+                    
+                    <div class="input-field col s6">
+                        <label for="fecha_hora">Fecha y Hora</label><br>
+                        <input id="fecha_hora" type="datetime-local" name="fecha_hora" class="validate" value="{{ $reservacion->fecha_hora }}" required>
+                        @error('fecha_hora')
+                            <span class="helper-text red-text">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="input-field col s12">
+                        <label for="estado">Estado</label><br><br>
+                        <p>
+                            <label>
+                                <input name="estado" type="radio" value="reservado" required />
+                                <span>Reservada</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="estado" type="radio" value="cancelado" required />
+                                <span>Cancelado</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="estado" type="radio" value="vencido" required />
+                                <span>Vencido</span>
+                            </label>
+                        </p>                        
+                        @error('estado')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col s6">
+                            <button class="btn waves-effect waves-light" type="submit">Guardar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                        <div class="col s6">
+                            <a class="btn waves-effect waves-light" href="/Reservaciones/show">Cancelar
+                                <i class="material-icons right">cancel</i>
+                            </a>
+                        </div>
+                    </div>
             </form>
         </div>
     </div>

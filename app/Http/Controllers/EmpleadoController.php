@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use App\Models\Acceso;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class EmpleadoController extends Controller
 {
