@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $promocion->nombre }}">
+                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $pedidos->nombre }}">
                         @error('nombre')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>

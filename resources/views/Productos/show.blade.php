@@ -73,7 +73,7 @@
                             <td>{{ $item->nombre }}</td>
                             <td>{{ $item->descripcion }}</td>
                             <td>{{ $item->stock }}</td>
-                            <td>{{ $item->estado === 'en existencia' ? 'En existencia' : 'Agotado' }}</td>
+                            <td>{{ $item->estado === 'En_existencia' ? 'En_existencia' : 'Agotado' }}</td>
                             <td>
                                 <a class="btn-small blue btn-editar" href="/Productos/edit/{{ $item->codigo }}"><i
                                         class="material-icons">edit</i></a>

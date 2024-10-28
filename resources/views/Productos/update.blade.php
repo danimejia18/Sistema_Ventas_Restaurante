@@ -89,7 +89,7 @@
                         <br><br>
                         <p>
                             <label>
-                                <input type="radio" name="estado" value="en existencia" required />
+                                <input type="radio" name="estado" value="En_existencia" required />
                                 <span>En existencia</span>
                             </label>
                         </p>

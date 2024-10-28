@@ -68,7 +68,7 @@ class InformeController extends Controller
         // Crear nuevo informe
         Informe::create([
             'titulo' => $data['titulo'],
-            'descripcion' => $data['capacidad'],
+            'descripcion' => $data['descripcion'],
             'fecha_creacion' => $data['fecha_creacion'],
             'estado' => $data['estado'],
         ]);

@@ -23,7 +23,7 @@ class ProductoController extends Controller
         //Listar todos los productos
         $productos = Producto::all();
 
-        return view('Productos.show')->with(['productos' => $productos]);
+        return view('Productos/show')->with(['productos' => $productos]);
     }
 
     /**
@@ -52,7 +52,7 @@ class ProductoController extends Controller
              'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
              'descripcion' => ['required', 'string', 'max:255'],
              'stock' => ['required', 'integer', 'min:0'],
-             'estado' => ['required', 'in:en existencia, agotada'], // Cambiar a 'in' para validar los valores
+             'estado' => 'required|in:En_existencia, Agotado', // Cambiar a 'in' para validar los valores
          ]);
      
          // Crear nuevo producto
@@ -107,7 +107,7 @@ class ProductoController extends Controller
              'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
              'descripcion' => ['required', 'string', 'max:255'],
              'stock' => ['required', 'integer', 'min:0'],
-             'estado' => ['required', 'in:en existencia,agotada'], // Verifica los valores permitidos
+             'estado' => 'required|in:En_existencia,Agotado', // Verifica los valores permitidos
          ]);
      
          // Reemplazar datos anteriores por los nuevos

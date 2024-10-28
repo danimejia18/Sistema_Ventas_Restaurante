@@ -52,7 +52,7 @@
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Modificar Pago</h5>
-            <form action="/Pagos/update/{{ $pagos->codigo }}" method="POST">
+            <form action="/Pagos/update/{{ $pago->codigo }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">

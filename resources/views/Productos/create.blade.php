@@ -84,13 +84,13 @@
                         <br><br>
                         <p>
                             <label>
-                                <input type="radio" name="estado" value="en existencia" required />
+                                <input type="radio" name="estado" value="En_existencia" required />
                                 <span>En existencia</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="radio" name="estado" value="agotada" required />
+                                <input type="radio" name="estado" value="Agotado" required />
                                 <span>Agotado</span>
                             </label>
                         </p>
