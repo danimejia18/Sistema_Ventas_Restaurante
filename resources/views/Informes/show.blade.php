@@ -58,6 +58,7 @@
             <table class="striped responsive-table">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Título</th>
                         <th>Descripción</th>
                         <th>Fecha</th>
@@ -68,10 +69,13 @@
                 <tbody>
                     @foreach ($informes as $item)
                         <tr>
+                            <td>{{ $item->codigo }}</td>
                             <td>{{ $item->titulo }}</td>
                             <td>{{ $item->descripcion }}</td>
                             <td>{{ $item->fecha_creacion }}</td>
-                            <td>{{ ucfirst($item->estado) }}</td>
+                            <td>
+                                {{ $item->estado === 'pendiente' ? 'pendiente' : ($item->estado === 'aprovado' ? 'aprovado' : 'rechazado') }}
+                            </td>
                             <td>
                                 <a class="btn-small blue btn-editar" href="/Informes/edit/{{ $item->codigo }}"><i
                                         class="material-icons">edit</i></a>

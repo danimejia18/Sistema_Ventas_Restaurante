@@ -94,15 +94,8 @@ class MenuController extends Controller
     {
        // Listar platos para llenar select
        $platos = Plato::all();
-       // Mostrar vista update.blade.php junto al menu y los platos
-       return view('Menus.update')->with(['menu' => $menu, 'platos' => $platos]);
-
        // Listar categorias para llenar select
        $categorias = Categoria::all();
-       // Mostrar vista update.blade.php junto al menu y los categorias
-       return view('Menus.update')->with(['menu' => $menu, 'categorias' => $categorias]);
-        $platos = Plato::all(); // Obtener todos los platos
-        $categorias = Categoria::all();
         //Mostrar vista update.blade.php   
         return view('Menus.update')->with(['menu' => $menu, 'platos' => $platos, 'categorias' => $categorias]);
    

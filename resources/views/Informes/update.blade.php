@@ -14,66 +14,84 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         /* Estilos personalizados */
-        .form-container {
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
             margin-top: 20px;
         }
 
-        .form-container form {
+        .table-container {
             max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
             background-color: #fff;
-            border-radius: 30px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .table-container table {
+            width: 100%;
+            border: black dotted 1px;
+        }
+
+        .btn-floating {
+            float: right;
+            margin-right: 50px;
+            bottom: 10px;
+        }
+
+        thead {
+            background-color: antiquewhite;
         }
     </style>
 
-    <h1 class="text-center">Crear</h1>
-    <h5 class="text-center">Formulario para agregar Informe</h5>
+    <h1 class="text-center">Modificar</h1>
+    <h5 class="text-center">Formulario para editar Informe</h5>
 
     <div class="container">
         <div class="table-container">
-            <div class="form-container">
+            <h5 class="card-title">Modificar Informe</h5>
                 <form action="/Informes/update/{{ $informe->codigo }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="form-group">
-                        <label for="titulo">Título</label>
-                        <input type="text" name="titulo" class="form-control" value="{{ $informe->titulo }}" required>
-                        @error('titulo')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" name="titulo" class="form-control" value="{{ $informe->titulo }}" required>
+                            @error('titulo')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea name="descripcion" class="form-control" value="{{ $informe->descripcion }}"></textarea>
+                            @error('descripcion')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="descripcion">Descripción</label>
-                        <textarea name="descripcion" class="form-control" value="{{ $informe->descripcion }}"></textarea>
-                        @error('descripcion')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="fecha_creacion">Fecha</label>
+                            <input type="date" name="fecha_creacion" class="form-control" value="{{ $informe->fecha_creacion }}" required>
+                            @error('fecha_creacion')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <select name="estado" class="form-control" value="{{ $informe->estado }}"required>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="aprobado">Aprobado</option>
+                                <option value="rechazado">Rechazado</option>
+                            </select>
+                            @error('estado')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
-                    
-
-                    <div class="form-group">
-                        <label for="fecha_creacion">Fecha</label>
-                        <input type="date" name="fecha_creacion" class="form-control" value="{{ $informe->fecha_creacion }}" required>
-                        @error('fecha_creacion')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="estado">Estado</label>
-                        <select name="estado" class="form-control" value="{{ $informe->estado }}"required>
-                            <option value="pendiente">Pendiente</option>
-                            <option value="aprobado">Aprobado</option>
-                            <option value="rechazado">Rechazado</option>
-                        </select>
-                        @error('estado')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
                     <div class="row mt-2">
                         <div class="col s6">
                             <button class="btn waves-effect waves-light" type="submit">Guardar

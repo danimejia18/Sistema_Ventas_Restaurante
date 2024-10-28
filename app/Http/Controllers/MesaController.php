@@ -126,6 +126,7 @@ class MesaController extends Controller
         $mesa->capacidad = $data['capacidad'];
         $mesa->estado = $data['estado'];
         $mesa->updated_at = now();
+        
         $mesa->save();
     
         // Redireccionar
