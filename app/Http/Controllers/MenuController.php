@@ -92,8 +92,15 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
+<<<<<<< HEAD
         $platos = Plato::all(); // Obtener todos los platos
         $categorias = Categoria::all();
+=======
+       // Listar platos para llenar select
+       $platos = Plato::all();
+       // Listar categorias para llenar select
+       $categorias = Categoria::all();
+>>>>>>> b121f38bb6457fb9af55c5bc721630481c9c3624
         //Mostrar vista update.blade.php   
         return view('Menus.update')->with(['menu' => $menu, 'platos' => $platos, 'categorias' => $categorias]);
    

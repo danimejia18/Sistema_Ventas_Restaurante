@@ -25,6 +25,7 @@ class DetalleInformeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //Listar todos los Detalle_informes
         $detalle_informes = DetalleInforme::select(
             "detalle_informes.codigo",
@@ -42,6 +43,25 @@ class DetalleInformeController extends Controller
         ->join("clientes", "clientes.codigo", "=", "detalle_informes.id_cliente")      
         ->join("empleados", "empleados.codigo", "=", "detalle_informes.id_empleado")
         ->join("pagos", "pagos.codigo", "=", "detalle_informes.id_pago")      
+=======
+        // Listar todos los Datos
+        $detalle_informes = DetalleInforme::select(
+            "detalle_informes.codigo",
+            "informes.titulo as id_informe", 
+            "pedidos.nombre as id_pedido",
+            "clientes.nombre as id_cliente",
+            "empleados.nombre as id_empleado",
+            "pagos.metodo as id_pago",
+            "reservaciones.fecha_hora as id_reservacion",
+            "mesas.numero as id_mesa",
+            "promociones.nombre as id_promocion"
+        )
+        ->join("informes", "informes.codigo", "=", "detalle_informes.id_informe")
+        ->join("pedidos", "pedidos.codigo", "=", "detalle_informes.id_pedido")
+        ->join("clientes", "clientes.codigo", "=", "detalle_informes.id_cliente")
+        ->join("empleados", "empleados.codigo", "=", "detalle_informes.id_empleado")
+        ->join("pagos", "pagos.codigo", "=", "detalle_informes.id_pago")
+>>>>>>> b121f38bb6457fb9af55c5bc721630481c9c3624
         ->join("reservaciones", "reservaciones.codigo", "=", "detalle_informes.id_reservacion")
         ->join("mesas", "mesas.codigo", "=", "detalle_informes.id_mesa")
         ->join("promociones", "promociones.codigo", "=", "detalle_informes.id_promocion")

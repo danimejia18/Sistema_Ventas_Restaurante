@@ -83,10 +83,10 @@
                     <div>
                         <label for="id_categoria">Categoría</label>
                         <select name="id_categoria" id="id_categoria" class="form-control">
-                            @foreach ($categorias as $item)
-                                <option value="{{ $item->codigo }}"
-                                    {{ $item->codigo == $plato->id_categoria ? 'selected' : '' }}>
-                                    {{ $item->nombre }}
+                            @foreach ($categorias as $categoria)
+                                <option value="{{ $categoria->codigo }}"
+                                    {{ $categoria->codigo == $menu->id_categoria ? 'selected' : '' }}>
+                                    {{ $categoria->nombre }}
                                 </option>
                             @endforeach
                         </select>

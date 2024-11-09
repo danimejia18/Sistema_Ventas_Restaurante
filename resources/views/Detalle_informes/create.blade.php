@@ -87,7 +87,7 @@
                         <label for="id_cliente">Cliente</label>
                         <select name="id_cliente" id="id_cliente" class="form-control">
                             @foreach ($clientes as $item)
-                                <option value="{{ $item->codigo }}">
+                                <option value="{{ $item->nombre }}">
                                     {{ $item->nombre }}
                                 </option>
                             @endforeach
@@ -103,7 +103,7 @@
                         <label for="id_empleado">Empleado</label>
                         <select name="id_empleado" id="id_empleado" class="form-control">
                             @foreach ($empleados as $item)
-                                <option value="{{ $item->codigo }}">
+                                <option value="{{ $item->nombre }}">
                                     {{ $item->nombre }}
                                 </option>
                             @endforeach
@@ -120,8 +120,13 @@
                         <label for="id_pago">Pago</label>
                         <select name="id_pago" id="id_pago" class="form-control">
                             @foreach ($pagos as $item)
+<<<<<<< HEAD
                                 <option value="{{ $item->codigo }}">
                                     {{ $item->monto }}
+=======
+                                <option value="{{ $item->metodo }}">
+                                    {{ $item->codigo }}
+>>>>>>> b121f38bb6457fb9af55c5bc721630481c9c3624
                                 </option>
                             @endforeach
                         </select>
@@ -135,8 +140,13 @@
                         <label for="id_reservacion">Reservación</label>
                         <select name="id_reservacion" id="id_reservacion" class="form-control">
                             @foreach ($reservaciones as $item)
+<<<<<<< HEAD
                                 <option value="{{ $item->codigo }}">
                                     {{ $item->estado }}
+=======
+                                <option value="{{ $item->fecha_hora }}">
+                                    {{ $item->codigo }}
+>>>>>>> b121f38bb6457fb9af55c5bc721630481c9c3624
                                 </option>
                             @endforeach
                         </select>
@@ -153,7 +163,7 @@
                         <label for="id_mesa">Mesa</label>
                         <select name="id_mesa" id="id_mesa" class="form-control">
                             @foreach ($mesas as $item)
-                                <option value="{{ $item->codigo }}">
+                                <option value="{{ $item->numero }}">
                                     {{ $item->numero }} </option>
                             @endforeach
                         </select>
@@ -167,7 +177,7 @@
                         <label for="id_promocion">Promoción</label>
                         <select name="id_promocion" id="id_promocion" class="form-control">
                             @foreach ($promociones as $item)
-                                <option value="{{ $item->codigo }}">
+                                <option value="{{ $item->nombre }}">
                                     {{ $item->nombre }} </option>
                             @endforeach
                         </select>

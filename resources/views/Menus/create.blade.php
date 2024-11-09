@@ -82,10 +82,7 @@
                         <label for="id_categoria">Categoría</label>
                         <select name="id_categoria" id="id_categoria" class="form-control">
                             @foreach ($categorias as $item)
-                                <option value="{{ $item->codigo }}"
-                                    {{ $item->codigo == $item->id_categoria ? 'selected' : '' }}>
-                                    {{ $item->nombre }}
-                                </option>
+                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
                             @endforeach
                         </select>
                         @error('id_categoria')

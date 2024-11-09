@@ -21,6 +21,7 @@ class InformeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         // Obtener todos los informes
         $informes = Informe::all()
             ->map(function ($informe) {
@@ -29,8 +30,19 @@ class InformeController extends Controller
                 return $informe;
             });
 
+=======
+        $informes = Informe::all();
+>>>>>>> b121f38bb6457fb9af55c5bc721630481c9c3624
 
-        return view('Informes.show')->with(['informes' => $informes]);
+        // Obtener todos los informes
+        // $informes = Informe::all()     
+        // ->map(function($informe) {
+        //     // Formatear la fecha
+        //     $informe->fecha_creacion = Carbon::parse($informe->fecha_creacion)->format('Y-m-d');
+        //     return $informe;
+        // });
+
+        return view('Informes/show')->with(['informes' => $informes]);
     }
 
     /**
@@ -57,7 +69,7 @@ class InformeController extends Controller
             'titulo' => ['required', 'string', 'max:150', 'regex:/^[\p{L}\s\-\']+$/u'],
             'descripcion' => ['nullable', 'string', 'regex:/^[\p{L}\s\-\']+$/u'],
             'fecha_creacion' => ['required', 'date'],
-            'estado' => ['required', 'in:pendiente,aprobado,rechazado']
+            'estado' => 'required|in:pendiente,aprobado,rechazado',
         ], [
             'titulo.required' => 'El título del informe es obligatorio.',
             'fecha_creacion.required' => 'La fecha del informe es obligatoria.',
@@ -66,7 +78,12 @@ class InformeController extends Controller
 
 
         // Crear nuevo informe
-        Informe::create($data);
+        Informe::create([
+            'titulo' => $data['titulo'],
+            'descripcion' => $data['descripcion'],
+            'fecha_creacion' => $data['fecha_creacion'],
+            'estado' => $data['estado'],
+        ]);
 
         // Redirigir a la vista de informes con un mensaje de éxito
         return redirect('/Informes/show');
@@ -93,8 +110,7 @@ class InformeController extends Controller
      */
     public function edit(Informe $informe)
     {
-        $informe->fecha_creacion = Carbon::parse($informe->fecha_creacion)->format('Y-m-d');
-
+        
         // Mostrar vista para editar el informe
         return view('Informes.update')->with(['informe' => $informe]);
     }
@@ -125,8 +141,6 @@ class InformeController extends Controller
         $informe->fecha_creacion = $data['fecha_creacion'];
         $informe->estado = $data['estado'];
         $informe->updated_at = now();
-
-        $data['fecha_creacion'] = Carbon::parse($data['fecha_creacion'])->format('Y-m-d');
 
         // Actualizar el informe
         $informe->save();

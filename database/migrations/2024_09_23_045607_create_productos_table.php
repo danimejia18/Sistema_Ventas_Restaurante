@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre', 100);
             $table->text('descripcion');
             $table->integer('stock');            
-            $table->string('estado')->default('en existencia');
+            $table->string('estado')->default('En_existencia');
 
            $table->timestamps();
         });
