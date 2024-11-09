@@ -64,10 +64,10 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         //Validar datos
-        $data = request()->validate([
-            'nombre' => 'required','string','max:50',
-            'id_plato' => 'required','integer',
-            'id_categoria' => 'required', 'integer',
+        $data = $request->validate([
+            'nombre' => 'required','string','max:50', 'regex:/^[\p{L}\s\-\']+$/u',
+            'id_plato' => 'required','integer', 'exists:platos,codigo',
+            'id_categoria' => 'required', 'integer', 'exists:categorias,codigo',
             ]);
     
             Menu::create($data);
@@ -92,15 +92,6 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-       // Listar platos para llenar select
-       $platos = Plato::all();
-       // Mostrar vista update.blade.php junto al menu y los platos
-       return view('Menus.update')->with(['menu' => $menu, 'platos' => $platos]);
-
-       // Listar categorias para llenar select
-       $categorias = Categoria::all();
-       // Mostrar vista update.blade.php junto al menu y los categorias
-       return view('Menus.update')->with(['menu' => $menu, 'categorias' => $categorias]);
         $platos = Plato::all(); // Obtener todos los platos
         $categorias = Categoria::all();
         //Mostrar vista update.blade.php   
@@ -117,10 +108,10 @@ class MenuController extends Controller
     public function update(Request $request, Menu $menu)
     {
         //Validar datos
-        $data = request()->validate([
-            'nombre' => 'required','string', 'max:50',
-            'id_plato' => 'required','integer',
-            'id_categoria' => 'required', 'integer',
+        $data = $request->validate([
+            'nombre' => 'required','string', 'max:50', 'regex:/^[\p{L}\s\-\']+$/u',
+            'id_plato' => 'required','integer', 'exists:platos,codigo',
+            'id_categoria' => 'required', 'integer', 'exists:categorias,codigo',
             ]);
 
             // Reemplazar datos anteriores por los nuevos

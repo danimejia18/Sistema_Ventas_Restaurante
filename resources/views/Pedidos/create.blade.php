@@ -46,16 +46,16 @@
             background-color: antiquewhite;
         }
     </style>
+    <h1 class="text-center">Crear</h1>
+    <h5 class="text-center">Formulario para agregar Pedidos</h5>
 
     <div class="container">
         <div class="table-container">
-            <h5 class="card-title">Crear Pedido</h5>
-
             {{-- Formulario para crear pedido --}}
             <form action="/Pedidos/store" method="POST">
                 @csrf
-                <div class="row">                    
-                    <div class="input-field col s6">
+                <div class="row">
+                    <div class="col s4 mb-3">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" name="nombre" id="nombre">
                         @error('nombre')
@@ -64,7 +64,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-12 mt-3">
+                    <div class="col s4 mb-3">
                         <label for="id_cliente">Cliente</label>
                         <select type="text" class="form-control" name="id_cliente" id="id_cliente" required>
                             @foreach ($clientes as $item)
@@ -74,13 +74,13 @@
                             @endforeach
                         </select>
                         @error('id_cliente')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
-                    <div class="col-12 mt-3">
+                    <div class="col s4 mb-3">
                         <label for="id_empleado">Empleado</label>
                         <select type="text" class="form-control" name="id_empleado" id="id_empleado" required>
                             @foreach ($empleados as $item)
@@ -88,15 +88,15 @@
                             @endforeach
                         </select>
                         @error('id_empleado')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 mt-3">
+                    <div class="col s4 mb-3">
                         <label for="fecha">Fecha</label>
                         <input id="fecha" type="date" name="fecha" class="validate" required>
                         @error('fecha')
@@ -104,17 +104,14 @@
                         @enderror
                     </div>
 
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="total">Total</label>
                         <input id="total" type="number" step="0.01" name="total" class="validate" required>
                         @error('total')
                             <span class="helper-text red-text">{{ $message }}</span>
                         @enderror
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
+                    <div class="col s4 mb-3">
                         <label for="estado">Estado</label><br><br>
                         <p>
                             <label>
@@ -124,20 +121,20 @@
                         </p>
                         <p>
                             <label>
-                                <input name="estado" type="radio" value="cancelado" required />
-                                <span>Cancelado</span>
+                                <input name="estado" type="radio" value="completado" required />
+                                <span>Completado</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="estado" type="radio" value="completado" required />
-                                <span>Completado</span>
+                                <input name="estado" type="radio" value="cancelado" required />
+                                <span>Cancelado</span>
                             </label>
-                        </p>                        
+                        </p>
                         @error('estado')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>

@@ -54,14 +54,16 @@
         <h5 class="card-title">Platos registrados</h5>
         <a class="btn-floating btn-large waves-effect waves-light green" href="/Platos/create"><i
                 class="material-icons">add</i></a>
-        <table class="highlight responsive-table">
+                <a class="btn btn-primary btn-sm" href="/reports12" target="_blank">Generar reporte</a>
+        
+                <table class="highlight responsive-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Ingredientes</th>
-                    <th>ID_Categoría</th>
+                    <th>Categoría</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

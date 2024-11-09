@@ -58,59 +58,64 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="input-field col s12">
+                    <!-- Fila 1 -->
+                    <div class="col s4 mb-3">
                         <label for="numero">Número de Mesa</label>
-                        <input type="text" class="validate" name="numero" id="numero"
-                            value="{{ old('numero', $mesa->numero) }}" required>
+                        <input type="text" class="validate" name="numero" id="numero" 
+                               value="{{ old('numero', $mesa->numero) }}" required>
                         @error('numero')
                             <span class="helper-text red-text" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+                
+                    <div class="col s4 mb-3">
+                        <label for="capacidad">Capacidad</label>
+                        <select name="capacidad" id="capacidad" required>
+                            <option value="" disabled>Seleccione la Capacidad de personas</option>
+                            @for ($i = 1; $i <= 10; $i++)
+                                <option value="{{ $i }}" {{ $mesa->capacidad == $i ? 'selected' : '' }}>{{ $i }}</option>
+                            @endfor
+                        </select>
+                        @error('capacidad')
+                            <span class="helper-text red-text" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <label for="capacidad">Capacidad</label><br><br>
-                    <select name="capacidad" id="capacidad" required>
-                        <option value="" disabled>Seleccione la Capacidad de personas</option>
-                        @for ($i = 1; $i <= 10; $i++)
-                            <option value="{{ $i }}" {{ $mesa->capacidad == $i ? 'selected' : '' }}>
-                                {{ $i }}</option>
-                        @endfor
-                    </select>
-                    @error('capacidad')
-                        <span class="helper-text red-text" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                
+                <div class="row">
+                    <!-- Fila 2 -->
+                    <div class="col s4 mb-3">
+                        <label>Estado</label>
+                        <p>
+                            <label>
+                                <input type="radio" name="estado" value="Disponible" {{ $mesa->estado == 'Disponible' ? 'checked' : '' }} required />
+                                <span>Disponible</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="radio" name="estado" value="reservada" {{ $mesa->estado == 'reservada' ? 'checked' : '' }} required />
+                                <span>Reservada</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="radio" name="estado" value="ocupada" {{ $mesa->estado == 'ocupada' ? 'checked' : '' }} required />
+                                <span>Ocupada</span>
+                            </label>
+                        </p>
+                        @error('estado')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <label for="estado">Estado</label>
-                    <br><br>
-                    <p>
-                        <label>
-                            <input type="radio" name="estado" value="Disponible" required />
-                            <span>Disponible</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input type="radio" name="estado" value="reservada" required />
-                            <span>Reservada</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input type="radio" name="estado" value="ocupada" required />
-                            <span>Ocupada</span>
-                        </label>
-                    </p>
-                    @error('estado')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+                
                 
                 <div class="row mt-2">
                     <div class="col s6">

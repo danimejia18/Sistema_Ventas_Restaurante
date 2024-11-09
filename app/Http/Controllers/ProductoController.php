@@ -48,11 +48,11 @@ class ProductoController extends Controller
      public function store(Request $request)
      {
          // Validar campos
-         $data = request()->validate([
+         $data = $request->validate([
              'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
-             'descripcion' => ['required', 'string', 'max:255'],
+             'descripcion' => ['required', 'string', 'max:255', 'regex:/^[\p{L}\s\-\']+$/u'],
              'stock' => ['required', 'integer', 'min:0'],
-             'estado' => ['required', 'in:en existencia, agotada'], // Cambiar a 'in' para validar los valores
+             'estado' => ['required', 'in:en existencia,agotada'], // Cambiar a 'in' para validar los valores
          ]);
      
          // Crear nuevo producto
@@ -103,9 +103,9 @@ class ProductoController extends Controller
      public function update(Request $request, Producto $producto)
      {
          // Validar campos
-         $data = request()->validate([
+         $data = $request->validate([
              'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
-             'descripcion' => ['required', 'string', 'max:255'],
+             'descripcion' => ['required', 'string', 'max:255', 'regex:/^[\p{L}\s\-\']+$/u'],
              'stock' => ['required', 'integer', 'min:0'],
              'estado' => ['required', 'in:en existencia,agotada'], // Verifica los valores permitidos
          ]);

@@ -58,16 +58,16 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $promocion->nombre }}">
+                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $pedidos->nombre }}">
                         @error('nombre')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-12 mt-3">
+                    <div class="col s4 mb-3">
                         <label for="id_cliente">Cliente</label>
                         <select type="text" class="form-control" name="id_cliente" id="id_cliente" value="{{ $pedidos->id_cliente }}" required>
                             @foreach ($clientes as $item)
@@ -83,7 +83,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 mt-3">
+                    <div class="col s4 mb-3">
                         <label for="id_empleado">Empleado</label>
                         <select type="text" class="form-control" name="id_empleado" id="id_empleado" value="{{ $pedidos->id_empleado }}" required>
                             @foreach ($empleados as $item)
@@ -100,7 +100,7 @@
 
                 <div class="row">
                     <!-- Campo de Fecha -->
-                    <div class="col-md-6 mt-3">
+                    <div class="col s4 mb-3">
                         <label for="fecha">Fecha</label>
                         <input id="fecha" type="date" name="fecha" class="form-control" value="{{ $pedidos->fecha }}" required>
                         @error('fecha')
@@ -109,36 +109,33 @@
                     </div>
                 
                     <!-- Campo de Total -->
-                    <div class="col-md-6 mt-3">
+                    <div class="col s4 mb-3">
                         <label for="total">Total</label>
                         <input id="total" type="number" name="total" class="form-control" value="{{ $pedidos->total }}" required>
                         @error('total')
                             <span class="helper-text red-text">{{ $message }}</span>
                         @enderror
                     </div>
-                </div>
-                
-                <div class="row">
-                    <div class="input-field col s12">
+                    <div class="col s4 mb-3">
                         <fieldset>
                             <legend>Estado</legend> <!-- Cambia 'Estado' a un título sobre las opciones -->
                 
                             <p>
                                 <label>
-                                    <input name="estado" type="radio" value=" {{ $pedidos->estado == 'pendiente' ? 'checked' : '' }}" required />
+                                    <input name="estado" type="radio" value="pendiente" required />
                                     <span>Pendiente</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input name="estado" type="radio" value="{{ $pedidos->estado == 'cancelado' ? 'checked' : '' }}" required />
-                                    <span>Cancelado</span>
+                                    <input name="estado" type="radio" value="completado" required />
+                                    <span>Completado</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input name="estado" type="radio" value="{{ $pedidos->estado == 'completado' ? 'checked' : '' }}" required />
-                                    <span>Completado</span>
+                                    <input name="estado" type="radio" value="cancelado" required />
+                                    <span>Cancelado</span>
                                 </label>
                             </p>   
                 

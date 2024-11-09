@@ -57,6 +57,8 @@
             <a href="/Categorias/create" class="btn-floating btn-large waves-effect waves-light green">
                 <i class="material-icons">add</i>
             </a>
+            <a class="btn btn-primary btn-sm" href="/reports2" target="_blank">Generar reporte</a>
+
             <table class="striped responsive-table">
                 <thead>
                     <tr>
@@ -88,9 +90,6 @@
             </table>
         </div>
     </div>
-@endsection
-
-@section('scripts')
     <!-- Importar Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     {{-- SweetAlert --}}

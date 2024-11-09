@@ -46,7 +46,7 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         // Validar campos
-        $data = request()->validate([
+        $data = $request->validate([
             'nombre' => 'required|string|max:100|regex:/^[\p{L}\s\-]+$/u',
             'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
         
@@ -99,7 +99,7 @@ class CategoriaController extends Controller
     public function update(Request $request, Categoria $categoria)
     {
         // Validar campos
-        $data = request()->validate([
+        $data = $request->validate([
             'nombre' => 'required|string|max:100|regex:/^[\p{L}\s\-]+$/u',
             'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
         

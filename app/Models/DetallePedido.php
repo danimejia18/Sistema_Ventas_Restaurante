@@ -12,5 +12,5 @@ class DetallePedido extends Model
     protected $primaryKey = 'codigo'; // Llave primaria de la tabla
     public $incrementing = true;
     protected $keyType = 'int';
-    protected $fillable = ['id_pedido', 'id_producto', 'cantidad', 'precio_unitario', 'subtotal']; // Campos para asignación masiva
+    protected $fillable = ['id_pedido', 'id_plato', 'cantidad', 'precio_unitario', 'subtotal']; // Campos para asignación masiva
 }

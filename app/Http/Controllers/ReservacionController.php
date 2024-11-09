@@ -62,7 +62,7 @@ class ReservacionController extends Controller
     public function store(Request $request)
     {
         //Validar datos
-        $data = request()->validate([
+        $data = $request->validate([
         'id_cliente' => 'required|exists:clientes,codigo', // Verifica que el cliente exista
         'id_mesa' => 'required|exists:mesas,codigo', // Verifica que la mesa exista
         'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
@@ -101,11 +101,11 @@ class ReservacionController extends Controller
     public function update(Request $request, Reservacion $reservacion)
     {
         //Validar datos
-        $data = request()->validate([
+        $data = $request->validate([
             'id_cliente' => 'required|exists:clientes,codigo', // Verifica que el cliente exista
             'id_mesa' => 'required|exists:mesas,codigo', // Verifica que la mesa exista
             'fecha_hora' => 'required|date', // Asegúrate de que sea una fecha válida
-            'estado' => 'required|in:reservado,cancelado,completado' // Asegúrate de que el estado sea uno de los permitidos
+            'estado' => 'required|in:reservado,cancelado,vencido' // Asegúrate de que el estado sea uno de los permitidos
         ]);
 
             // Reemplazar datos anteriores por los nuevos

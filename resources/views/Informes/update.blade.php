@@ -28,8 +28,8 @@
         }
     </style>
 
-    <h1 class="text-center">Crear</h1>
-    <h5 class="text-center">Formulario para agregar Informe</h5>
+    <h1 class="text-center">Actualizar</h1>
+    <h5 class="text-center">Formulario para actualizar Informe</h5>
 
     <div class="container">
         <div class="table-container">
@@ -47,13 +47,11 @@
                     
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>
-                        <textarea name="descripcion" class="form-control" value="{{ $informe->descripcion }}"></textarea>
+                        <textarea name="descripcion" class="form-control" required>{{ $informe->descripcion }}</textarea>
                         @error('descripcion')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
-                    </div>
-                    
-
+                    </div>                    
                     <div class="form-group">
                         <label for="fecha_creacion">Fecha</label>
                         <input type="date" name="fecha_creacion" class="form-control" value="{{ $informe->fecha_creacion }}" required>

@@ -56,89 +56,95 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $promocion->nombre }}">
+                        <input type="text" class="form-control" name="nombre" id="nombre"
+                            value="{{ $promocion->nombre }}">
                         @error('nombre')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="descripcion">Descripción</label>
-                        <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ $promocion->descripcion }}">
+                        <input type="text" class="form-control" name="descripcion" id="descripcion"
+                            value="{{ $promocion->descripcion }}">
                         @error('descripcion')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div>
-                        <div class="col-12 mt-3">
-                            <label for="id_plato">ID_Plato</label>
-                            <select type="text" class="form-control" name="id_plato" id="id_plato" value="{{ $promocion->id_plato }}">
-                                @foreach ($platos as $item)
-                                    <option value="{{ $item->codigo }}">
-                                        {{ $item->nombre }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('id_plato')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="input-field col s6">
-                            <label for="descuento">Descuento</label>
-                            <br><br>
-                            <input type="num" class="form-control" name="descuento" id="descuento" value="{{ $promocion->descuento }}">
-                            @error('descuento')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-field col s6">
-                            <br>
-                            <label for="fecha_inicio">Fecha inicio</label>
-                            <input id="fecha_inicio" type="date" name="fecha_inicio" class="form-control" value="{{ $promocion->fecha_inicio }}" required>
-
-                            @error('fecha_inicio')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="input-field col s6">
-                            <br>
-                            <label for="fecha_fin">Fecha fin</label>
-                            <input id="fecha_fin" type="date" name="fecha_fin" class="form-control" value="{{ $promocion->fecha_fin }}" required>
-
-                            @error('fecha_fin')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    <div class="col s4 mb-3">
+                        <label for="id_plato">Plato</label>
+                        <select type="text" class="form-control" name="id_plato" id="id_plato"
+                            value="{{ $promocion->id_plato }}">
+                            @foreach ($platos as $item)
+                                <option value="{{ $item->codigo }}">
+                                    {{ $item->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_plato')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
-                <div>
-                    <div class="input-field col s6">
+                <div class="row">
+                    <div class="col s4 mb-3">
+                        <label for="descuento">Descuento</label>
+                        <br><br>
+                        <input type="num" class="form-control" name="descuento" id="descuento"
+                            value="{{ $promocion->descuento }}">
+                        @error('descuento')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col s4 mb-3">
+                        <br>
+                        <label for="fecha_inicio">Fecha inicio</label>
+                        <input id="fecha_inicio" type="date" name="fecha_inicio" class="form-control"
+                            value="{{ $promocion->fecha_inicio }}" required>
+
+                        @error('fecha_inicio')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col s4 mb-3">
+                        <br>
+                        <label for="fecha_fin">Fecha fin</label>
+                        <input id="fecha_fin" type="date" name="fecha_fin" class="form-control"
+                            value="{{ $promocion->fecha_fin }}" required>
+
+                        @error('fecha_fin')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4 mb-3">
                         <label for="estado">Estado</label>
                         <br><br>
                         <p>
                             <label>
-                                <input type="radio" name="estado" value="confirmada"  required />
+                                <input type="radio" name="estado" value="confirmada" required 
+                                       {{ (old('estado', $promocion->estado) == 'confirmada') ? 'checked' : '' }} />
                                 <span>Confirmada</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="radio" name="estado" value="no confirmada" required />
+                                <input type="radio" name="estado" value="no confirmada" required 
+                                       {{ (old('estado', $promocion->estado) == 'no confirmada') ? 'checked' : '' }} />
                                 <span>No Confirmada</span>
                             </label>
                         </p>
@@ -147,25 +153,24 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>                    
+                    </div>
                 </div>
-                    <div class="row mt-2">
-                        <div class="col s6">
-                            <button class="btn waves-effect waves-light" type="submit">Guardar
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </div>
-                        <div class="col s6">
-                            <a class="btn waves-effect waves-light" href="/Promociones/show">Cancelar
-                                <i class="material-icons right">cancel</i>
-                            </a>
-                        </div>
+                <div class="row mt-2">
+                    <div class="col s6">
+                        <button class="btn waves-effect waves-light" type="submit">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="col s6">
+                        <a class="btn waves-effect waves-light" href="/Promociones/show">Cancelar
+                            <i class="material-icons right">cancel</i>
+                        </a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Importar Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-@endsection
+        <!-- Importar Materialize JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    @endsection

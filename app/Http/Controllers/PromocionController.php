@@ -63,9 +63,9 @@ class PromocionController extends Controller
     public function store(Request $request)
     {
         // Validar los datos de la solicitud
-        $data = request()->validate([
-            'nombre' => 'required|string|max:50',
-            'descripcion' => 'nullable|string',
+        $data = $request->validate([
+            'nombre' => 'required|string|max:50|regex:/^[\p{L}\s\-\']+$/u',
+            'descripcion' => 'nullable|string|regex:/^[\p{L}\s\-\']+$/u',
             'id_plato' => 'required|exists:platos,codigo', // Verifica que el plato exista
             'descuento' => 'required|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
             'fecha_inicio' => 'required|date',
@@ -115,9 +115,9 @@ class PromocionController extends Controller
     public function update(Request $request, Promocion $promocion)
     {
         //Validar datos
-        $data = request()->validate([
-            'nombre' => 'required|string|max:50',
-            'descripcion' => 'nullable|string',
+        $data = $request->validate([
+            'nombre' => 'required|string|max:50|regex:/^[\p{L}\s\-\']+$/u',
+            'descripcion' => 'nullable|string|regex:/^[\p{L}\s\-\']+$/u',
             'id_plato' => 'required|exists:platos,codigo', // Verifica que el plato exista
             'descuento' => 'required|min:0|max:100', // Valida que sea un número y puedes agregar un rango si aplica
             'fecha_inicio' => 'required|date',

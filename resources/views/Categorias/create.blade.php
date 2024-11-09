@@ -47,7 +47,6 @@
         }
     </style>
 
-@section('content')
     <h1 class="center-align">Agregar Categoria</h1>
     <br>
     <h3 class="center-align">Formulario para crear Categoria</h3>

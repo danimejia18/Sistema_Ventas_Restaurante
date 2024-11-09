@@ -13,4 +13,11 @@ class DetalleInforme extends Model
     public $incrementing = true;
     protected $keyType = 'int';
     protected $fillable = ['id_informe', 'id_pedido', 'id_cliente', 'id_empleado', 'id_pago', 'id_reservacion', 'id_mesa', 'id_promocion']; // Campos para asignación masiva
+
+    public function informe()
+{
+    return $this->belongsTo(Informe::class, 'id_informe');
 }
+
+}
+  

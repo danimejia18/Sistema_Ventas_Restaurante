@@ -19,6 +19,7 @@ class Informe extends Model
     // Relación con el modelo DetalleInforme
     public function detalles()
     {
-        return $this->hasMany(DetalleInforme::class, 'informe_id');
+        return $this->hasMany(DetalleInforme::class, 'id_informe');
     }
+    
 }

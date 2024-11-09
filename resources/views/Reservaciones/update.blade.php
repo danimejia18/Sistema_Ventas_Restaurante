@@ -56,11 +56,13 @@
 
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="id_cliente">ID Cliente</label><br><br>
-                        <select name="id_cliente" class="form-control" name="id_cliente" id="id_cliente" value="{{ $reservacion->id_cliente }}" required>
+                        <label for="id_cliente">Cliente</label><br><br>
+                        <select name="id_cliente" class="form-control" name="id_cliente" id="id_cliente" required>
                             <option value="" disabled selected>Seleccione un cliente</option>
                             @foreach ($clientes as $item)
-                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+                                <option value="{{ $item->codigo }}"
+                                    {{ $reservacion->id_cliente == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->nombre }}</option>
                             @endforeach
                         </select>
                         @error('id_cliente')
@@ -69,11 +71,13 @@
                     </div>
                     
                     <div class="input-field col s6">
-                        <label for="id_mesa">ID Mesa</label><br><br>
+                        <label for="id_mesa">Mesa</label><br><br>
                         <select name="id_mesa" class="form-control" name="id_mesa" id="id_mesa" value="{{ $reservacion->id_mesa }}" required>
                             <option value="" disabled selected>Seleccione una mesa</option>
                             @foreach ($mesas as $item)
-                                <option value="{{ $item->codigo }}">{{ $item->numero }}</option>
+                                <option value="{{ $item->codigo }}"
+                                    {{ $reservacion->id_mesa == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->numero }}</option>
                             @endforeach
                         </select>
                         @error('id_mesa')
@@ -93,28 +97,29 @@
                         <label for="estado">Estado</label><br><br>
                         <p>
                             <label>
-                                <input name="estado" type="radio" value="reservado" required />
+                                <input name="estado" type="radio" value="reservado" required {{ (old('estado',$reservacion->estado) == 'reservado') ? 'checked' : '' }} />
                                 <span>Reservada</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="estado" type="radio" value="cancelado" required />
+                                <input name="estado" type="radio" value="cancelado" required {{ (old('estado',$reservacion->estado) == 'cancelado') ? 'checked' : '' }} />
                                 <span>Cancelado</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="estado" type="radio" value="vencido" required />
+                                <input name="estado" type="radio" value="vencido" required {{ (old('estado', $reservacion->estado) == 'vencido') ? 'checked' : '' }} />
                                 <span>Vencido</span>
                             </label>
-                        </p>                        
+                        </p>
                         @error('estado')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
+                    
 
                     <div class="row mt-2">
                         <div class="col s6">

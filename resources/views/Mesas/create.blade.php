@@ -47,96 +47,98 @@
         }
     </style>
 
-    <h1 class="text-center">Crear Mesa</h1>
-    <h5 class="text-center">Formulario para agregar mesas</h5>
-
     <div class="container">
+        <h1 class="center-aling">Agregar Nueva Mesa</h1>
+        <h5 class="center-aling">Formulario para agregar mesas</h5>
         <div class="table-container">
-            <h5 class="card-title">Agregar Nueva Mesa</h5>
+            <div class="form-container">
+                <form action="/Mesas/store" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col s4 mb-3">
+                            <label for="numero">Número de Mesa</label>
+                            <input type="text" class="validate" name="numero" id="numero" required>
+                            @error('numero')
+                                <span class="helper-text red-text" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-            <!-- Formulario para agregar mesa -->
-            <form action="/Mesas/store" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="numero">Número de Mesa</label>
-                        <input type="text" class="validate" name="numero" id="numero" required>
-                        @error('numero')
-                            <span class="helper-text red-text" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <div class="col s4 mb-3">
+                            <label for="capacidad">Capacidad</label>
+                            <select name="capacidad" id="capacidad" required>
+                                <option value="" disabled selected>Seleccione la Capacidad de personas</option>
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                            @error('capacidad')
+                                <span class="helper-text red-text" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-                    <div class="input-field col s12">
-                        <label for="capacidad">Capacidad</label><br><br>
-                        <select name="capacidad" id="capacidad" required>
-                            <option value="" disabled selected>Seleccione la Capacidad de personas</option>
-                            @for ($i = 1; $i <= 10; $i++)
-                                <option value="{{ $i }}">{{ $i }}</option>
-                            @endfor
-                        </select>
-                        @error('capacidad')
-                            <span class="helper-text red-text" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="input-field col s6">
-                        <label for="estado">Estado</label>
-                        <br><br>
-                        <p>
-                            <label>
-                                <input type="radio" name="estado" value="Disponible" required />
-                                <span>Disponible</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="estado" value="reservada" required />
-                                <span>Reservada</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="estado" value="ocupada" required />
-                                <span>Ocupada</span>
-                            </label>
-                        </p>
-                        @error('estado')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    
-                </div>
 
-                <div class="row mt-2">
-                    <div class="col s6">
-                        <button class="btn waves-effect waves-light" type="submit">Guardar
-                            <i class="material-icons right">send</i>
-                        </button>
+                    <div class="row">
+                        <div class="col s4 mb-3">
+                            <label for="estado">Estado</label>
+                            <div>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="estado" value="Disponible" required />
+                                        <span>Disponible</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="estado" value="reservada" required />
+                                        <span>Reservada</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="estado" value="ocupada" required />
+                                        <span>Ocupada</span>
+                                    </label>
+                                </p>
+                                @error('estado')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col s4 mb-3"></div> <!-- Espacio vacío para mantener el diseño de 2 columnas -->
                     </div>
-                    <div class="col s6">
-                        <a class="btn waves-effect waves-light" href="/Mesas/show">Cancelar
-                            <i class="material-icons right">cancel</i>
-                        </a>
+
+                    <div class="row mt-2">
+                        <div class="col s6">
+                            <button class="btn waves-effect waves-light" type="submit">Guardar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                        <div class="col s6">
+                            <a class="btn waves-effect waves-light" href="/Mesas/show">Cancelar
+                                <i class="material-icons right">cancel</i>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('scripts')
-    <!-- Importar Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        // Inicializar el select
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('select');
-            var instances = M.FormSelect.init(elems);
-        });
-    </script>
-@endsection
+    @section('scripts')
+        <!-- Importar Materialize JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>
+            // Inicializar el select
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems);
+            });
+        </script>
+    @endsection

@@ -54,16 +54,17 @@
 
             <!-- Tabla para mostrar Pedidos -->
             <div class="table-container">
-                <h5 class="card-title">Pedidos registrados</h5>
+                <h5 class="card-title">Pedidos registrados</h5><br>
                 <a class="btn-floating btn-large waves-effect waves-light green" href="/Pedidos/create"><i
                         class="material-icons">add</i></a>
-                <table class="striped responsive-table">
+                <a class="btn btn-primary btn-sm" href="/reports11" target="_blank">Generar reporte</a>
+                        <table class="striped responsive-table">
                     <thead>
                         <tr>
-                            <th>ID_Cliente</th>
+                            <th>Codigo</th>
                             <th>Nombre</th>
-                            <th>ID_Cliente</th>
-                            <th>ID_Empleado</th>
+                            <th>Cliente</th>
+                            <th>Empleado</th>
                             <th>Fecha</th>
                             <th>Total</th>
                             <th>Estado</th>

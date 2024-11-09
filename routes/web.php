@@ -19,6 +19,7 @@ use App\Http\Controllers\PromocionController;
 use App\Http\Controllers\ReservacionController;
 use App\Http\Controllers\InformeController;
 use App\Http\Controllers\DetalleInformeController;
+use App\Http\Controllers\ReportController;
 
 
 Route::get('/home', function () {
@@ -116,7 +117,7 @@ Route::get('/Detalle_pedidos/edit/{detalle_pedido}', [DetallePedidoController::c
 
 Route::post('/Detalle_pedidos/store', [DetallePedidoController::class, 'store']);
 
-Route::put('/Detalle_pedidos/{detalle_pedidos}', [DetallePedidoController::class, 'update']);
+Route::put('/Detalle_pedidos/{detalle_pedido}', [DetallePedidoController::class, 'update'])->name('detalle_pedidos.update');
 
 Route::delete('/Detalle_pedidos/destroy/{id}', [DetallePedidoController::class, 'destroy']);
 
@@ -281,6 +282,25 @@ Route::post('Reservaciones/store', [ReservacionController::class, 'store']);
 Route::put('Reservaciones/update/{reservacion}', [ReservacionController::class, 'update']);
 
 Route::delete('Reservaciones/destroy/{id}', [ReservacionController::class, 'destroy']);
+
+
+Route::get('/reports1', [ReportController::class,'reporteUno']);
+Route::get('/reports2', [ReportController::class,'reporteDos']);
+Route::get('/reports3', [ReportController::class,'reporteTres']);
+Route::get('/reports4', [ReportController::class,'reporteCuatro']);
+Route::get('/reports5', [ReportController::class,'reporteCinco']);
+Route::get('/reports6', [ReportController::class,'reporteSeis']);
+Route::get('/reports7', [ReportController::class,'reporteSiete']);
+Route::get('/reports8', [ReportController::class,'reporteOcho']);
+Route::get('/reports9', [ReportController::class,'reporteNueve']);
+Route::get('/reports10', [ReportController::class,'reporteDiez']);
+Route::get('/reports11', [ReportController::class,'reporteOnce']);
+Route::get('/reports12', [ReportController::class,'reporteDoce']);
+Route::get('/reports13', [ReportController::class,'reporteTrece']);
+Route::get('/reports14', [ReportController::class,'reporteCatorce']);
+Route::get('/reports15', [ReportController::class,'reporteQuince']);
+
+
 
 
 Auth::routes();

@@ -53,10 +53,10 @@
             <form action="/Pagos/store" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="input-field col s6">
-                        <label for="id_pedido">ID Pedido</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_pedido">Pedido</label>
                         <select type="text" class="form-control" id="id_pedido" name="id_pedido" required>
-                            <option value="" disabled selected>Seleccione el ID del Pedido</option>
+                            <option value="" disabled>Seleccione el ID del Pedido</option>
                             @foreach ($pedidos as $item)
                                 <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
 
@@ -68,7 +68,7 @@
                         @enderror
                         </select>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="monto">Monto</label>
                         <input type="number" class="form-control" name="monto" id="monto">
                         @error('nonto')
@@ -79,24 +79,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="metodo">Método</label>
                         <p>
                             <label>
-                                <input type="checkbox" name="metodo" value="efectivo" />
                                 <input type="checkbox" name="metodo" value="efectivo" />
                                 <span>Efectivo</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" name="metodo" value="tarjeta" />
-                                <span>Tarjeta</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="checkbox" name="metodo" value="transferencia" />
                                 <input type="checkbox" name="metodo" value="tarjeta" />
                                 <span>Tarjeta</span>
                             </label>
@@ -113,7 +105,7 @@
                         </span>
                         @enderror
                     </div>
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="fecha">Fecha</label>
                         <input id="fecha" name="fecha" type="date" class="validate" required>
                         @error('fecha')
@@ -124,7 +116,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="estado">Estado</label>
                         <p>
                             <label>

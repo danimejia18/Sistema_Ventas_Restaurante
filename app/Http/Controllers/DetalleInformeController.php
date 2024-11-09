@@ -26,7 +26,26 @@ class DetalleInformeController extends Controller
     public function index()
     {
         //Listar todos los Detalle_informes
-        $detalle_informes = DetalleInforme::all();
+        $detalle_informes = DetalleInforme::select(
+            "detalle_informes.codigo",
+            "informes.titulo as id_informe",
+            "pedidos.nombre as id_pedido",        
+            "clientes.nombre as id_cliente",
+            "empleados.nombre as id_empleado",
+            "pagos.monto as id_pago",
+            "reservaciones.estado as id_reservacion",
+            "mesas.numero as id_mesa",
+            "promociones.nombre as id_promocion",
+        )
+        ->join("informes", "informes.codigo", "=", "detalle_informes.id_informe")
+        ->join("pedidos", "pedidos.codigo", "=", "detalle_informes.id_pedido")      
+        ->join("clientes", "clientes.codigo", "=", "detalle_informes.id_cliente")      
+        ->join("empleados", "empleados.codigo", "=", "detalle_informes.id_empleado")
+        ->join("pagos", "pagos.codigo", "=", "detalle_informes.id_pago")      
+        ->join("reservaciones", "reservaciones.codigo", "=", "detalle_informes.id_reservacion")
+        ->join("mesas", "mesas.codigo", "=", "detalle_informes.id_mesa")
+        ->join("promociones", "promociones.codigo", "=", "detalle_informes.id_promocion")
+        ->get();
 
         //Mostrar vista show.blade
         return view('Detalle_informes/show')->with(['detalle_informes' => $detalle_informes]);
@@ -69,7 +88,7 @@ class DetalleInformeController extends Controller
     public function store(Request $request)
     {
         // Validar los datos
-        $data = request()->validate([
+        $data = $request->validate([
             'id_informe' => 'required|exists:informes,codigo', // Asegúrate de que el informe exista
             'id_pedido' => 'required|exists:pedidos,codigo', // Asegúrate de que el pedido exista
             'id_cliente' => 'required|exists:clientes,codigo', // Asegúrate de que el cliente exista
@@ -116,30 +135,18 @@ class DetalleInformeController extends Controller
      */
     public function edit(DetalleInforme $detalle_informe)
     {
-        // Recuperar todas las listas necesarias
-    $informes = Informe::all();
-    $pedidos = Pedido::all();
-    $clientes = Cliente::all();
-    $empleados = Empleado::all();
-    $pagos = Pago::all();
-    $reservaciones = Reservacion::all();
-    $mesas = Mesa::all();
-    $promociones = Promocion::all();
-
-    // Pasar todas las variables a la vista
-    return view('Detalle_informes.update')->with([
-        'detalle_informe' => $detalle_informe,
-        'informes' => $informes,
-        'pedidos' => $pedidos,
-        'clientes' => $clientes,
-        'empleados' => $empleados,
-        'pagos' => $pagos,
-        'reservaciones' => $reservaciones,
-        'mesas' => $mesas,
-        'promociones' => $promociones
-    ]);
+        // Listar informes para llenar select
+        $informes = Informe::all();
+        $pedidos = Pedido::all();
+        $clientes = Cliente::all();
+        $empleados = Empleado::all();
+        $pagos = Pago::all();
+        $reservaciones = Reservacion::all();
+        $mesas = Mesa::all();
+        $promociones = Promocion::all();
+        // Mostrar vista update.blade.php junto al detalle_informe y los informes
+        return view('Detalle_informes.update')->with(['detalle_informe' => $detalle_informe, 'informes' => $informes, 'pedidos' => $pedidos, 'clientes' => $clientes, 'empleados' => $empleados, 'pagos' => $pagos, 'reservaciones' => $reservaciones, 'mesas' => $mesas, 'promociones' => $promociones]);
     }
-
     /**
      * Update the specified resource in storage.
      */

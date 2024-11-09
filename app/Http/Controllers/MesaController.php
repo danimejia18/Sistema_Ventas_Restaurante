@@ -46,7 +46,7 @@ class MesaController extends Controller
     public function store(Request $request)
 {
     // Validar datos
-    $data = request()->validate([
+    $data = $request->validate([
         'numero' => ['required', 'integer', 'unique:mesas,numero'], // Número de mesa requerido y único
         'capacidad' => ['required', 'integer', 'min:1'], // Capacidad requerida y debe ser un número positivo
         'estado' => 'required|in:Disponible,reservada,ocupada', // Estado requerido
@@ -107,7 +107,7 @@ class MesaController extends Controller
     public function update(Request $request, Mesa $mesa)
     {
         // Validar datos
-        $data = request()->validate([
+        $data = $request->validate([
             'numero' => ['required'], // Ignorar el registro actual
             'capacidad' => ['required', 'min:1'], // Capacidad requerida
            'estado' => 'required|in:Disponible,reservada,ocupada', // Estado requerido

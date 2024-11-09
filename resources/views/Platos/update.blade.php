@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-12 mt-3">
-                    <label for="id_categoria">ID_Categoría</label>
+                    <label for="id_categoria">Categoría</label>
                     <select name="id_categoria" id="id_categoria" class="form-control">
                         @foreach ($categorias as $item)
                             <option value="{{ $item->codigo }}"

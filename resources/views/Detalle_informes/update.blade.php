@@ -7,6 +7,12 @@
 {{-- Definimos el contenido principal --}}
 @section('content')
 
+    <!-- Importar Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
         /* Estilos personalizados */
         .form-container {
@@ -46,14 +52,14 @@
                 @method('PUT')
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="id_informe">ID Informe</label>
+                        <label for="id_informe">Informe</label>
                         <br><br>
                         <select class="browser-default" id="id_informe" name="id_informe">
                             <option value="" disabled>Seleccione el ID del Informe</option>
                             @foreach ($informes as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_informe == $item->codigo ? 'selected' : '' }}>
-                                    {{ $item->codigo }}
+                                    {{ $item->id_informe == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->titulo }}
                                 </option>
                             @endforeach
                         </select>
@@ -64,13 +70,13 @@
                         @enderror
                     </div>
                     <div class="input-field col s6">
-                        <label for="id_pedido">ID Pedido</label>
+                        <label for="id_pedido">Pedido</label>
                         <br><br>
                         <select class="browser-default" id="id_pedido" name="id_pedido">
                             <option value="" disabled>Seleccione el ID del Pedido</option>
                             @foreach ($pedidos as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_pedido == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->id_pedido == $item->codigo ? 'selected' : '' }}>
                                     {{ $item->nombre }}
                                 </option>
                             @endforeach
@@ -84,13 +90,13 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="id_cliente">ID Cliente</label>
+                        <label for="id_cliente">Cliente</label>
                         <br><br>
                         <select class="browser-default" id="id_cliente" name="id_cliente">
                             <option value="" disabled>Seleccione el ID del Cliente</option>
                             @foreach ($clientes as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_cliente == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->id_cliente == $item->codigo ? 'selected' : '' }}>
                                     {{ $item->nombre }}
                                 </option>
                             @endforeach
@@ -102,13 +108,13 @@
                         @enderror
                     </div>
                     <div class="input-field col s6">
-                        <label for="id_empleado">ID Empleado</label>
+                        <label for="id_empleado">Empleado</label>
                         <br><br>
                         <select class="browser-default" id="id_empleado" name="id_empleado">
                             <option value="" disabled>Seleccione el ID del Empleado</option>
                             @foreach ($empleados as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_empleado == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->id_empleado == $item->codigo ? 'selected' : '' }}>
                                     {{ $item->nombre }}
                                 </option>
                             @endforeach
@@ -122,14 +128,14 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="id_pago">ID Pago</label>
+                        <label for="id_pago">Pago</label>
                         <br><br>
                         <select class="browser-default" id="id_pago" name="id_pago">
                             <option value="" disabled>Seleccione el ID del Pago</option>
                             @foreach ($pagos as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_pago == $item->codigo ? 'selected' : '' }}>
-                                    {{ $item->codigo }}
+                                    {{ $item->id_pago == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->monto }}
                                 </option>
                             @endforeach
                         </select>
@@ -140,14 +146,14 @@
                         @enderror
                     </div>
                     <div class="input-field col s6">
-                        <label for="id_reservacion">ID Reservación</label>
+                        <label for="id_reservacion">Reservación</label>
                         <br><br>
                         <select class="browser-default" id="id_reservacion" name="id_reservacion">
                             <option value="" disabled>Seleccione el ID de la Reservación</option>
                             @foreach ($reservaciones as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_reservacion == $item->codigo ? 'selected' : '' }}>
-                                    {{ $item->codigo }}
+                                    {{ $item->id_reservacion == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->estado }}
                                 </option>
                             @endforeach
                         </select>
@@ -160,13 +166,13 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="id_mesa">ID Mesa</label>
+                        <label for="id_mesa">Mesa</label>
                         <br><br>
                         <select class="browser-default" id="id_mesa" name="id_mesa">
                             <option value="" disabled>Seleccione el ID de la Mesa</option>
                             @foreach ($mesas as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_mesa == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->id_mesa == $item->codigo ? 'selected' : '' }}>
                                     {{ $item->numero }}
                                 </option>
                             @endforeach
@@ -178,13 +184,13 @@
                         @enderror
                     </div>
                     <div class="input-field col s6">
-                        <label for="id_promocion">ID Promoción</label>
+                        <label for="id_promocion">Promoción</label>
                         <br><br>
                         <select class="browser-default" id="id_promocion" name="id_promocion">
                             <option value="" disabled>Seleccione el ID de la Promoción</option>
                             @foreach ($promociones as $item)
                                 <option value="{{ $item->codigo }}"
-                                    {{ $detalleInforme->id_promocion == $item->codigo ? 'selected' : '' }}>
+                                    {{ $item->id_promocion == $item->codigo ? 'selected' : '' }}>
                                     {{ $item->nombre }}
                                 </option>
                             @endforeach
@@ -203,7 +209,7 @@
                         </button>
                     </div>
                     <div class="col s6">
-                        <a class="btn waves-effect waves-light" href="/Detalle_informe/show">Cancelar
+                        <a class="btn waves-effect waves-light" href="/Detalle_informes/show">Cancelar
                             <i class="material-icons right">cancel</i>
                         </a>
                     </div>

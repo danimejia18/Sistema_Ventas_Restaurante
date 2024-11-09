@@ -51,12 +51,11 @@
 
     <div class="container">
         <div class="table-container">
-            <h5 class="card-title">Promociones registradas</h5>
             <!-- Formulario para agregar mesa -->
             <form action="/Promociones/store" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" name="nombre" id="nombre">
                         @error('nombre')
@@ -65,7 +64,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="descripcion">Descripción</label>
                         <input type="text" class="form-control" name="descripcion" id="descripcion">
                         @error('descripcion')
@@ -74,60 +73,55 @@
                             </span>
                         @enderror
                     </div>
-                    <div>
-                        <div class="col-12 mt-3">
-                            <label for="id_plato">ID_Plato</label>
-                            <select type="text" class="form-control" name="id_plato" id="id_plato">
-                                @foreach ($platos as $item)
-                                    <option value="{{ $item->codigo }}">
-                                        {{ $item->nombre }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('id_plato')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="input-field col s6">
-                            <label for="descuento">Descuento</label>
-                            <br><br>
-                            <input type="num" class="form-control" name="descuento" id="descuento">
-                            @error('descuento')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-field col s6">
-                            <br>
-                            <label for="fecha_inicio">Fecha inicio</label>
-                            <input id="fecha_inicio" type="date" name="fecha_inicio" class="form-control" required>
-
-                            @error('fecha_inicio')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="input-field col s6">
-                            <br>
-                            <label for="fecha_fin">Fecha fin</label>
-                            <input id="fecha_fin" type="date" name="fecha_fin" class="form-control" required>
-
-                            @error('fecha_fin')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    <div class="col s4 mb-3">
+                        <label for="id_plato">Plato</label>
+                        <select type="text" class="form-control" name="id_plato" id="id_plato">
+                            @foreach ($platos as $item)
+                                <option value="{{ $item->codigo }}">
+                                    {{ $item->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_plato')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
-                <div>
-                    <div class="input-field col s6">
+                <div class="row">
+                    <div class="col s4 mb-3">
+                        <label for="descuento">Descuento</label>
+                        <input type="num" class="form-control" name="descuento" id="descuento">
+                        @error('descuento')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col s4 mb-3">
+                        <label for="fecha_inicio">Fecha inicio</label>
+                        <input id="fecha_inicio" type="date" name="fecha_inicio" class="form-control" required>
+
+                        @error('fecha_inicio')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col s4 mb-3">
+                        <label for="fecha_fin">Fecha fin</label>
+                        <input id="fecha_fin" type="date" name="fecha_fin" class="form-control" required>
+
+                        @error('fecha_fin')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4 mb-3">
                         <label for="estado">Estado</label>
                         <br><br>
                         <p>
@@ -147,8 +141,8 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>                    
-                </div>
+                    </div>
+
                     <div class="row mt-2">
                         <div class="col s6">
                             <button class="btn waves-effect waves-light" type="submit">Guardar
@@ -162,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-            </form> 
+            </form>
         </div>
     </div>
 @endsection

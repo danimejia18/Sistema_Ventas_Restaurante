@@ -59,7 +59,8 @@
                 <span class="card-title">Clientes registrados</span>
                 <a href="/Clientes/create" class="btn-floating btn-large waves-effect waves-light green"><i
                   class="material-icons">add</i></a>
-                  <table class="striped">
+            <a class="btn btn-primary btn-sm" href="/reports3" target="_blank">Generar reporte</a>
+            <table class="striped">
                     <thead>
                         <tr>
                             <th>ID</th>

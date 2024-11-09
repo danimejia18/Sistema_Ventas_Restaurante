@@ -21,7 +21,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
         body {
-            background-image: url(https://crehana-public-catalog.imgix.net/images/resources/images/5b8b958e/ebef0ad2.jpg?w=718&h=404&dpr=2&fit=crop)
+            background-image: url(https://crehana-public-catalog.imgix.net/images/resources/images/5b8b958e/ebef0ad2.jpg?w=718&h=404&dpr=2&fit=crop);
+            max-width:auto;
         }
 
         /* Cambiar el fondo del menú a negro */

@@ -52,23 +52,25 @@
     <div class="container">
         <div class="table-container">
             <h5 class="card-title">Modificar Pago</h5>
-            <form action="/Pagos/update/{{ $pagos->codigo }}" method="POST">
+            <form action="/Pagos/update/{{ $pago->codigo }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="id_pedido">Pedido</label>
-                        <select type="text" class="form-control" id="id_pedido" name="id_pedido" value="{{ $pago->id_pedido }}" required>
+                        <select class="form-control" id="id_pedido" name="id_pedido" required>
                             <option value="" disabled selected>Seleccione el ID del Pedido</option>
                             @foreach ($pedidos as $item)
-                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
-
-                            @endforeach
+                            <option value="{{ $item->codigo }}"
+                                {{ $pago->id_pedido == $item->codigo ? 'selected' : '' }}>
+                                {{ $item->nombre }}
+                            </option> @endforeach
                         </select>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="monto">Monto</label>
-                        <input type="number" class="form-control" name="monto" id="monto" value="{{ $pago->monto }}">
+                        <input type="number" class="form-control" name="monto" id="monto"
+                            value="{{ $pago->monto }}">
                         @error('nonto')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -77,63 +79,71 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
                         <label for="metodo">Método</label>
                         <p>
                             <label>
-                                <input type="checkbox" name="metodo" value="efectivo" />
+                                <input type="checkbox" name="metodo" value="efectivo"
+                                    {{ strpos($pago->metodo ?? '', 'efectivo') !== false ? 'checked' : '' }} />
                                 <span>Efectivo</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" name="metodo" value="tarjeta" />
+                                <input type="checkbox" name="metodo" value="tarjeta"
+                                    {{ strpos($pago->metodo ?? '', 'tarjeta') !== false ? 'checked' : '' }} />
                                 <span>Tarjeta</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" name="metodo" value="transferencia" />
+                                <input type="checkbox" name="metodo" value="transferencia"
+                                    {{ strpos($pago->metodo ?? '', 'transferencia') !== false ? 'checked' : '' }} />
                                 <span>Transferencia</span>
                             </label>
                         </p>
                         @error('metodo')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="input-field col s6">
-                        <label for="fecha">Fecha</label>
-                        <input id="fecha" name="fecha" type="date" class="validate" value="{{ $pago->fecha }}" required>
-                        @error('fecha')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="col s4 mb-3">
+                        <label for="fecha">Fecha</label>
+                        <input id="fecha" type="date" name="fecha" class="form-control"
+                               value="{{ \Carbon\Carbon::parse($pago->fecha)->format('Y-m-d') }}" required>
+                        @error('fecha')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>                    
+
+                    <div class="col s4 mb-3">
                         <label for="estado">Estado</label>
                         <p>
                             <label>
-                                <input type="radio" name="estado" value="pagado" required/>
-                                <span>Cancelado</span>
+                                <input type="radio" name="estado" value="pagado" 
+                                       {{ (old('estado', $pago->estado ?? '') === 'pagado') ? 'checked' : '' }} required />
+                                <span>Pagado</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="radio" name="estado" value="pendiente" required/>
+                                <input type="radio" name="estado" value="pendiente" 
+                                       {{ (old('estado', $pago->estado ?? '') === 'pendiente') ? 'checked' : '' }} required />
                                 <span>Pendiente</span>
                             </label>
                         </p>
                         @error('estado')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
+                    
                 </div>
                 <div class="row mt-2">
                     <div class="col s6">

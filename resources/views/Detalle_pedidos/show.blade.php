@@ -52,15 +52,16 @@
     <div class="container">
         <!-- Mostrar Clientes -->
         <div class="table-container">
-            <span class="card-title">Pedidos registrados</span>
+            <h5 class="card-title">Pedidos registrados</h5>
             <a href="/Detalle_pedidos/create" class="btn-floating btn-large waves-effect waves-light green"><i
                     class="material-icons">add</i></a>
+            <a class="btn btn-primary btn-sm" href="/reports5" target="_blank">Generar reporte</a>
             <table class="striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Pedido</th>
-                        <th>Producto</th>
+                        <th>Plato</th>
                         <th>Cantidad</th>
                         <th>Precio Unitario</th>
                         <th>Subtotal</th>
@@ -73,7 +74,7 @@
                         <tr>
                             <td>{{ $item->codigo }}</td>
                             <td>{{ $item->id_pedido }}</td>
-                            <td>{{ $item->id_producto }}</td>
+                            <td>{{ $item->id_plato }}</td>
                             <td>{{ $item->cantidad }}</td>
                             <td>{{ $item->precio_unitario }}</td>
                             <td>{{ $item->subtotal }}</td>

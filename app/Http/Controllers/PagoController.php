@@ -60,7 +60,7 @@ class PagoController extends Controller
     public function store(Request $request)
     {
         //Validar datos
-        $data = request()->validate([
+        $data = $request->validate([
         'id_pedido' => 'required|exists:pedidos,codigo', // Verifica que el pedido exista
         'monto' => 'required|numeric|min:0', // Asegúrate de que el monto sea un número positivo
         'metodo' => 'required|in:efectivo,tarjeta,transferencia', // Asegúrate de que el método sea uno de los permitidos
@@ -98,7 +98,7 @@ class PagoController extends Controller
     public function update(Request $request, Pago $pago)
     {
         //Validar datos
-        $data = request()->validate([
+        $data = $request->validate([
            'id_pedido' => 'required|exists:pedidos,codigo', // Verifica que el pedido exista
             'monto' => 'required|numeric|min:1', // Asegúrate de que el monto sea un número positivo
             'metodo' => 'required|in:efectivo,tarjeta,transferencia', // Asegúrate de que el método sea uno de los permitidos

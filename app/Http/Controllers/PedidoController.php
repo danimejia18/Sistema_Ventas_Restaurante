@@ -60,8 +60,8 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
         //Validar datos
-        $data = request()->validate([
-            'nombre' => 'required|string|max:100',
+        $data = $request->validate([
+            'nombre' => 'required|string|max:100|regex:/^[\p{L}\s\-\'.#.0-30]+$/u',
             'id_cliente' => 'required|exists:Clientes,codigo', // Asegura que id_cliente exista en la tabla clientes
             'id_empleado' => 'required|exists:Empleados,codigo', // Asegura que id_empleado exista en la tabla empleados
             'fecha' => 'required|date', // Asegura que sea una fecha válida
@@ -106,8 +106,8 @@ class PedidoController extends Controller
     public function update(Request $request, Pedido $pedido)
     {
         //Validar datos
-        $data = request()->validate([
-            'nombre' => 'required|string|max:100',
+        $data = $request->validate([
+            'nombre' => 'required|string|max:100|regex:/^[\p{L}\s\-\'.#.0-30]+$/u',
             'id_cliente' => 'required|exists:Clientes,codigo', // Asegura que id_cliente exista en la tabla clientes
             'id_empleado' => 'required|exists:Empleados,codigo', // Asegura que id_empleado exista en la tabla empleados
             'fecha' => 'required', 'date', // Asegura que sea una fecha válida

@@ -22,4 +22,21 @@ class Empleado extends Model
         return $this->belongsTo(Acceso::class, 'id_acceso', 'codigo'); // Asegúrate de que 'codigo' sea la clave primaria en la tabla 'accesos'
     }
 
+    public function getRolDescripcionAttribute()
+{
+    switch ($this->rol) {
+        case 1:
+            return 'Mesero';
+        case 2:
+            return 'Cocinero';
+        case 3:
+            return 'Gerente';
+        case 4:
+            return 'Personal de Limpieza';
+        default:
+            return 'Rol no definido';
+    }
+}
+
+
 }

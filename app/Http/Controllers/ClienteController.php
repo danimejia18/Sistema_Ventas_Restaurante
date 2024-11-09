@@ -44,7 +44,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $data = request()->validate([
+        $data = $request->validate([
             'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
             'apellido' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
             'correo' => ['required', 'email', 'max:150', 'unique:clientes,correo'],
@@ -93,7 +93,7 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        $data = request()->validate([
+        $data = $request->validate([
             'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
             'apellido' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
             'correo' => ['required', 'email', 'max:150'],
@@ -117,7 +117,7 @@ class ClienteController extends Controller
 
         // Actualizar los datos del cliente
         $cliente->save();
-        return redirect('/Clientes/show')->with('success', 'Cliente creado exitosamente.');
+        return redirect('/Clientes/show');
         }
 
 

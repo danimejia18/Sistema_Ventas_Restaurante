@@ -6,6 +6,13 @@
 
 {{-- Definimos el contenido principal --}}
 @section('content')
+
+    <!-- Importar Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
         /* Estilos personalizados */
         body {
@@ -47,11 +54,11 @@
             <form action="/Detalle_informes/store" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="col s6">
-                        <label for="id_informe">ID Informe</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_informe">Informe</label>
                         <select name="id_informe" id="id_informe" class="form-control">
                             @foreach ($informes as $item)
-                                <option value="{{ $item->codigo }}">{{ $item->codigo }}</option><br><br>
+                                <option value="{{ $item->codigo }}">{{ $item->titulo }}</option><br><br>
                             @endforeach
                         </select>
                         @error('id_informe')
@@ -61,8 +68,8 @@
                         @enderror
                         <br>
                     </div>
-                    <div class="col s6">
-                        <label for="id_pedido">ID Pedido</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_pedido">Pedido</label>
                         <select name="id_pedido" id="id_pedido" class="form-control">
                             @foreach ($pedidos as $item)
                                 <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
@@ -76,8 +83,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s6">
-                        <label for="id_cliente">ID Cliente</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_cliente">Cliente</label>
                         <select name="id_cliente" id="id_cliente" class="form-control">
                             @foreach ($clientes as $item)
                                 <option value="{{ $item->codigo }}">
@@ -92,8 +99,8 @@
                         @enderror
                     </div>
                     <br>
-                    <div class="col s6">
-                        <label for="id_empleado">ID Empleado</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_empleado">Empleado</label>
                         <select name="id_empleado" id="id_empleado" class="form-control">
                             @foreach ($empleados as $item)
                                 <option value="{{ $item->codigo }}">
@@ -109,12 +116,12 @@
                     </div>
                 </div><br>
                 <div class="row">
-                    <div class="col s6">
-                        <label for="id_pago">ID Pago</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_pago">Pago</label>
                         <select name="id_pago" id="id_pago" class="form-control">
                             @foreach ($pagos as $item)
                                 <option value="{{ $item->codigo }}">
-                                    {{ $item->codigo }}
+                                    {{ $item->monto }}
                                 </option>
                             @endforeach
                         </select>
@@ -124,12 +131,12 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col s6">
-                        <label for="id_reservacion">ID Reservación</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_reservacion">Reservación</label>
                         <select name="id_reservacion" id="id_reservacion" class="form-control">
                             @foreach ($reservaciones as $item)
                                 <option value="{{ $item->codigo }}">
-                                    {{ $item->codigo }}
+                                    {{ $item->estado }}
                                 </option>
                             @endforeach
                         </select>
@@ -142,8 +149,8 @@
                 </div><br>
 
                 <div class="row">
-                    <div class="col s6">
-                        <label for="id_mesa">ID Mesa</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_mesa">Mesa</label>
                         <select name="id_mesa" id="id_mesa" class="form-control">
                             @foreach ($mesas as $item)
                                 <option value="{{ $item->codigo }}">
@@ -156,8 +163,8 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col s6">
-                        <label for="id_promocion">ID Promoción</label>
+                    <div class="col s4 mb-3">
+                        <label for="id_promocion">Promoción</label>
                         <select name="id_promocion" id="id_promocion" class="form-control">
                             @foreach ($promociones as $item)
                                 <option value="{{ $item->codigo }}">

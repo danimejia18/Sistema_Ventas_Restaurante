@@ -59,7 +59,8 @@
                 <a href="/Detalle_informes/create" class="btn-floating btn-large waves-effect waves-light green">
                     <i class="material-icons">add</i>
                 </a>
-                <table class="striped responsive-table">
+            <a class="btn btn-primary btn-sm" href="/reports4" target="_blank">Generar reporte</a>
+            <table class="striped responsive-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -80,13 +81,13 @@
                             <tr>
                                 <td>{{ $item->codigo }}</td>
                                 <td>{{ $item->id_informe }}</td>
-                                <td>{{ $item->id_pedido }}</td>
+                                <td>{{ $item->id_pedido}}</td>
                                 <td>{{ $item->id_cliente }}</td>
                                 <td>{{ $item->id_empleado }}</td>
                                 <td>{{ $item->id_pago }}</td>
-                                <td>{{ $item->id_reservacion }}</td>
+                                <td>{{ $item->id_reservacion}}</td>
                                 <td>{{ $item->id_mesa }}</td>
-                                <td>{{ $item->id_promocion }}</td>
+                                <td>{{ $item->id_promocion}}</td>
                                 <td>
                                     <a class="btn-small blue btn-editar"
                                         href="/Detalle_informes/edit/{{ $item->codigo }}"><i

@@ -5,26 +5,40 @@ destroy = function(e) {
     Swal.fire({
         icon: 'question',
         title: '¿Desea continuar?',
-        text: 'El Acceso será eliminado',
+        text: 'El acceso será eliminado',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si'
+        confirmButtonText: 'Sí'
     }).then((res) => {
         if (res.isConfirmed) {
-            const request = new XMLHttpRequest();
-            request.open('delete', url);
-            request.setRequestHeader('X-CSRF-TOKEN', token);
+            const request = new XMLHttpRequest(); // Corrección aquí, debe ser XMLHttpRequest()
+            request.open('DELETE', url); // Usa 'DELETE' en mayúsculas
+            request.setRequestHeader('X-CSRF-TOKEN', token); // Configurar el encabezado CSRF
+
             request.onload = () => {
                 if (request.status == 200) {
-                    e.closest('tr').remove();
+                    e.closest('tr').remove(); // Eliminar la fila de la tabla
                     Swal.fire({
                         icon: 'success',
                         text: 'Acceso eliminado'
                     });
+                } else {
+                    // Manejar errores si el estado no es 200
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al eliminar el acceso: ' + request.responseText
+                    });
                 }
             };
-            request.onerror = err => reject(err);
-            request.send();
+
+            request.onerror = () => {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Error de conexión'
+                });
+            };
+
+            request.send(); // Enviar la solicitud
         }
     });
 }

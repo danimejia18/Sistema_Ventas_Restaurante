@@ -46,7 +46,7 @@ class AccesoController extends Controller
     public function store(Request $request)
     {
         // Validar campos
-        $data = request()->validate([
+        $data = $request->validate([
             'tipo_acceso' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
             'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
         ], [
@@ -97,7 +97,7 @@ class AccesoController extends Controller
     public function update(Request $request, Acceso $acceso)
     {
         // Validar campos
-        $data = request()->validate([
+        $data = $request->validate([
             'tipo_acceso' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
             'descripcion' => 'required|string|regex:/^[\p{L}\s\-]+$/u',
         ], [

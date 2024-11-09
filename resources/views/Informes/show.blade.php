@@ -55,9 +55,11 @@
             <h5 class="card-title">Informes registrados</h5>
             <a href="/Informes/create" class="btn-floating btn-large waves-effect waves-light green"><i
                 class="material-icons">add</i></a>
-            <table class="striped responsive-table">
+                <a class="btn btn-primary btn-sm" href="/reports7" target="_blank">Generar reporte</a>
+                <table class="striped responsive-table">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Título</th>
                         <th>Descripción</th>
                         <th>Fecha</th>
@@ -68,6 +70,7 @@
                 <tbody>
                     @foreach ($informes as $item)
                         <tr>
+                            <td>{{ $item->codigo }}</td>
                             <td>{{ $item->titulo }}</td>
                             <td>{{ $item->descripcion }}</td>
                             <td>{{ $item->fecha_creacion }}</td>

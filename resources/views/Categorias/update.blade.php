@@ -81,7 +81,7 @@
                     </button>
                 </div>
                 <div class="col s6">
-                    <a class="btn waves-effect waves-light" href="/Ctegorias/show">Cancelar
+                    <a class="btn waves-effect waves-light" href="/Categorias/show">Cancelar
                         <i class="material-icons right">cancel</i>
                     </a>
                 </div>

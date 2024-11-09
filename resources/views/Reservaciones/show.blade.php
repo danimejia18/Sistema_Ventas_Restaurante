@@ -56,12 +56,14 @@
             <h5 class="card-title">Menús reservaciones</h5>
             <a href="/Reservaciones/create" class="btn-floating btn-large waves-effect waves-light green"><i
                     class="material-icons">add</i></a>
+                    <a class="btn btn-primary btn-sm" href="/reports15" target="_blank">Generar reporte</a>
+
             <table class="striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Id_Cliente</th>
-                        <th>ID_Mesa</th>
+                        <th>Cliente</th>
+                        <th>Mesa</th>
                         <th>Fecha y Hora</th>
                         <th>Estado</th>
                         <th>Acciones</th>

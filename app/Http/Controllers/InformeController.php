@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
@@ -21,13 +22,13 @@ class InformeController extends Controller
     public function index()
     {
         // Obtener todos los informes
-        $informes = Informe::all()     
-        ->map(function($informe) {
-            // Formatear la fecha
-            $informe->fecha_creacion = Carbon::parse($informe->fecha_creacion)->format('Y-m-d');
-            return $informe;
-        });
-        
+        $informes = Informe::all()
+            ->map(function ($informe) {
+                // Formatear la fecha
+                $informe->fecha_creacion = Carbon::parse($informe->fecha_creacion)->format('Y-m-d');
+                return $informe;
+            });
+
 
         return view('Informes.show')->with(['informes' => $informes]);
     }
@@ -52,7 +53,7 @@ class InformeController extends Controller
     public function store(Request $request)
     {
         // Validar los datos del formulario
-        $data = request()->validate([
+        $data = $request->validate([
             'titulo' => ['required', 'string', 'max:150', 'regex:/^[\p{L}\s\-\']+$/u'],
             'descripcion' => ['nullable', 'string', 'regex:/^[\p{L}\s\-\']+$/u'],
             'fecha_creacion' => ['required', 'date'],
@@ -62,7 +63,7 @@ class InformeController extends Controller
             'fecha_creacion.required' => 'La fecha del informe es obligatoria.',
             'estado.required' => 'El estado del informe es obligatorio.'
         ]);
-        
+
 
         // Crear nuevo informe
         Informe::create($data);
@@ -71,18 +72,18 @@ class InformeController extends Controller
         return redirect('/Informes/show');
     }
 
-        /**
+    /**
      * Display the specified resource.
      * 
      * @param int $id
      * @return \Illuminate\Http\Response
      */
 
-     public function show($id)
-     {
-         //
-     }
- 
+    public function show($id)
+    {
+        //
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -108,7 +109,7 @@ class InformeController extends Controller
     public function update(Request $request, Informe $informe)
     {
         // Validar los datos del formulario
-        $data = request()->validate([
+        $data = $request->validate([
             'titulo' => ['required', 'string', 'max:150', 'regex:/^[\p{L}\s\-\']+$/u'],
             'descripcion' => ['nullable', 'string', 'regex:/^[\p{L}\s\-\']+$/u'],
             'fecha_creacion' => ['required', 'date'],

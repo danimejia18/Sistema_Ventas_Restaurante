@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetallePedido;
 use App\Models\Pedido;
-use App\Models\Producto;
+use App\Models\Plato;
 use Illuminate\Http\Request;
 
 class DetallePedidoController extends Controller
@@ -23,15 +23,15 @@ class DetallePedidoController extends Controller
     {
         //Listar todos los detalle_pedidos
         $detalle_pedidos = DetallePedido::select(  
-        "detalle_pedidos.codigo",
-        "detalle_pedidos.cantidad",
-        "detalle_pedidos.precio_unitario",
-        "detalle_pedidos.subtotal",
-        "pedidos.nombre as id_pedido",
-        "productos.nombre as id_producto"
-    )
+            "detalle_pedidos.codigo",
+            "detalle_pedidos.cantidad",
+            "detalle_pedidos.precio_unitario",
+            "detalle_pedidos.subtotal",
+            "pedidos.nombre as id_pedido",
+            "platos.nombre as id_plato"
+        )
     ->join("pedidos", "pedidos.codigo", "=", "detalle_pedidos.id_pedido")
-    ->join("productos", "productos.codigo", "=", "detalle_pedidos.id_producto") // <- asegúrate que este campo existe
+    ->join("platos", "platos.codigo", "=", "detalle_pedidos.id_plato") 
     ->get();
 
 
@@ -47,9 +47,9 @@ class DetallePedidoController extends Controller
     public function create()
     {
         $pedidos = Pedido::all();
-        $productos = Producto::all();
+        $platos = Plato::all();
         //Mostrar vista create.blade.php para crear un nuevo detalle_pedidos
-        return view('Detalle_pedidos.create')->with(['pedidos' => $pedidos, 'productos' => $productos]);
+        return view('Detalle_pedidos.create')->with(['pedidos' => $pedidos, 'platos' => $platos]);
     }
 
     /**
@@ -60,9 +60,9 @@ class DetallePedidoController extends Controller
     public function store(Request $request)
 {
     // Validar datos
-    $data = request()->validate([
+    $data = $request->validate([
         'id_pedido' => 'required|exists:pedidos,codigo', // Asegurarse de que el pedido existe
-        'id_producto' => 'required|exists:productos,codigo', // Asegurarse de que el producto existe
+        'id_plato' => 'required|exists:platos,codigo', // Asegurarse de que el producto existe
         'cantidad' => 'required|integer|min:1', // La cantidad debe ser un número entero positivo
         'precio_unitario' => 'required|numeric|min:1', // Validar el precio
     ]);
@@ -92,18 +92,14 @@ class DetallePedidoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(DetallePedido $detalle_pedidos)
+    public function edit(DetallePedido $detalle_pedido)
     {
-        // Listar pedidos y productos para llenar los selects
+        // Listar pedidos y platos para llenar los selects
         $pedidos = Pedido::all();
-        $productos = Producto::all();
+        $platos = Plato::all();
         
         // Pasar los datos a la vista update.blade.php junto al pedido
-        return view('Detalle_pedidos.update')->with([
-            'detalle_pedidos' => $detalle_pedidos,
-            'pedidos' => $pedidos, // Cambié 'pedido' a 'pedidos' para que coincida
-            'productos' => $productos
-        ]);
+        return view('Detalle_pedidos.update')->with(['detalle_pedido' => $detalle_pedido, 'pedidos' => $pedidos, 'platos' => $platos]);
     }
 
     /**
@@ -113,27 +109,28 @@ class DetallePedidoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DetallePedido $detalle_pedidos)
+    public function update(Request $request, DetallePedido $detalle_pedido)
     {
-        $data = request()->validate([
-            'id_pedido' => 'required',
-            'id_producto' => 'required',
-            'cantidad' => 'required|numeric',
-            'precio_unitario' => 'required|numeric',
-            'subtotal' => 'required|numeric'
+        // Validar datos
+        $data = $request->validate([
+            'id_pedido' => 'required|exists:pedidos,codigo',
+            'id_plato' => 'required|exists:platos,codigo',
+            'cantidad' => 'required|integer|min:1',
+            'precio_unitario' => 'required|numeric|min:1',
         ]);
     
-        $detalle_pedidos->id_pedido = $data['id_pedido'];
-        $detalle_pedidos->id_producto = $data['id_producto'];
-        $detalle_pedidos->cantidad = $data['cantidad'];
-        $detalle_pedidos->precio_unitario = $data['precio_unitario'];
-        $detalle_pedidos->subtotal = $data['subtotal']; // Asegúrate de calcularlo si no se envía del formulario
+        // Calcular el subtotal y actualizar los campos
+        $detalle_pedido->id_pedido = $data['id_pedido'];
+        $detalle_pedido->id_plato = $data['id_plato'];
+        $detalle_pedido->cantidad = $data['cantidad'];
+        $detalle_pedido->precio_unitario = $data['precio_unitario'];
+        $detalle_pedido->subtotal = $data['cantidad'] * $data['precio_unitario'];
     
-        $detalle_pedidos->save();
+        $detalle_pedido->save();
     
         return redirect('/Detalle_pedidos/show');
+        
     }
-    
 
     /**
      * Remove the specified resource from storage.

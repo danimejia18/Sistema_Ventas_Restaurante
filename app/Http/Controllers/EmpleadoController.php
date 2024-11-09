@@ -59,7 +59,7 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         // Validar campos
-        $data = request()->validate([
+        $data = $request->validate([
             'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
             'apellido' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
             'correo' => ['required', 'email', 'max:150', 'unique:empleados,correo'],
@@ -119,13 +119,11 @@ class EmpleadoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function update(Request $request, $codigo)
+     public function update(Request $request, Empleado $empleado)
      {
-         // Encuentra al empleado por su código
-         $empleado = Empleado::findOrFail($codigo);
-     
+
          // Validar los datos del formulario
-         $data = request()->validate([
+         $data = $request->validate([
              'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
              'apellido' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
              'correo' => ['required', 'email', 'max:150'],
@@ -154,6 +152,8 @@ class EmpleadoController extends Controller
          $empleado->id_acceso = $data['id_acceso'];
          $empleado->password = $data['password'];
      
+        $empleado->updated_at = now();
+
          // Guardar los cambios en la base de datos
          $empleado->save();
      

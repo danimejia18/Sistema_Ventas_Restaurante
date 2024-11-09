@@ -56,9 +56,9 @@ class PlatoController extends Controller
     public function store(Request $request)
     {
         //Validar campos
-        $data = request()->validate([
+        $data = $request->validate([
             'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
-            'precio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/', 'min:0'], // Precio en formato decimal, mínimo 0
+            'precio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/', 'min:0'], 
             'ingredientes' => ['required', 'string', 'regex:/^[\p{L}\s,]+$/u'],
             'id_categoria' => 'required'
         ]);
@@ -107,9 +107,9 @@ class PlatoController extends Controller
     public function update(Request $request, Plato $plato)
     {
           //Validar campos
-          $data = request()->validate([
+          $data = $request->validate([
             'nombre' => ['required', 'string', 'max:100', 'regex:/^[\p{L}\s\-\']+$/u'],
-            'precio' => 'required', 
+            'precio' => 'required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/', 'min:0', 
             'ingredientes' => ['required', 'string', 'regex:/^[\p{L}\s,]+$/u'],
             'id_categoria' => 'required'
         ]);

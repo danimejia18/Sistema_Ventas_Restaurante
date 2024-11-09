@@ -53,60 +53,60 @@
         <form action="/Clientes/update/{{ $cliente->codigo }}" method="POST">
             @csrf
             @method('PUT')
-
-            <div class="input-field col s12">
-                <label class="form-label" for="nombre">Nombre del cliente</label>
-                <input type="text" id="nombre" name="nombre" value="{{ $cliente->nombre }}">
-                @error('nombre')
-                    <span class="invalid-feedback d-block" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="input-field col s12">
-                <label class="form-label" for="apellido">Apellido</label>
-                <input type="text" id="apellido" name="apellido" value="{{ old('apellido', $cliente->apellido) }}">
-                @error('apellido')
-                    <span class="invalid-feedback d-block" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="input-field col s12">
-                <label class="form-label" for="correo">Correo Electrónico</label>
-                <input type="email" id="correo" name="correo" value="{{ $cliente->correo }}" required>
-                @error('correo')
-                    <span class="invalid-feedback d-block" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="input-field col s12">
-                <label class="form-label" for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" name="telefono" value="{{ $cliente->telefono }}" required
-                    pattern="[0-9]*">
-                @error('telefono')
-                    <span class="invalid-feedback d-block" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="input-field col s12">
-                <label class="form-label" for="direccion">Dirección</label>
-                <input type="text" id="direccion" name="direccion" value="{{ $cliente->direccion }}" required>
-                @error('direccion')
-                    <span class="invalid-feedback d-block" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="row mt-2">
+            <div class="row">
                 <div class="col s6">
+                    <label class="form-label" for="nombre">Nombre del cliente</label>
+                    <input type="text" id="nombre" name="nombre" value="{{ $cliente->nombre }}">
+                    @error('nombre')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col s6">
+                    <label class="form-label" for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" value="{{ old('apellido', $cliente->apellido) }}">
+                    @error('apellido')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col s6">
+                    <label class="form-label" for="correo">Correo Electrónico</label>
+                    <input type="email" id="correo" name="correo" value="{{ $cliente->correo }}" required>
+                    @error('correo')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col s6">
+                    <label for="telefono"> Teléfono del cliente</label>
+                    <input type="tel" class="form-control @error('telefono') is-invalid @enderror" name="telefono"
+                        id="telefono" value="{{ $cliente->telefono }}">
+                    @error('telefono')
+                        <span class="helper-text red-text">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col s6">
+                    <label class="form-label" for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" value="{{ $cliente->direccion }}" required>
+                    @error('direccion')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
             <div class="row mt-2">
                 <div class="col s6">
                     <button class="btn waves-effect waves-light" type="submit">Guardar

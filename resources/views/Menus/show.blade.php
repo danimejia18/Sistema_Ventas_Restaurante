@@ -55,13 +55,15 @@
             <h5 class="card-title">Menús registrados</h5>
             <a class="btn-floating btn-large waves-effect waves-light green" href="/Menus/create"><i
                     class="material-icons">add</i></a>
-            <table class="striped responsive-table">
+                    <a class="btn btn-primary btn-sm" href="/reports8" target="_blank">Generar reporte</a>
+            
+                    <table class="striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>ID_Plato</th>
-                        <th>ID_Categoría</th>
+                        <th>Plato</th>
+                        <th>Categoría</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>

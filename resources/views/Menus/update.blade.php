@@ -65,7 +65,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="id_plato">Id_Plato</label>
+                        <label for="id_plato">Plato</label>
                         <select name="id_plato" id="id_plato" class="form-control">
                             @foreach ($platos as $plato)
                                 <option value="{{ $plato->codigo }}"
@@ -81,7 +81,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="id_categoria">ID_Categoría</label>
+                        <label for="id_categoria">Categoría</label>
                         <select name="id_categoria" id="id_categoria" class="form-control">
                             @foreach ($categorias as $item)
                                 <option value="{{ $item->codigo }}"

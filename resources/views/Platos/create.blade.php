@@ -50,51 +50,52 @@
         <h1 class="center-align">Agregar Platos</h1>
         <div class="table-container">
             <h5 class="card-title">Formulario para agregar Platos</h5>
-            <!-- Formulario para agregar plato -->
-            <form action="/Platos/store" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="col-6">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre">
-                        @error('nombre')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+            <div class="form-container">
+                <form action="/Platos/store" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col s6 mb-3">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre">
+                            @error('nombre')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col s6 mb-3">
+                            <label for="precio">Precio</label>
+                            <input type="text" class="form-control" name="precio" id="precio">
+                            @error('precio')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col s6 mb-3">
+                            <label for="ingredientes">Ingredientes</label>
+                            <input type="text" class="form-control" name="ingredientes" id="ingredientes">
+                            @error('ingredientes')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <label for="precio">Precio</label>
-                        <input type="text" class="form-control" name="precio" id="precio">
-                        @error('precio')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-6">
-                        <label for="ingredientes">Ingredientes</label>
-                        <input type="text" class="form-control" name="ingredientes" id="ingredientes">
-                        @error('ingredientes')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-12 mt-3">
-                        <label for="id_categoria">ID_Categoría</label>
-                        <select name="id_categoria" id="id_categoria" class="form-control">
-                            @foreach ($categorias as $item)
-                                <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
-                            @endforeach
-                        </select>
-                        @error('id_categoria')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div>
+                    <div class="row">
+                        <div class="col s6 mb-3">
+                            <label for="id_categoria">Categoría</label>
+                            <select name="id_categoria" id="id_categoria" class="form-control">
+                                @foreach ($categorias as $item)
+                                    <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_categoria')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="row mt-2">
                             <div class="col s6">
                                 <button class="btn waves-effect waves-light" type="submit">Guardar
@@ -108,12 +109,9 @@
                             </div>
                         </div>
                     </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-@endsection
-
-@section('scripts')
-    <!-- Importar Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-@endsection
+        <!-- Importar Materialize JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    @endsection

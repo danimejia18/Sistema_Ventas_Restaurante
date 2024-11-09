@@ -54,16 +54,18 @@
             <h5 class="card-title">Promociones registradas</h5>
             <a class="btn-floating btn-large waves-effect waves-light green" href="/Promociones/create"><i
                     class="material-icons">add</i></a>
-            <table class="striped responsive-table">
+                    <a class="btn btn-primary btn-sm" href="/reports14" target="_blank">Generar reporte</a>
+            
+                    <table class="striped responsive-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>ID_Plato</th>
+                        <th>Plato</th>
                         <th>Descuento</th>
-                        <th>Fecha_inicio</th>
-                        <th>Fecha_fin</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha fin</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
